@@ -116,9 +116,18 @@ public class AuthorDAO {
             Connection con = DBContext.getConnection();
 
             String query = "UPDATE authors SET author_status = 0 WHERE author_id = ?";
+            String query1 = "UPDATE authors SET author_status = 1 WHERE author_id = ?";
 
-            PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, id);
+            int status = this.getAuthorByID(id).getAuthor_status();
+            PreparedStatement pst;
+            if (status == 1) {
+                pst = con.prepareStatement(query);
+                pst.setInt(1, id);
+            } else {
+                pst = con.prepareStatement(query1);
+                pst.setInt(1, id);
+            }
+
             pst.executeUpdate();
 
             pst.close();

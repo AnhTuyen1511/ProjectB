@@ -21,6 +21,7 @@
             />
         <!-- https://fonts.google.com/specimen/Roboto -->
         <link rel="stylesheet" href="css/fontawesome.min.css" />
+            <link rel="stylesheet" href="css/customstyle.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- https://fontawesome.com/ -->
@@ -131,20 +132,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <% for (int i = 0; i < listAuthor.size(); i++) {%>
-                                    <tr>
-                                        
-                                        <td><%=listAuthor.get(i).getAuthor_id()  %></td>
+                                    <% for (int i = 0; i < listAuthor.size(); i++) {%>                                  
+                                    <tr class="rowAuthor<%=listAuthor.get(i).getAuthor_status()%>">                                       
+                                        <td><%=listAuthor.get(i).getAuthor_id() %></td>
                                         <td><%=listAuthor.get(i).getAuthor_name() %></td>
                                         <td><%=listAuthor.get(i).getAuthor_bio()%> </td>
-
                                         <td><%=listAuthor.get(i).getAuthor_status() %></td>
 <!--                                        <td><img src="dishImages/<% %>" style="max-width: 100%;width: 115px;height: 115px;" alt="loading" loading="lazy"> </td>-->
                                         <td>
-                                            <a href="ManageAuthorServlet?mode=disableAuthor&authorID=<%= listAuthor.get(i).getAuthor_id() %>" class="tm-product-delete-link"/>
-                                            <i class="far fa-trash-alt tm-product-delete-icon"></i>
-
+                                            <a href="ManageAuthorServlet?mode=disableAuthor&authorID=<%= listAuthor.get(i).getAuthor_id() %>"  class="tm-product-delete-link"/>
+                                            <i class="far fa-trash-alt tm-product-delete-icon" ></i>
                                         </td>
                                         <td>
                                             <a href="EditAuthorServlet?mode=viewAuthor&authorID=<%= listAuthor.get(i).getAuthor_id() %>" class="tm-product-delete-link">
@@ -167,8 +164,12 @@
                 </div>
             </div>
         </div>
+                              
+                              
          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script>
+                
+                
                 $(function () {
                     $(".tm-product-name").on("click", function () {
                         window.location.href = "edit-product.html";
@@ -189,6 +190,7 @@
                             container.find('.search-input').val('');
         }
 }
+                
             </script>
                        
     </body>

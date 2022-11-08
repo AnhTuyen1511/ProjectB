@@ -120,9 +120,17 @@ public class GenreDAO {
             Connection con = DBContext.getConnection();
 
             String query = "UPDATE genre SET genre_status = 0 WHERE genre_id = ?";
-
-            PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, id);
+            String query1 = "UPDATE genre SET genre_status = 1 WHERE genre_id = ?";
+            
+            int status = this.getGenreByID(id).getGenre_status();
+            PreparedStatement pst;
+            if (status == 1) {
+                pst = con.prepareStatement(query);
+                pst.setInt(1, id);
+            } else {
+                pst = con.prepareStatement(query1);
+                pst.setInt(1, id);
+            }
             pst.executeUpdate();
 
             pst.close();

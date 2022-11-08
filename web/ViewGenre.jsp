@@ -22,6 +22,7 @@
             />
         <!-- https://fonts.google.com/specimen/Roboto -->
         <link rel="stylesheet" href="css/fontawesome.min.css" />
+         <link rel="stylesheet" href="css/customstyle.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- https://fontawesome.com/ -->
@@ -134,7 +135,7 @@
                                 <tbody>
 
                                     <% for (int i = 0; i < listGenre.size(); i++) {%>
-                                    <tr>
+                                    <tr class="rowGenre<%=listGenre.get(i).getGenre_status()%>">
                                         
                                         <td><%=listGenre.get(i).getGenre_id()  %></td>
                                         <td class="tm-product-name"><%=listGenre.get(i).getGenre() %></td>
