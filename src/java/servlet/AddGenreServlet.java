@@ -14,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import manager.AuthorManager;
 import manager.GenreManager;
 
 /**
@@ -55,9 +54,7 @@ public class AddGenreServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
             
-            target = "ManageBookServlet?mode=addBook";
-            rd = request.getRequestDispatcher(target);
-            rd.forward(request, response);
+//            
         }
 
     }

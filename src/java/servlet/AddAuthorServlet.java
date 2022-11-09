@@ -43,8 +43,9 @@ public class AddAuthorServlet extends HttpServlet {
 
             String authorName = request.getParameter("authorName");
             String authorBio = request.getParameter("authorBio");
-
-            Author newAuthor = new Author(authorName, authorBio, 1);
+             int status = 1;
+             
+            Author newAuthor = new Author(authorName, authorBio, status);
 
 //            myAuthorDAO.insertAuthor(newAuthor);
             myAuthorManager.addAuthor(newAuthor);
@@ -57,11 +58,9 @@ public class AddAuthorServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
     
-            target =  "ManageBookServlet?mode=addBook";
-            response.sendRedirect(target);
+//            
             
-            
-           
+                  
 
         }
 
