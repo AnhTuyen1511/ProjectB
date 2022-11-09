@@ -5,10 +5,15 @@
  */
 package servlet;
 
+import dao.AuthorDAO;
 import dao.BookDAO;
+import dao.GenreDAO;
+import entity.Author;
 import entity.Book;
+import entity.Genre;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,12 +48,19 @@ public class EditBookServlet extends HttpServlet {
 
             if (mode.equals("viewBook")) {
                 int id = Integer.parseInt(request.getParameter("bookID"));
-//                String name = request.getParameter("name");
-//                int status = Integer.parseInt(request.getParameter("status"));
-
                 Book tempBook = myBookDAO.getBookByID(id);
+                ArrayList<Author> listAuthor = new ArrayList<>();
+                AuthorDAO authorDao = new AuthorDAO();
+                listAuthor = authorDao.getListAuthor();
+
+                ArrayList<Genre> listGenre = new ArrayList<>();
+                GenreDAO genreDAO = new GenreDAO();
+                listGenre = genreDAO.getListGenre();
+                request.setAttribute("listAuthor", listAuthor);
+                request.setAttribute("listGenre", listGenre);
                 System.out.println(tempBook.getTitle());
                 request.setAttribute("tempBook", tempBook);
+                
                 target = "EditBook.jsp";
             }
 

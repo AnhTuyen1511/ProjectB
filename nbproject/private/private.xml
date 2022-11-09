@@ -3,11 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Project/ProjectB_Demo01chuaeditduoc/ProjectB_Demo01/web/ViewBook.jsp</file>
-            <file>file:/D:/Project/ProjectB_Demo01chuaeditduoc/ProjectB_Demo01/web/css/customstyle.css</file>
-            <file>file:/D:/Project/ProjectB_Demo01chuaeditduoc/ProjectB_Demo01/web/AddAuthor.jsp</file>
-            <file>file:/D:/Project/ProjectB_Demo01chuaeditduoc/ProjectB_Demo01/src/java/servlet/ManageBookServlet.java</file>
-            <file>file:/D:/Project/ProjectB_Demo01chuaeditduoc/ProjectB_Demo01/web/ViewAuthor.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/user_login_register.css</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/EditAuthorServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/AddGenreServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/EditAuthor.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/UserLoginLogoutServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/index.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/customstyle.css</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/EditGenreServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/ViewAuthor.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/loginstyle.css</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/EditBookServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/EditGenre.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/UserLogin.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/AddAuthorServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/EditBook.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/home.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/ManageBookServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/ViewBook.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/style.css</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/AddBook.jsp</file>
         </group>
     </open-files>
 </project-private>

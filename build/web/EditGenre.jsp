@@ -130,7 +130,7 @@
                                     <div class="form-group mb-3">
                                         <label  for="name" >Status </label>
                                             <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                            id="name" name="status" type="number" min = "0" max="1" maxlength="1"  pattern="\d*" class="form-control validate" value="<%=editGenre.getGenre_status() %>" required=""/>
+                                                   id="name" name="status" type="number" min = "0" max="1" maxlength="1"  pattern="\d*" class="form-control validate" value="<%=editGenre.getGenre_status() %>" readonly=""/>
                                     </div>
 <!--
                                     

@@ -48,6 +48,14 @@
         <servlet-name>InitServlet</servlet-name>
         <servlet-class>servlet.InitServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForwardGenre_AuthorIDToAddBookServlet</servlet-name>
+        <servlet-class>servlet.ForwardGenre_AuthorIDToAddBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserLoginLogoutServlet</servlet-name>
+        <servlet-class>servlet.UserLoginLogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -103,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>InitServlet</servlet-name>
         <url-pattern>/InitServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForwardGenre_AuthorIDToAddBookServlet</servlet-name>
+        <url-pattern>/ForwardGenre_AuthorIDToAddBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserLoginLogoutServlet</servlet-name>
+        <url-pattern>/UserLoginLogoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

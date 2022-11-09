@@ -4,6 +4,9 @@
     Author     : phuon
 --%>
 
+<%@page import="entity.Genre"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Author"%>
 <%@page import="entity.Book"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>  
 <!DOCTYPE html>
@@ -38,6 +41,10 @@
         </style>
     </head>
     <% Book editBook = (Book)request.getAttribute("tempBook"); %>
+    <% ArrayList<Author> listAuthor = (ArrayList<Author>)request.getAttribute("listAuthor"); %>
+    <% ArrayList<Genre> listGenre = (ArrayList<Genre>)request.getAttribute("listGenre"); %>
+
+    
     
     <body id="reportsPage">
         <nav class="navbar navbar-expand-xl">
@@ -131,13 +138,19 @@
                                     
                                     <div class="form-group mb-3">
                                         <label  for="name" >Author ID </label>
-                                            <input id="name" name="authorID" type="text"class="form-control validate" value="<%=editBook.getAuthor_id() %>" required=""/>
+                                            <input id="name" name="authorID" class="form-control validate" value="<%=editBook.getAuthor_id() %>"
+                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                             type="number" min = "<%=listAuthor.get(0).getAuthor_id() %>" max="<%=listAuthor.get(listAuthor.size()-1).getAuthor_id() %>" maxlength="4"  pattern="\d*" />
                                     </div>
                                     
                                     <div class="form-group mb-3">
-                                        <label  for="name" >Genre ID </label>
-                                            <input id="name" name="genreID" type="text"class="form-control validate" value="<%=editBook.getGenre_id() %>" required=""/>
+                                        <label  for="name" >Author ID </label>
+                                            <input id="name" name="genreID" class="form-control validate" value="<%=editBook.getGenre_id()%>"
+                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                             type="number" min = "<%=listGenre.get(0).getGenre_id() %>" max="<%=listGenre.get(listGenre.size()-1).getGenre_id()%>" maxlength="4"  pattern="\d*" />
                                     </div>
+                                    
+                                    
                                     
                                     <div class="form-group mb-3">
                                         <label  for="name" >Year of Release </label>
@@ -168,7 +181,7 @@
                                         <label  for="name" >Status</label>
                                         <input
                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                            id="name" name="status" type="number" min = "0" max="1" maxlength="1"  pattern="\d*" class="form-control validate" value="<%=editBook.getBook_status() %>" required=""/>
+                                            id="name" name="status" type="number" min = "0" max="1" maxlength="1"  pattern="\d*" class="form-control validate" value="<%=editBook.getBook_status() %>" readonly=""/>
                               </div>
                               <div class="form-group mb-3">
                                 <label  for="name" >Description </label>
