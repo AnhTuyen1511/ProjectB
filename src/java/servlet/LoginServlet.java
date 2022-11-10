@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
         if (mode.equals("loginAdmin")) {
             if (userNameForm.equals(username) && passwordForm.equals(password)) {
                 target = "home.jsp";
-                session.setAttribute("userLogin", username);
+                session.setAttribute("adminLogin", username);
             }else{
                 target = "adminLogin.jsp";
                 String mess= "Username or password invalid";

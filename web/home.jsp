@@ -63,7 +63,7 @@
                 <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h1>Hello <%= session.getAttribute("userLogin") %> </h1>
+                            <h1>Hello <%= session.getAttribute("adminLogin") %> </h1>
                         </div>
                     </div>
                     <div class="row mt-2 manage">

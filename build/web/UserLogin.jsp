@@ -17,10 +17,14 @@
     <body class="align">
         <div class="overlay">
 <!-- LOGN IN FORM by Omar Dsoky -->
-<form>
+
+<h1><% request.getAttribute("aaa"); %> 2</h1>
+<form action = "UserLoginLogoutServlet" method="post">
+    <input name="mode" type="hidden" value="userLogin" />
    <!--   con = Container  for items in the form-->
    <div class="con">
    <!--     Start  header Content  -->
+   
    <header class="head-form">
       <h2>Log In</h2>
       <!--     A welcome message or an explanation of the login form -->
@@ -35,7 +39,8 @@
            <i class="fa fa-user-circle"></i>
          </span>
         <!--   user name Input-->
-         <input class="form-input" id="txt-input" type="text" placeholder="@UserName" required>
+        
+         <input class="form-input" id="txt-input" type="text" placeholder="UserName" required="" name="username" >
      
       <br>
      
@@ -45,12 +50,12 @@
         <i class="fa fa-key"></i>
        </span>
       <!--   Password Input-->
-      <input class="form-input" type="password" placeholder="Password" id="pwd"  name="password" required>
+      <input class="form-input" type="password" placeholder="Password" id="pwd"  name="password" required ="">
      
 <!--      Show/hide password  -->
-     <span>
+<!--     <span>
         <i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i>
-     </span>
+     </span>-->
      
      
       <br>
@@ -81,27 +86,27 @@
         <script>
             
 
-            function show() {
-                var p = document.getElementById('pwd');
-                p.setAttribute('type', 'text');
-            }
-
-            function hide() {
-                var p = document.getElementById('pwd');
-                p.setAttribute('type', 'password');
-            }
-
-            var pwShown = 0;
-
-            document.getElementById("eye").addEventListener("click", function () {
-                if (pwShown == 0) {
-                    pwShown = 1;
-                    show();
-                } else {
-                    pwShown = 0;
-                    hide();
-                }
-            }, false);
+//            function show() {
+//                var p = document.getElementById('pwd');
+//                p.setAttribute('type', 'text');
+//            }
+//
+//            function hide() {
+//                var p = document.getElementById('pwd');
+//                p.setAttribute('type', 'password');
+//            }
+//
+//            var pwShown = 0;
+//
+//            document.getElementById("eye").addEventListener("click", function () {
+//                if (pwShown == 0) {
+//                    pwShown = 1;
+//                    show();
+//                } else {
+//                    pwShown = 0;
+//                    hide();
+//                }
+//            }, false);
         </script>
 </body>
 </html>
