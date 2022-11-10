@@ -19,7 +19,7 @@
 <!-- LOGN IN FORM by Omar Dsoky -->
 
 <h1><% request.getAttribute("aaa"); %> 2</h1>
-<form action = "UserLoginLogoutServlet" method="post">
+<form action = "ManageUserLoginServlet" method="post">
     <input name="mode" type="hidden" value="userLogin" />
    <!--   con = Container  for items in the form-->
    <div class="con">

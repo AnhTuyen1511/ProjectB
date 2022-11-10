@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author phuon
  */
-public class UserLoginLogoutServlet extends HttpServlet {
+public class ManageUserLoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
