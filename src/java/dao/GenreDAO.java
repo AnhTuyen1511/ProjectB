@@ -4,7 +4,6 @@
  */
 package dao;
 
-
 import entity.Genre;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,60 +12,58 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author BLC
  */
 public class GenreDAO {
-  
 
-   public ArrayList<Genre> getListGenre(){
+    public ArrayList<Genre> getListGenre() {
 
-      
-      ArrayList<Genre> listGenre = new ArrayList<>();
-      
-      try{
-         Connection con = DBContext.getConnection();
+        ArrayList<Genre> listGenre = new ArrayList<>();
+
+        try {
+            Connection con = DBContext.getConnection();
             String query = "SELECT * FROM genre;";
             Statement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery(query);
-          while(rs.next()){
-                Genre genre = new Genre(rs.getInt(1), 
-                        rs.getString(2), 
-                        rs.getString(3), 
-                        rs.getInt(4) 
-                        );
-                listGenre.add(genre);  
+            while (rs.next()) {
+                Genre genre = new Genre(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4)
+                );
+                listGenre.add(genre);
             }
-          
-      }
-      catch(SQLException ex){
-           System.out.println(ex.getMessage());
-      }
-      return listGenre;
-   }
-   public void insertGenre(Genre genre){
-       try{
-         Connection con = DBContext.getConnection();
-           PreparedStatement pst =con.prepareStatement("INSERT INTO genre( genre, description, genre_status) VALUE(?,?,?)");
-          
-           pst.setString(1, genre.getGenre());
-           pst.setString(2, genre.getDescription());
-           pst.setInt(3, genre.getGenre_status());
-           
-         pst.executeUpdate();
-         
-         pst.close();
-         con.close();
-     
-      }
-      catch(SQLException ex){
-           System.out.println(ex.getMessage());
-           
-      }
-   }
-   
-   public void updateGenre(Genre genre) {
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listGenre;
+    }
+
+    public void insertGenre(Genre genre) {
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("INSERT INTO genre( genre, description, genre_status) VALUE(?,?,?)");
+
+            pst.setString(1, genre.getGenre());
+            pst.setString(2, genre.getDescription());
+            pst.setInt(3, genre.getGenre_status());
+
+            pst.executeUpdate();
+
+            pst.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+    }
+
+    public void updateGenre(Genre genre) {
 
         try {
             Connection con = DBContext.getConnection();
@@ -113,7 +110,7 @@ public class GenreDAO {
         }
         return genre;
     }
-    
+
     public void disableGenre(int id) {
 
         try {
@@ -121,7 +118,7 @@ public class GenreDAO {
 
             String query = "UPDATE genre SET genre_status = 0 WHERE genre_id = ?";
             String query1 = "UPDATE genre SET genre_status = 1 WHERE genre_id = ?";
-            
+
             int status = this.getGenreByID(id).getGenre_status();
             PreparedStatement pst;
             if (status == 1) {
@@ -142,4 +139,3 @@ public class GenreDAO {
 
     }
 }
-   

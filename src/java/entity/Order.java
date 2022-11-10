@@ -10,7 +10,8 @@ package entity;
  * @author phuon
  */
 public class Order {
-     private int order_id;
+
+    private int order_id;
     private int customer_id;
     private String order_date;
     private int total;
@@ -33,7 +34,6 @@ public class Order {
         this.shipping_status = shipping_status;
         this.order_status = order_status;
     }
-    
 
     public int getOrder_id() {
         return order_id;

@@ -71,7 +71,7 @@ public class ManageBookServlet extends HttpServlet {
 
             }
             if (mode.equals("disableBook")) {
-                
+
                 int id = Integer.parseInt(request.getParameter("bookID"));
                 myBookDAO.disableBook(id);
                 target = "ManageBookServlet?mode=viewBook";

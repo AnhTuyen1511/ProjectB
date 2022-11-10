@@ -51,26 +51,24 @@ public class LoginServlet extends HttpServlet {
         String userNameForm = request.getParameter("username");
         String passwordForm = request.getParameter("password");
 
-        
-
         String mode = request.getParameter("mode");
-        String target ="home.jsp";
+        String target = "home.jsp";
         if (mode.equals("loginAdmin")) {
             if (userNameForm.equals(username) && passwordForm.equals(password)) {
                 target = "home.jsp";
                 session.setAttribute("adminLogin", username);
-            }else{
+            } else {
                 target = "adminLogin.jsp";
-                String mess= "Username or password invalid";
+                String mess = "Username or password invalid";
                 request.setAttribute("mess", mess);
             }
         }
-        if(mode.equals("logoutAdmin")){
+        if (mode.equals("logoutAdmin")) {
             target = "adminLogin.jsp";
             session = request.getSession();
             session.removeAttribute("userLogin");
         }
-      
+
         RequestDispatcher rd = request.getRequestDispatcher(target);
         rd.forward(request, response);
 

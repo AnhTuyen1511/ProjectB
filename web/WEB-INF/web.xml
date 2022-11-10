@@ -53,8 +53,8 @@
         <servlet-class>servlet.ForwardGenre_AuthorIDToAddBookServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserLoginLogoutServlet</servlet-name>
-        <servlet-class>servlet.UserLoginLogoutServlet</servlet-class>
+        <servlet-name>ManageUserLoginServlet</servlet-name>
+        <servlet-class>servlet.ManageUserLoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -117,8 +117,8 @@
         <url-pattern>/ForwardGenre_AuthorIDToAddBookServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserLoginLogoutServlet</servlet-name>
-        <url-pattern>/UserLoginLogoutServlet</url-pattern>
+        <servlet-name>ManageUserLoginServlet</servlet-name>
+        <url-pattern>/ManageUserLoginServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

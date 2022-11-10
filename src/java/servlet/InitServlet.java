@@ -33,22 +33,19 @@ public class InitServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             ServletContext servletctx = request.getServletContext();
             String ctxFullPath = servletctx.getRealPath("\\");
 
             //Set path to ConfigInfo, DAO can get the real path from ConfigInfo
             ConfigInfo.setCtxRealPath(ctxFullPath);
-            
-            
+
             String target = "index.jsp";
             RequestDispatcher reqDispatch = request.getRequestDispatcher(target);
             reqDispatch.forward(request, response);
         }
     }
-        
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -35,7 +35,7 @@ public class ManageCustomerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String mode = request.getParameter("mode");
             String target = "home.jsp";
@@ -47,11 +47,11 @@ public class ManageCustomerServlet extends HttpServlet {
                 target = "ViewCustomer.jsp";
                 request.setAttribute("listCustomer", listCustomer);
             }
-            if(mode.equals("disableCustomer")){
-                
+            if (mode.equals("disableCustomer")) {
+
             }
-            
-             RequestDispatcher rd = request.getRequestDispatcher(target);
+
+            RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }
     }

@@ -68,9 +68,6 @@ public class Book {
     public void setPicture(String picture) {
         this.picture = picture;
     }
-    
-    
-    
 
     public int getBook_id() {
         return book_id;

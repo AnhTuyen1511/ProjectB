@@ -17,27 +17,25 @@ import java.util.ArrayList;
  * @author phuon
  */
 public class AuthorManager {
+
     private ArrayList<Author> listAuthor;
     private AuthorDAO myAuthorDao;
-    
 
     public AuthorManager() {
         this.listAuthor = new ArrayList();
-        myAuthorDao=new AuthorDAO();
+        myAuthorDao = new AuthorDAO();
 //        myBookDao.createFolder();
-        
+
     }
-    
-    public AuthorManager(ArrayList<Author> listAuthor)
-    {
-        this.listAuthor= listAuthor;
-        myAuthorDao=new AuthorDAO();
+
+    public AuthorManager(ArrayList<Author> listAuthor) {
+        this.listAuthor = listAuthor;
+        myAuthorDao = new AuthorDAO();
     }
-    
+
     public Author getAuthorByID(int id) {
         listAuthor = this.myAuthorDao.getListAuthor();
-        
-        
+
         Author resAuthor = null;
         for (int i = 0; i < this.listAuthor.size(); i++) {
             Author currentAuthor = listAuthor.get(i);
@@ -48,8 +46,9 @@ public class AuthorManager {
         return resAuthor;
 //            this.myAuthorDao.getAuthorByID(id);
     }
+
     public void addAuthor(Author author) {
-         this.myAuthorDao.insertAuthor(author);
+        this.myAuthorDao.insertAuthor(author);
     }
 
 //    public boolean deleteBookbyID(int id) {
@@ -62,32 +61,23 @@ public class AuthorManager {
 //        }
 //        return result;
 //    }
-
     public ArrayList getListAuthor() {
         return this.myAuthorDao.getListAuthor();
     }
-
-   
 
     public ArrayList getAuthorByName(String name) {
         ArrayList resultAuthorlist = new ArrayList();
 
         Author tempAuthor;
-        for(int i=0;i<listAuthor.size();i++)
-        {
-            tempAuthor =listAuthor.get(i);
-            if(tempAuthor.getAuthor_name().toLowerCase().equalsIgnoreCase(name))
-            {
+        for (int i = 0; i < listAuthor.size(); i++) {
+            tempAuthor = listAuthor.get(i);
+            if (tempAuthor.getAuthor_name().toLowerCase().equalsIgnoreCase(name)) {
                 resultAuthorlist.add(tempAuthor);
             }
-        }     
+        }
         return resultAuthorlist;
     }
 
-   
-
-
-    
     public void updateAuthor(Author edittedAuthor) {
 //        boolean result = false;
 //        Author oldAuthor;
@@ -110,6 +100,6 @@ public class AuthorManager {
 //            result = true;
 //        }
 //        return result;
-            this.myAuthorDao.updateAuthor(edittedAuthor);
+        this.myAuthorDao.updateAuthor(edittedAuthor);
     }
 }

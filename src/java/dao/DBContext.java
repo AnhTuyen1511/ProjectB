@@ -4,7 +4,6 @@
  */
 package dao;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,17 +22,16 @@ public class DBContext {
     static final String DB_PASSWD = "admin";
 
     public static Connection getConnection() {
-        Connection con=null;
+        Connection con = null;
         try {
-             Class.forName(DB_DRV);
+            Class.forName(DB_DRV);
             con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
-            if(con==null)
-            {
+            if (con == null) {
                 System.out.println("-----------------------------------CON IS NULL");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("----------------------"+ex.getMessage());
+            System.out.println("----------------------" + ex.getMessage());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -10,7 +10,8 @@ package entity;
  * @author phuon
  */
 public class Customer {
-     private int customer_id;
+
+    private int customer_id;
     private String username;
     private String password;
     private String name;
@@ -39,8 +40,6 @@ public class Customer {
         this.email = email;
         this.customer_status = customer_status;
     }
-    
-    
 
     public int getCustomer_id() {
         return customer_id;

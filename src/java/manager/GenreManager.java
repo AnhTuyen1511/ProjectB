@@ -14,22 +14,21 @@ import java.util.ArrayList;
  * @author phuon
  */
 public class GenreManager {
+
     private ArrayList<Genre> listGenre;
     private GenreDAO myGenreDao;
-    
 
     public GenreManager() {
         this.listGenre = new ArrayList();
-        myGenreDao=new GenreDAO();
-        
+        myGenreDao = new GenreDAO();
+
     }
-    
+
 //    public GenreManager(ArrayList<Genre> listGenre)
 //    {
 //        this.listGenre= listGenre;
 //        myGenreDao=new GenreDAO();
 //    }
-    
     public void getGenreByID(int id) {
 //        Genre resGenre = null;
 //        for (int i = 0; i < this.listGenre.size(); i++) {
@@ -42,8 +41,9 @@ public class GenreManager {
 
         myGenreDao.getGenreByID(id);
     }
+
     public void addGenre(Genre genre) {
-       this.myGenreDao.insertGenre(genre);
+        this.myGenreDao.insertGenre(genre);
     }
 
 //    public boolean deleteBookbyID(int id) {
@@ -56,32 +56,23 @@ public class GenreManager {
 //        }
 //        return result;
 //    }
-
     public ArrayList getListGenre() {
         return this.listGenre;
     }
-
-   
 
     public ArrayList getGenreByName(String name) {
         ArrayList resultGenrelist = new ArrayList();
 
         Genre tempGenre;
-        for(int i=0;i<listGenre.size();i++)
-        {
-            tempGenre =listGenre.get(i);
-            if(tempGenre.getGenre().toLowerCase().equalsIgnoreCase(name))
-            {
+        for (int i = 0; i < listGenre.size(); i++) {
+            tempGenre = listGenre.get(i);
+            if (tempGenre.getGenre().toLowerCase().equalsIgnoreCase(name)) {
                 resultGenrelist.add(tempGenre);
             }
-        }     
+        }
         return resultGenrelist;
     }
 
-   
-
-
-    
 //    public boolean updateGenre(Genre edittedGenre) {
 //        boolean result = false;
 //        Genre oldGenre;

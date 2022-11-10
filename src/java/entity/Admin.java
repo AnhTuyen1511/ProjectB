@@ -10,6 +10,7 @@ package entity;
  * @author phuon
  */
 public class Admin {
+
     private String username;
     private String password;
 
@@ -33,5 +34,5 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 }
