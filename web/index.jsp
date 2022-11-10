@@ -49,9 +49,16 @@
                         </div>
                         <div class="col-md-6">
                             <div class="right-element">
-                                <a href="UserLogin.jsp" class="user-account for-buy"><i class="icon icon-user"></i><span>Login</span></a>
-                                <a href="#"  class="user-account for-buy"><i class="icon icon-user"></i><span>
-                                        ${session.getAttribute("UserLogin")}</span></a>
+                                <% String txtAccount = "Login"; 
+                                String link = "UserLogin.jsp";
+                                String ss = (String) session.getAttribute("UserLogin");
+                                if (ss!=null) {
+                                        txtAccount = ss;
+                                        link = "#";
+                                    }
+                                %>
+                                <a href=<%=link%> class="user-account for-buy" ><i class="icon icon-user"></i><span><%=txtAccount%></span></a>
+                                
                                 <a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0 $)</span></a>
 
                                 <div class="action-menu">
