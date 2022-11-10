@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login</title>
         <link rel="stylesheet" href="css/loginstyle.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
@@ -18,7 +18,7 @@
         <div class="overlay">
             <!-- LOGN IN FORM by Omar Dsoky -->
 
-            <h1><% request.getAttribute("aaa");%> 2</h1>
+            <h1><% request.getAttribute("aaa");%></h1>
             <form action = "ManageUserLoginServlet" method="post">
                 <input name="mode" type="hidden" value="userLogin" />
                 <!--   con = Container  for items in the form-->
