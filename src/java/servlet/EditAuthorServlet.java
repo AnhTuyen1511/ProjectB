@@ -34,42 +34,39 @@ public class EditAuthorServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             AuthorManager myAuthorManager = new AuthorManager();
-            AuthorDAO  myAuthorDAO = new AuthorDAO();
+            AuthorDAO myAuthorDAO = new AuthorDAO();
             String mode = request.getParameter("mode");
             String target = "home.jsp";
-            
-            
-            if(mode.equals("viewAuthor")){
+
+            if (mode.equals("viewAuthor")) {
                 int id = Integer.parseInt(request.getParameter("authorID"));
 //                String name = request.getParameter("name");
 //                int status = Integer.parseInt(request.getParameter("status"));
                 Author tempAuthor = myAuthorDAO.getAuthorByID(id);
                 request.setAttribute("tempAuthor", tempAuthor);
-               target = "EditAuthor.jsp";
+                target = "EditAuthor.jsp";
             }
-            
-            if(mode.equals("editAuthor")){
+
+            if (mode.equals("editAuthor")) {
                 int ID, status;
-                String authorName , authorBio;
-               
+                String authorName, authorBio;
+
                 ID = Integer.parseInt(request.getParameter("authorID"));
                 authorName = request.getParameter("authorName");
                 authorBio = request.getParameter("authorBio");
                 status = Integer.parseInt(request.getParameter("status"));
-                
+
                 Author newAuthor = new Author(ID, authorName, authorBio, status);
                 myAuthorManager.updateAuthor(newAuthor);
-                
+
                 target = "ManageAuthorServlet?mode=viewAuthor";
             }
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
-            
-            
-            
+
         }
     }
 

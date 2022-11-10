@@ -34,39 +34,38 @@ public class EditGenreServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             GenreManager myGenreManager = new GenreManager();
-            GenreDAO  myGenreDAO = new GenreDAO();
+            GenreDAO myGenreDAO = new GenreDAO();
             String mode = request.getParameter("mode");
             String target = "home.jsp";
-            
-            
-            if(mode.equals("viewGenre")){
+
+            if (mode.equals("viewGenre")) {
                 int id = Integer.parseInt(request.getParameter("genreID"));
 //                String name = request.getParameter("name");
 //                int status = Integer.parseInt(request.getParameter("status"));
                 Genre tempGenre = myGenreDAO.getGenreByID(id);
                 request.setAttribute("tempGenre", tempGenre);
-               target = "EditGenre.jsp";
+                target = "EditGenre.jsp";
             }
-            
-            if(mode.equals("editGenre")){
+
+            if (mode.equals("editGenre")) {
                 int ID, status;
-                String genre , description;
-               
+                String genre, description;
+
                 ID = Integer.parseInt(request.getParameter("genreID"));
                 genre = request.getParameter("genre");
                 description = request.getParameter("description");
                 status = Integer.parseInt(request.getParameter("status"));
-                
+
                 Genre newGenre = new Genre(ID, genre, description, status);
                 myGenreDAO.updateGenre(newGenre);
-                
+
                 target = "ManageGenreServlet?mode=viewGenre";
             }
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
-          
+
         }
     }
 

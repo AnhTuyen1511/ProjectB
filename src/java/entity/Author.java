@@ -10,7 +10,8 @@ package entity;
  * @author phuon
  */
 public class Author {
-   private int author_id;
+
+    private int author_id;
     private String author_name;
     private String author_bio;
     private int author_status;
@@ -27,8 +28,6 @@ public class Author {
         this.author_bio = author_bio;
         this.author_status = author_status;
     }
-    
-    
 
     public int getAuthor_id() {
         return author_id;
@@ -60,5 +59,5 @@ public class Author {
 
     public void setAuthor_status(int author_status) {
         this.author_status = author_status;
-    } 
+    }
 }

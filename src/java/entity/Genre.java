@@ -10,7 +10,8 @@ package entity;
  * @author phuon
  */
 public class Genre {
-     private int genre_id;
+
+    private int genre_id;
     private String genre;
     private String description;
     private int genre_status;
@@ -21,15 +22,12 @@ public class Genre {
         this.description = description;
         this.genre_status = genre_status;
     }
-    
 
     public Genre(String genre, String description, int genre_status) {
         this.genre = genre;
         this.description = description;
         this.genre_status = genre_status;
     }
-    
-    
 
     public int getGenre_id() {
         return genre_id;

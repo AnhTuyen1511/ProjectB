@@ -21,7 +21,7 @@
             href="https://fonts.googleapis.com/css?family=Roboto:400,700"
             />
         <!-- https://fonts.google.com/specimen/Roboto -->
-        
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- https://fontawesome.com/ -->
@@ -34,7 +34,7 @@
         -->
         <link rel="stylesheet" href="css/search_button.css" />
         <style>
-           
+
 
 
 
@@ -44,8 +44,8 @@
     <% ArrayList<Author> listAuthor = (ArrayList<Author>)request.getAttribute("listAuthor"); %>
     <% ArrayList<Genre> listGenre = (ArrayList<Genre>)request.getAttribute("listGenre"); %>
 
-    
-    
+
+
     <body id="reportsPage">
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
@@ -78,7 +78,7 @@
                                 <i class="fas fa-book"></i> BOOKS
                             </a>
                         </li>
-                        
+
 
                         <li class="nav-item">
                             <a class="nav-link" href="ManageGenreServlet?mode=viewGenre">
@@ -87,7 +87,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="ManageOrderServlet?mode=viewOrder">
-                                 <i class="far fa-file-alt"></i> ORDER
+                                <i class="far fa-file-alt"></i> ORDER
                             </a>
                         </li>
                         <li class="nav-item">
@@ -95,12 +95,12 @@
                                 <i class="fas fa-user"></i> CUSTOMER
                             </a>
                         </li>
-                        
-<!--                        <li class="nav-item">
-                            <a class="nav-link" href="Billing.jsp">
-                                <i class="fas fa-money-bill-wave"></i> 
-                            </a>
-                        </li>-->
+
+                        <!--                        <li class="nav-item">
+                                                    <a class="nav-link" href="Billing.jsp">
+                                                        <i class="fas fa-money-bill-wave"></i> 
+                                                    </a>
+                                                </li>-->
 
                     </ul>
                     <ul class="navbar-nav">
@@ -130,76 +130,76 @@
                                         <label  for="name" >ID </label>
                                         <input id="name" name="bookID" type="text"class="form-control validate" readonly="" value="<%=editBook.getBook_id()%>" />
                                     </div> 
-                                    
+
                                     <div class="form-group mb-3">
                                         <label  for="name" >Book Title </label>
                                         <input id="name" name="title" type="text"class="form-control validate" value="<%=editBook.getTitle() %>" required=""/>
                                     </div> 
-                                    
+
                                     <div class="form-group mb-3">
                                         <label  for="name" >Author ID </label>
-                                            <input id="name" name="authorID" class="form-control validate" value="<%=editBook.getAuthor_id() %>"
-                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                             type="number" min = "<%=listAuthor.get(0).getAuthor_id() %>" max="<%=listAuthor.get(listAuthor.size()-1).getAuthor_id() %>" maxlength="4"  pattern="\d*" />
+                                        <input id="name" name="authorID" class="form-control validate" value="<%=editBook.getAuthor_id() %>"
+                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                               type="number" min = "<%=listAuthor.get(0).getAuthor_id() %>" max="<%=listAuthor.get(listAuthor.size()-1).getAuthor_id() %>" maxlength="4"  pattern="\d*" />
                                     </div>
-                                    
+
                                     <div class="form-group mb-3">
                                         <label  for="name" >Author ID </label>
-                                            <input id="name" name="genreID" class="form-control validate" value="<%=editBook.getGenre_id()%>"
-                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                             type="number" min = "<%=listGenre.get(0).getGenre_id() %>" max="<%=listGenre.get(listGenre.size()-1).getGenre_id()%>" maxlength="4"  pattern="\d*" />
+                                        <input id="name" name="genreID" class="form-control validate" value="<%=editBook.getGenre_id()%>"
+                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                               type="number" min = "<%=listGenre.get(0).getGenre_id() %>" max="<%=listGenre.get(listGenre.size()-1).getGenre_id()%>" maxlength="4"  pattern="\d*" />
                                     </div>
-                                    
-                                    
-                                    
+
+
+
                                     <div class="form-group mb-3">
                                         <label  for="name" >Year of Release </label>
                                         <input
                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                             id="name" name="YOR" type="number" min = "1200" max="2022" maxlength="4"  pattern="\d*" class="form-control validate" value="<%=editBook.getYor() %>" required=""/>
                                     </div>
-                                                                                                                                                                                                                                   
-                                   
-<!--                                    <div class="custom-file mt-3 mb-3">
-                                        <input  name = "image" id="fileInput" type="file"  />
-                                    </div>-->
+
+
+                                    <!--                                    <div class="custom-file mt-3 mb-3">
+                                                                            <input  name = "image" id="fileInput" type="file"  />
+                                                                        </div>-->
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                              <div class="row">
-                                <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label for="expire_date"> Price </label>
-                                    <input id="expire_date" name="price" type="number" value="<%=editBook.getPrice() %>" class="form-control validate" data-large-mode="true"/>
-                                </div>
-                                <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label for="stock">Quantity</label> 
-                                     <input id="name" name="quantity" type="number" class="form-control validate" value="<%=editBook.getQuantity() %>" required=""/>
-                                
-                                </div>
-                             
-                             </div>
-                              <div class="form-group mb-3">
-                                        <label  for="name" >Status</label>
-                                        <input
-                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                            id="name" name="status" type="number" min = "0" max="1" maxlength="1"  pattern="\d*" class="form-control validate" value="<%=editBook.getBook_status() %>" readonly=""/>
-                              </div>
-                              <div class="form-group mb-3">
-                                <label  for="name" >Description </label>
-                                    <textarea class="form-control validate tm-small" rows="5" name="description" required="" ><%=editBook.getDescription() %></textarea>
-                               </div>
-                               
+                                <div class="row">
+                                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                        <label for="expire_date"> Price </label>
+                                        <input id="expire_date" name="price" type="number" value="<%=editBook.getPrice() %>" class="form-control validate" data-large-mode="true"/>
+                                    </div>
+                                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                        <label for="stock">Quantity</label> 
+                                        <input id="name" name="quantity" type="number" class="form-control validate" value="<%=editBook.getQuantity() %>" required=""/>
 
-                                
-                                <div class="custom-file mt-3 mb-3">
-                                  <input id="fileInput" type="file" style="display:none;" accept=".png, .jpg, .jpeg, .gif" />
-                                  <input
-                                    type="button"
-                                    class="btn btn-primary btn-block mx-auto"
-                                    value="UPLOAD PRODUCT IMAGE"
-                                    onclick="document.getElementById('fileInput').click();"
-                                  />
+                                    </div>
+
                                 </div>
-                        </div>
+                                <div class="form-group mb-3">
+                                    <label  for="name" >Status</label>
+                                    <input
+                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        id="name" name="status" type="number" min = "0" max="1" maxlength="1"  pattern="\d*" class="form-control validate" value="<%=editBook.getBook_status() %>" readonly=""/>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label  for="name" >Description </label>
+                                    <textarea class="form-control validate tm-small" rows="5" name="description" required="" ><%=editBook.getDescription() %></textarea>
+                                </div>
+
+
+
+                                <div class="custom-file mt-3 mb-3">
+                                    <input id="fileInput" type="file" style="display:none;" accept=".png, .jpg, .jpeg, .gif" />
+                                    <input
+                                        type="button"
+                                        class="btn btn-primary btn-block mx-auto"
+                                        value="UPLOAD PRODUCT IMAGE"
+                                        onclick="document.getElementById('fileInput').click();"
+                                        />
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary btn-block text-uppercase"> UPDATE</button>
                             </div>
@@ -225,9 +225,9 @@
         <script src="js/bootstrap.min.js"></script>
         <!-- https://getbootstrap.com/ -->
         <script>
-            $(function () {
-                $("#expire_date").datepicker();
-            });
+                                            $(function () {
+                                                $("#expire_date").datepicker();
+                                            });
         </script>
     </body>
 </html>

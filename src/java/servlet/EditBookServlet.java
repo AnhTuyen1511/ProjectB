@@ -60,7 +60,7 @@ public class EditBookServlet extends HttpServlet {
                 request.setAttribute("listGenre", listGenre);
                 System.out.println(tempBook.getTitle());
                 request.setAttribute("tempBook", tempBook);
-                
+
                 target = "EditBook.jsp";
             }
 
