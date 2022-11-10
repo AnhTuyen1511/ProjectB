@@ -137,7 +137,7 @@
                                 <tbody>
 
                                     <% for (int i = 0; i < listCustomer.size(); i++) {%>
-                                    <tr>
+                                    <tr class="rowCustomer<%=listCustomer.get(i).getCustomer_status()%>">
                                         
                                         <td><%=listCustomer.get(i).getCustomer_id()  %></td>
                                         <td><%=listCustomer.get(i).getUsername() %></td>
@@ -150,7 +150,7 @@
                                         <td><%=listCustomer.get(i).getCustomer_status() %></td>
 <!--                                        <td><img src="dishImages/<% %>" style="max-width: 100%;width: 115px;height: 115px;" alt="loading" loading="lazy"> </td>-->
                                         <td>
-                                            <a href="" class="tm-product-delete-link"/>
+                                            <a href="ManageCustomerServlet?mode=disableCustomer&customerID=<%= listCustomer.get(i).getCustomer_id() %>" class="tm-product-delete-link"/>
                                             <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                         </td>
                                         

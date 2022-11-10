@@ -38,20 +38,26 @@ public class ManageCustomerServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String mode = request.getParameter("mode");
+            CustomerDAO myCustomerDAO = new CustomerDAO();
             String target = "home.jsp";
             if (mode.equals("viewCustomer")) {
                 List<Customer> listCustomer = new ArrayList<>();
-                CustomerDAO dao = new CustomerDAO();
-                listCustomer = dao.getListCustomer();
+
+                listCustomer = myCustomerDAO.getListCustomer();
 
                 target = "ViewCustomer.jsp";
                 request.setAttribute("listCustomer", listCustomer);
             }
-            if(mode.equals("disableCustomer")){
-                
+            if (mode.equals("disableCustomer")) {
+
+                int id = Integer.parseInt(request.getParameter("customerID"));
+
+                myCustomerDAO.disableCustomer(id);
+
+                target = "ManageCustomerServlet?mode=viewCustomer";
             }
-            
-             RequestDispatcher rd = request.getRequestDispatcher(target);
+
+            RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }
     }

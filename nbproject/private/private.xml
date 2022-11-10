@@ -3,33 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/user_login_register.css</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/EditAuthorServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/AddGenreServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/UserLoginLogoutServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/index.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/EditGenreServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/ViewAuthor.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/dao/CustomerDAO.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/loginstyle.css</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/LoginServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/AddAuthorServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/home.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/AddBookServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/ViewBook.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/InitServlet.java</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/ManageAuthorServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/EditAuthor.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/manager/CustomerManager.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/manager/BookManager.java</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/customstyle.css</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/EditBookServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/EditGenre.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/dao/CustomerDAO.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/ViewAuthor.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/LoginServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/loginstyle.css</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/UserRegister.jsp</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/UserLogin.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/ManageBookServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/AddAuthor.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/style.css</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/AddBook.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/entity/Customer.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/AddAuthorServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/EditCustomer.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/dao/BookDAO.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/normalize.css</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/ManageCustomerServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/ManageUserLoginServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/ViewCustomer.jsp</file>
         </group>
     </open-files>
 </project-private>
