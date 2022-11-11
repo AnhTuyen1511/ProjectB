@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>JSP Page</title>
         <link rel="stylesheet" href="css/loginstyle.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
@@ -17,8 +17,6 @@
     <body class="align">
         <div class="overlay">
             <!-- LOGN IN FORM by Omar Dsoky -->
-            <form action = "ManageUserLoginServlet" method="post">
-                <input name="mode" type="hidden" value="userLogin" />
                 <!--   con = Container  for items in the form-->
                 <div class="con">
                     <!--     Start  header Content  -->
@@ -31,14 +29,18 @@
                     <!--     End  header Content  -->
                     <br>
                     <div class="field-set">
-
+                         <form action = "ManageUserLoginServlet" method="post">
                         <!--   user name -->
                         <span class="input-item">
+                            
+                            
+                            
                             <i class="fa fa-user-circle"></i>
                         </span>
                         <!--   user name Input-->
-
-                        <input class="form-input" id="txt-input" type="text" placeholder="UserName" required="" name="username" >
+                       
+                         <input name="mode" type="hidden" value="userLogin" />
+                        <input class="form-input" id="txt-input" type="text" placeholder="UserName" required="" name="username"  >
 
                         <br>
 
@@ -48,7 +50,7 @@
                             <i class="fa fa-key"></i>
                         </span>
                         <!--   Password Input-->
-                        <input class="form-input" type="password" placeholder="Password" id="pwd"  name="password" required ="">
+                        <input class="form-input" type="password" placeholder="Password" id="pwd"  name="password" >
 
                         <!--      Show/hide password  -->
                         <!--     <span>
@@ -60,25 +62,23 @@
                         <!--        buttons -->
                         <!--      button LogIn -->
                         <button class="log-in"> Log In </button>
+                        </form>
                     </div>
+                                          
 
-                    <!--   other buttons -->
                     <div class="other">
                         <!--      Forgot Password button-->
-                        <button class="btn submits frgt-pass">Forgot Password</button>
+                        <a href="#"><button class="btn submits frgt-pass">Forgot Password</button></a>
                         <!--     Sign Up button -->
-                        <button class="btn submits sign-up">Sign Up 
+                        <a href="UserRegister.jsp"><button class="btn submits sign-up">Sign Up 
                             <!--         Sign Up font icon -->
                             <i class="fa fa-user-plus" aria-hidden="true"></i>
-                        </button>
+                            </button></a>
                         <!--      End Other the Division -->
                     </div>
+                </div> 
+            
 
-                    <!--   End Conrainer  -->
-                </div>
-
-                <!-- End Form -->
-            </form>
         </div>
 
         <script>

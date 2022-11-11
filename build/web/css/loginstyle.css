@@ -33,7 +33,7 @@ body {
 /* End body rules */
 
 /* Start form  attributes */
-form {
+.overlay {
     width: 450px;
     min-height: 500px;
     height: auto;
@@ -44,7 +44,7 @@ form {
     background-image: linear-gradient(-225deg, #F3F2EC 50%, #FFE6FA 50%);
 }
 /* form Container */
-form .con {
+ .con {
     display: -webkit-flex;
     display: flex;
 
@@ -184,7 +184,9 @@ button:hover {
     transform: translatey(3px);
     box-shadow: none;
 }
-
+.fa-phone{
+    font-size: 35px;
+}
 /* buttons hover Animation */
 button:hover {
     animation: ani9 0.4s ease-in-out infinite alternate;

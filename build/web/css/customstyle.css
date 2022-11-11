@@ -21,4 +21,11 @@
 .rowGenre1 {
     text-decoration: none;
 }
+.rowCustomer0{
+    color: grey;   
+ text-decoration: line-through;
+}
+.rowCustomer1{
+   text-decoration: none;
+}
 
