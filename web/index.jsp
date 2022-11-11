@@ -1,3 +1,4 @@
+<%@page import="entity.Customer"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,6 +52,7 @@
                                 <% String txtAccount = "Login";
                                     String link = "UserLogin.jsp";
                                     String ss = (String) session.getAttribute("UserLogin");
+                                    
                                     if (ss != null) {
                                         txtAccount = ss;
                                         link = "UserProfile.jsp";

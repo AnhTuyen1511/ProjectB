@@ -4,6 +4,8 @@
     Author     : BLC
 --%>
 
+<%@page import="entity.Customer"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -122,12 +124,13 @@
 
     </head>
     <body>
+        <% Customer tempCustomer = (Customer) request.getAttribute("tempCustomer");  %>
         
         <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
             <div class="card p-4"> 
                 <div class=" image d-flex flex-column justify-content-center align-items-center"> 
                     <button class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
-                    </button> <span class="name mt-3">Eleanor Pena</span> <span class="idd">@eleanorpena</span> 
+                    </button> <span class="name mt-3"></span> <span class="idd">@eleanorpena</span> 
                     <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
                         <!--<span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span>--> 
                     </div> 
@@ -135,7 +138,7 @@
                         <span class="number">1069 <span class="follow">Followers</span></span> 
                     </div> 
                     <div class=" d-flex mt-2"> 
-                        <a href="EditUserProfile" class="logout"><button class="btn1 btn-dark">Edit Profile</button></a>
+                        <a href="EditUserProfile.jsp" class="logout"><button class="btn1 btn-dark">Edit Profile</button></a>
                     </div>
                     <div class="text mt-3"> 
                         <span>

@@ -36,7 +36,7 @@ public class ManageUserLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             CustomerDAO myCustomerDAO = new dao.CustomerDAO();
             manager.CustomerManager myCustomerManager = new CustomerManager();
@@ -44,24 +44,20 @@ public class ManageUserLoginServlet extends HttpServlet {
             String target = "UserLogin.jsp";
             HttpSession mySession = request.getSession();
 
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String mess = "";
-
-            System.out.println(username + password + "");
-
-            ArrayList<Customer> listCustomer = new ArrayList<>();
-            listCustomer = myCustomerDAO.getListCustomer();
-
-            System.out.println(listCustomer.get(1).getUsername() + listCustomer.get(1).getPassword());
             if (mode.equals("userLogin")) {
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String mess = "";
+
+                ArrayList<Customer> listCustomer = new ArrayList<>();
+                listCustomer = myCustomerDAO.getListCustomer();
                 for (int i = 0; i < listCustomer.size(); i++) {
-                    String user = listCustomer.get(i).getUsername().toString();
-                    String pass = listCustomer.get(i).getPassword().toString();
+                    String user = listCustomer.get(i).getUsername();
+                    String pass = listCustomer.get(i).getPassword();
                     if (user.equals(username) && pass.equals(password)) {
                         target = "index.jsp";
                         mySession.setAttribute("UserLogin", listCustomer.get(i).getName());
-                        mySession.setAttribute("CustomerID", listCustomer.get(i).getCustomer_id());
+                        mySession.setAttribute("tempCustomer", listCustomer.get(i));
                         break;
                     } else {
                         mess = "Invalid username or password";
@@ -71,28 +67,29 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 }
             }
-            if (mode.equals("userProfile")) {
-//                String id = request.getParameter();
-                
+            if (mode.equals("viewProfile")) {
+                int id = Integer.parseInt(request.getParameter("cusID"));
+                Customer tempCustomer = myCustomerDAO.getCustomerByID(id);
+                request.setAttribute("tempCustomer", tempCustomer);
+
                 target = "UserProfile.jsp";
-                mySession = request.getSession();
-                
+
             }
-            
+
             if (mode.equals("userLogout")) {
                 target = "index.jsp";
                 mySession = request.getSession();
                 mySession.removeAttribute("UserLogin");
 
             }
-            if(mode.equals("forgetPass")){
-                
+            if (mode.equals("forgetPass")) {
+
             }
 
             if (mode.equals("userRegister")) {
                 String customerName = request.getParameter("name");
                 String R_username = request.getParameter("R_username");
-                password = request.getParameter("R_password");
+                String password = request.getParameter("R_password");
                 String address = request.getParameter("address");
                 String email = request.getParameter("email");
                 int phoneNumber = Integer.parseInt(request.getParameter("phone_number"));
@@ -100,19 +97,20 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 Customer newCustomer = new Customer(R_username, password, customerName, phoneNumber, address, email, status);
 
-                listCustomer = myCustomerDAO.getListCustomer();
+                ArrayList<Customer> listCustomer = myCustomerDAO.getListCustomer();
+                boolean exist = false;
                 for (int i = 0; i < listCustomer.size(); i++) {
                     if (listCustomer.get(i).getUsername().equals(R_username)) {
-                        target = "UserRegister";
-                        mess = ("Username is already exist");
+                        exist = true;
+                        target = "UserRegister.jsp";
+                        String mess = ("Username is already exist");
                         request.setAttribute("registerMess", mess);
                         break;
-                    } else {
-                         myCustomerManager.addCustomer(newCustomer);
-                        target = "UserLogin.jsp";
-                        break;
                     }
-
+                }
+                if (exist == false) {
+                    myCustomerManager.addCustomer(newCustomer);
+                    target = "UserLogin.jsp";
                 }
             }
 
@@ -121,7 +119,7 @@ public class ManageUserLoginServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

@@ -41,6 +41,10 @@ public class Customer {
         this.customer_status = customer_status;
     }
 
+    public Customer() {
+    }
+    
+
     public int getCustomer_id() {
         return customer_id;
     }

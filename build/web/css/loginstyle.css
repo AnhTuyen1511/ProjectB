@@ -15,9 +15,6 @@ body {
     background-image: linear-gradient(to top, #F3F2EC 0%, #F3F2EC 100%);
     background-attachment: fixed;
     background-repeat: no-repeat;
-    font-family: 'Vibur', cursive;
-    /*   the main font */
-    font-family: 'Abel', sans-serif;
     opacity: .95;
     /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
 }
@@ -108,6 +105,7 @@ header p {
 }*/
 /* inputs form  */
 input[class="form-input"]{
+    
     width: 250px;
     height: 50px;
 
@@ -115,7 +113,6 @@ input[class="form-input"]{
     padding: 15px;
 
     font-size: 16px;
-    font-family: 'Abel', sans-serif;
     color: #5E6472;
 
     outline: none;
