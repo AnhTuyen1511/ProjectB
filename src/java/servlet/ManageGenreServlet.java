@@ -35,9 +35,9 @@ public class ManageGenreServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
+            
             GenreDAO myGenreDAO = new GenreDAO();
             String mode = request.getParameter("mode");
             String target = "home.jsp";
@@ -47,16 +47,18 @@ public class ManageGenreServlet extends HttpServlet {
                 listGenre = dao.getListGenre();
 
                 target = "ViewGenre.jsp";
-                request.setAttribute("listGenre", listGenre);
+                request.setAttribute("listGenre", listGenre);  
             }
-            if (mode.equals("disableGenre")) {
-
+            if(mode.equals("disableGenre")){
+                
                 int id = Integer.parseInt(request.getParameter("genreID"));
-
+                
                 myGenreDAO.disableGenre(id);
-
+                
                 target = "ManageGenreServlet?mode=viewGenre";
-
+                
+                
+                
             }
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);

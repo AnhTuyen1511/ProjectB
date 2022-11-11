@@ -19,14 +19,14 @@ public class OrderDetailDAO {
 
     public ArrayList<OrderDetail> getListOrderDetail() {
 
-        ArrayList<OrderDetail> listOrder = new ArrayList<>();
+     ArrayList<OrderDetail> listOrder = new ArrayList<>();
 
         try {
             Connection con = DBContext.getConnection();
             String query = "SELECT * FROM orderdetail;";
             Statement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery(query);
-
+            
             while (rs.next()) {
                 OrderDetail orderDetail = new OrderDetail(
                         rs.getInt(1),
@@ -36,7 +36,7 @@ public class OrderDetailDAO {
                 );
                 listOrder.add(orderDetail);
             }
-
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

@@ -109,7 +109,7 @@ public class AuthorDAO {
         }
         return author;
     }
-
+    
     public void disableAuthor(int id) {
 
         try {
@@ -138,5 +138,5 @@ public class AuthorDAO {
         }
 
     }
-
+    
 }

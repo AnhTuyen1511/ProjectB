@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 /**
  *
  * @author BLC
@@ -28,7 +29,7 @@ public class AdminDAO {
             while (rs.next()) {
 
                 String uName = rs.getString("username");
-                String pass = rs.getString("password");
+                String pass=rs.getString("password");
 
                 Admin admin = new Admin(uName, pass);
                 listAdmin.add(admin);
@@ -48,4 +49,5 @@ public class AdminDAO {
 //
 //        return listAdmin;
 //    }
+
 }

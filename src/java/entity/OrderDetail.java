@@ -10,7 +10,6 @@ package entity;
  * @author phuon
  */
 public class OrderDetail {
-
     private int order_id;
     private int book_id;
     private int quantity;
@@ -54,5 +53,5 @@ public class OrderDetail {
     public void setPrice(int price) {
         this.price = price;
     }
-
+    
 }

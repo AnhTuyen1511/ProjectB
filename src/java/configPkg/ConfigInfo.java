@@ -10,8 +10,7 @@ package configPkg;
  * @author ThanhDaiMacW10
  */
 public class ConfigInfo {
-
-    private static String ctxRealPath = "";
+    private static String ctxRealPath="";
 
     public static String getCtxRealPath() {
         return ctxRealPath;
@@ -20,5 +19,5 @@ public class ConfigInfo {
     public static void setCtxRealPath(String ctxRealPath) {
         ConfigInfo.ctxRealPath = ctxRealPath;
     }
-
+    
 }

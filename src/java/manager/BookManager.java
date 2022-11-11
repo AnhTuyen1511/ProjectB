@@ -14,25 +14,26 @@ import java.util.ArrayList;
  * @author phuon
  */
 public class BookManager {
-
     private ArrayList<Book> listBook;
     private BookDAO myBookDao;
+    
 
     public BookManager() {
         this.listBook = new ArrayList();
-        myBookDao = new BookDAO();
-
+        myBookDao=new BookDAO();
+        
     }
-
-    public BookManager(ArrayList<Book> listBook) {
-        this.listBook = listBook;
-        myBookDao = new BookDAO();
+    
+    public BookManager(ArrayList<Book> listBook)
+    {
+        this.listBook= listBook;
+        myBookDao=new BookDAO();
     }
-
+    
     public void getBookbyID(int id) {
-
+        
         myBookDao.getBookByID(id);
-
+        
 //       Book resBook = null;
 //       listBook = this.myBookDao.getListBook();
 //        for (int i = 0; i < listBook.size(); i++) {
@@ -48,8 +49,8 @@ public class BookManager {
 ////            }
 ////        }
 //        return resBook;
+       
     }
-
     public void addBook(Book book) {
         this.myBookDao.insertBook(book);
     }
@@ -64,34 +65,38 @@ public class BookManager {
 //        }
 //        return result;
 //    }
+
     public ArrayList getListBook() {
         return this.myBookDao.getListBook();
     }
-
-    public ArrayList<Book> getListBookByID(String id) {
+    public ArrayList<Book> getListBookByID(String id){
         listBook = myBookDao.getListBook();
         ArrayList<Book> resultBookList = new ArrayList<>();
         Book tempBook;
-        for (int i = 0; i < listBook.size(); i++) {
-            tempBook = listBook.get(i);
+        for(int i = 0; i < listBook.size();i++){
+            tempBook= listBook.get(i);
             String a = String.valueOf(tempBook.getBook_id());
-            if (a.toLowerCase().startsWith(id)) {
+            if(a.toLowerCase().startsWith(id)){
                 resultBookList.add(tempBook);
-            }
+            }                
         }
         return resultBookList;
     }
+
+   
 
     public ArrayList getBookByGenre(int genre_id) {
         ArrayList resultBooklist = new ArrayList();
 
         Book tempBook;
-        for (int i = 0; i < listBook.size(); i++) {
-            tempBook = listBook.get(i);
-            if (tempBook.getGenre_id() == genre_id) {
+        for(int i=0;i<listBook.size();i++)
+        {
+            tempBook =listBook.get(i);
+            if(tempBook.getGenre_id() == genre_id)
+            {
                 resultBooklist.add(tempBook);
             }
-        }
+        }     
         return resultBooklist;
     }
 
@@ -99,12 +104,14 @@ public class BookManager {
         ArrayList resultBoooklist = new ArrayList();
 
         Book tempBook;
-        for (int i = 0; i < listBook.size(); i++) {
-            tempBook = listBook.get(i);
-            if (tempBook.getAuthor_id() == authorID) {
+        for(int i=0;i<listBook.size();i++)
+        {
+            tempBook =listBook.get(i);
+            if(tempBook.getAuthor_id() == authorID)
+            {
                 resultBoooklist.add(tempBook);
             }
-        }
+        }     
         return resultBoooklist;
     }
 
@@ -122,8 +129,9 @@ public class BookManager {
 //        }     
 //        return resultCdlist;
 //    }
+    
     public void updateBook(Book edittedBook) {
-        myBookDao.updateBook(edittedBook);
+      myBookDao.updateBook(edittedBook);
     }
 
 }

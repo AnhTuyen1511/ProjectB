@@ -35,9 +35,9 @@ public class ManageOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String mode = request.getParameter("mode");
+             String mode = request.getParameter("mode");
             String target = "home.jsp";
             if (mode.equals("viewOrder")) {
                 List<Order> listOrder = new ArrayList<>();
@@ -47,8 +47,8 @@ public class ManageOrderServlet extends HttpServlet {
                 target = "ViewOrder.jsp";
                 request.setAttribute("listOrder", listOrder);
             }
-
-            RequestDispatcher rd = request.getRequestDispatcher(target);
+            
+              RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }
     }

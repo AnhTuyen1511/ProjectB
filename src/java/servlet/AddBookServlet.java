@@ -22,6 +22,7 @@ import manager.BookManager;
  *
  * @author BLC
  */
+
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
@@ -41,8 +42,8 @@ public class AddBookServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-
+        try (PrintWriter out = response.getWriter()) {
+            
             BookManager myBookManager = new BookManager();
             String target = "ViewBook.jsp";
             String title = request.getParameter("title");
@@ -52,12 +53,13 @@ public class AddBookServlet extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             int price = Integer.parseInt(request.getParameter("price"));
             String description = request.getParameter("description");
-            String pictureName = title + ".jpg";
+            String pictureName = title+".jpg";
             Part filePart = request.getPart("image");
             int status = 1;
+            
 
-            Book newBook = new Book(title, authorID, genreID, price, quantity, yor, description, status, pictureName);
-
+            Book newBook = new Book(title, authorID, genreID, price, quantity, yor, description, status,pictureName);
+           
             myBookManager.addBook(newBook);
 
             ArrayList<Book> listBook = new ArrayList<>();
@@ -69,7 +71,7 @@ public class AddBookServlet extends HttpServlet {
 
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
-        }
+        }     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -99,7 +101,11 @@ public class AddBookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        
 
+        
     }
 
+    
 }

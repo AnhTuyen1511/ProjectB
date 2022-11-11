@@ -21,14 +21,14 @@ public class OrderDAO {
 
     public ArrayList<Order> getListOrder() {
 
-        ArrayList<Order> listOrder = new ArrayList<>();
+     ArrayList<Order> listOrder = new ArrayList<>();
 
         try {
             Connection con = DBContext.getConnection();
             String query = "SELECT * FROM orders;";
             Statement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery(query);
-
+            
             while (rs.next()) {
                 Order order = new Order(rs.getInt(1),
                         rs.getInt(2),
@@ -39,7 +39,7 @@ public class OrderDAO {
                 );
                 listOrder.add(order);
             }
-
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

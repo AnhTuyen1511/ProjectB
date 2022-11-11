@@ -1,5 +1,5 @@
 ::selection {
-    background: #212129;
+   background: #212129;
 }
 
 .search-wrapper {
@@ -9,10 +9,9 @@
     /*left:50%;*/
     right:2%;
 }
-.search-wrapper.active {
-}
+.search-wrapper.active {}
 
-.search-wrapper .input-holder {
+.search-wrapper .input-holder {    
     height: 70px;
     width:80px;
     overflow: hidden;
@@ -86,9 +85,9 @@
     transform: rotate(-45deg);
 }
 .search-wrapper .input-holder .search-icon span::before, .search-wrapper .input-holder .search-icon span::after {
-    position: absolute;
+    position: absolute; 
     content:'';
-
+   
 }
 .search-wrapper .input-holder .search-icon span::before {
     width: 4px;
