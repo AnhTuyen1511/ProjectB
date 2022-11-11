@@ -17,8 +17,6 @@
     <body class="align">
         <div class="overlay">
             <!-- LOGN IN FORM by Omar Dsoky -->
-
-            <h1><% request.getAttribute("aaa");%></h1>
             <form action = "ManageUserLoginServlet" method="post">
                 <input name="mode" type="hidden" value="userLogin" />
                 <!--   con = Container  for items in the form-->

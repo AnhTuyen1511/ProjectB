@@ -6,6 +6,7 @@ package dao;
 
 import entity.Customer;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,6 +44,35 @@ public class CustomerDAO {
             System.out.println(ex.getMessage());
         }
         return listCus;
+    }
+    
+    public Customer getCustomerByID(int id) {
+        Customer customer = null;
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM customer WHERE customer_id = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                customer = new Customer(id,
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8)
+                );
+            }
+            con.close();
+            pst.close();
+            rs.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return customer;
     }
 
 }
