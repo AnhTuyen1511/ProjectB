@@ -56,6 +56,7 @@ public class ManageCustomerServlet extends HttpServlet {
 
                 target = "ManageCustomerServlet?mode=viewCustomer";
             }
+            
 
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
