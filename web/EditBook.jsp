@@ -145,7 +145,11 @@
                                     
                                     <div class="form-group mb-3">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         <label  for="name" >Genre ID </label>
+=======
+                                        <label  for="name" >Author ID </label>
+>>>>>>> parent of 360b5ee (Merge branch 'main' of https://github.com/AnhTuyen1511/ProjectB)
                                         <input id="name" name="genreID" class="form-control validate" value="<%=editBook.getGenre_id()%>"
                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                type="number" min = "<%=listGenre.get(0).getGenre_id() %>" max="<%=listGenre.get(listGenre.size()-1).getGenre_id()%>" maxlength="4"  pattern="\d*" />
@@ -234,7 +238,7 @@
         <script>
 <<<<<<< HEAD
                                             $(function () {
-                                                $("#expire_date"). ;
+                                                $("#expire_date").datepicker();
                                             });
 =======
             $(function () {

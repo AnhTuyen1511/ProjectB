@@ -133,25 +133,25 @@
             <div class="py-2">
                 <div class="row py-2">
                     <div class="col-md-6">
-                        <label for="name">Name</label>
-                        <input name="name" type="text" class="bg-light form-control" placeholder="Steve">
+                        <label for="firstname">First Name</label>
+                        <input type="text" class="bg-light form-control" placeholder="Steve">
                     </div>
                     <div class="col-md-6 pt-md-0 pt-3">
-                        <label for="address">Address</label>
-                        <input name="address" type="text" class="bg-light form-control" placeholder="Smith">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" class="bg-light form-control" placeholder="Smith">
                     </div>
                 </div>
                 <div class="row py-2">
                     <div class="col-md-6">
                         <label for="email">Email Address</label>
-                        <input name="email" type="text" class="bg-light form-control" placeholder="steve_@email.com">
+                        <input type="text" class="bg-light form-control" placeholder="steve_@email.com">
                     </div>
                     <div class="col-md-6 pt-md-0 pt-3">
                         <label for="phone">Phone Number</label>
-                        <input name="phone" type="tel" class="bg-light form-control" placeholder="+1 213-548-6015">
+                        <input type="tel" class="bg-light form-control" placeholder="+1 213-548-6015">
                     </div>
                 </div>
-<!--                <div class="row py-2">
+                <div class="row py-2">
                     <div class="col-md-6">
                         <label for="country">Country</label>
                         <select name="country" id="country" class="bg-light">
@@ -172,7 +172,7 @@
                             </select>
                         </div>
                     </div>
-                </div>-->
+                </div>
                 <div class="py-3 pb-4 border-bottom">
                     <button class="btn btn-primary mr-3">Save Changes</button>
                     <button class="btn border button">Cancel</button>
