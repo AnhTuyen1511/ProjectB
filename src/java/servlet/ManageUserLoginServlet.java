@@ -42,8 +42,6 @@ public class ManageUserLoginServlet extends HttpServlet {
             manager.CustomerManager myCustomerManager = new CustomerManager();
             String mode = request.getParameter("mode");
             String target = "UserLogin.jsp";
-            String a = "hong co do";
-            request.setAttribute("aaa", a);
             HttpSession mySession = request.getSession();
 
             String username = request.getParameter("username");
@@ -63,6 +61,7 @@ public class ManageUserLoginServlet extends HttpServlet {
                     if (user.equals(username) && pass.equals(password)) {
                         target = "index.jsp";
                         mySession.setAttribute("UserLogin", listCustomer.get(i).getName());
+                        mySession.setAttribute("CustomerID", listCustomer.get(i).getCustomer_id());
                         break;
                     } else {
                         mess = "Invalid username or password";
@@ -72,6 +71,14 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 }
             }
+            if (mode.equals("userProfile")) {
+//                String id = request.getParameter();
+                
+                target = "UserProfile.jsp";
+                mySession = request.getSession();
+                
+            }
+            
             if (mode.equals("userLogout")) {
                 target = "index.jsp";
                 mySession = request.getSession();

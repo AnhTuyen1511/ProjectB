@@ -144,7 +144,7 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label  for="name" >Author ID </label>
+                                        <label  for="name" >Genre ID </label>
                                         <input id="name" name="genreID" class="form-control validate" value="<%=editBook.getGenre_id()%>"
                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                type="number" min = "<%=listGenre.get(0).getGenre_id() %>" max="<%=listGenre.get(listGenre.size()-1).getGenre_id()%>" maxlength="4"  pattern="\d*" />
@@ -226,7 +226,7 @@
         <!-- https://getbootstrap.com/ -->
         <script>
                                             $(function () {
-                                                $("#expire_date").datepicker();
+                                                $("#expire_date"). ;
                                             });
         </script>
     </body>
