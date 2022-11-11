@@ -95,13 +95,15 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 listCustomer = myCustomerDAO.getListCustomer();
                 for (int i = 0; i < listCustomer.size(); i++) {
-                    if (listCustomer.get(i).getUsername() != R_username) {
-                        myCustomerManager.addCustomer(newCustomer);
-                        target = "UserLogin.jsp";
-                    } else {
+                    if (listCustomer.get(i).getUsername().equals(R_username)) {
                         target = "UserRegister";
                         mess = ("Username is already exist");
                         request.setAttribute("registerMess", mess);
+                        break;
+                    } else {
+                         myCustomerManager.addCustomer(newCustomer);
+                        target = "UserLogin.jsp";
+                        break;
                     }
 
                 }
