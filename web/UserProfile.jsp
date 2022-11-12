@@ -64,11 +64,11 @@
             }
 
             .idd1 {
-                font-size: 12px
+                font-size: 14px
             }
 
             .number {
-                font-size: 22px;
+                font-size: 16px;
                 font-weight: bold
             }
 
@@ -98,9 +98,14 @@
             }
 
             .text span {
-                font-size: 13px;
+                font-size: 14px;
                 color: #545454;
-                font-weight: 500
+                font-weight: 600;
+            }
+            .text .idd{
+                font-size: 14px;
+                font-weight: 600;
+                color: #000;
             }
 
             .icons i {
@@ -124,26 +129,31 @@
 
     </head>
     <body>
-        <% Customer tempCustomer = (Customer) request.getAttribute("tempCustomer");  %>
-        
+        <% Customer tempCustomer = (Customer) request.getAttribute("cus");%>
+
         <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
             <div class="card p-4"> 
                 <div class=" image d-flex flex-column justify-content-center align-items-center"> 
-                    <button class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
-                    </button> <span class="name mt-3"></span> <span class="idd">@eleanorpena</span> 
-                    <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
-                        <!--<span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span>--> 
-                    </div> 
-                    <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
-                        <span class="number">1069 <span class="follow">Followers</span></span> 
-                    </div> 
+                    
+                    <button class="btn btn-secondary"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" height="100" width="100" />
+                        <!--https://i.imgur.com/wvxPV9S.png-->
+                    
+                    </button> <span class="name mt-3"><%=tempCustomer.getName()%> </span> 
+                   
+                    <span class="idd">@<%=tempCustomer.getUsername()%></span> 
+                    
                     <div class=" d-flex mt-2"> 
-                        <a href="EditUserProfile.jsp" class="logout"><button class="btn1 btn-dark">Edit Profile</button></a>
+                        <a href="ManageUserLoginServlet?mode=editProfile&customerID=<%=tempCustomer.getCustomer_id() %>" class="logout"><button class="btn1 btn-dark">Edit Profile</button></a>
                     </div>
-                    <div class="text mt-3"> 
+                    <br>
+                    <span class="idd">Email: <%=tempCustomer.getEmail()%></span> 
+                    <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
+                        <span class="number"><span class="idd">Phone Number: </span>0<%=tempCustomer.getPhone_number()%></span> 
+                    </div> 
+
+                    <div class="text mt-3">   
                         <span>
-                            Eleanor Pena is a creator of minimalistic x bold graphics and digital artwork.<br>
-                            <br> Artist/ Creative Director by Day #NFT minting@ with FND night. 
+                            <span class="idd">Address: </span><%=tempCustomer.getAddress() %>
                         </span> 
                     </div> 
                     <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> 

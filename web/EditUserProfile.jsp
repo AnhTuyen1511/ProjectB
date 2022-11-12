@@ -4,6 +4,7 @@
     Author     : BLC
 --%>
 
+<%@page import="entity.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,8 @@
         <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
         <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" >
         <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" >
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"/>
         <style type="text/css">
             
             @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -36,6 +39,19 @@
                 margin: 10px auto;
                 max-width: 600px;
             }
+            
+
+            .image:hover img {
+                transition: all 0.5s;
+                transform: scale(1.5);
+            }
+            
+            .name {
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            
             h4{
                 letter-spacing: -1px;
                 font-weight: 400;
@@ -119,9 +135,17 @@
         </style>
     </head>
     <body>
+        <% Customer tempCustomer = (Customer) request.getAttribute("cus");%>
         <div class="wrapper bg-white mt-sm-5">
             <h4 class="pb-4 border-bottom">Account settings</h4>
-            <div class="d-flex align-items-start py-3 border-bottom">
+            
+            <div class=" image d-flex flex-column justify-content-center align-items-center">      
+                    <button class="btn btn-secondary"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" height="100" width="100" />
+                        <!--https://i.imgur.com/wvxPV9S.png-->
+                    </button> 
+                <span class="name mt-3">@<%=tempCustomer.getUsername() %></span> 
+            </div>
+<!--            <div class="d-flex align-items-start py-3 border-bottom">
                 <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                      class="img" alt="">
                 <div class="pl-sm-4 pl-2" id="img-section">
@@ -129,26 +153,26 @@
                     <p>Accepted file type .png. Less than 1MB</p>
                     <button class="btn button border"><b>Upload</b></button>
                 </div>
-            </div>
+            </div>-->
             <div class="py-2">
                 <div class="row py-2">
                     <div class="col-md-6">
                         <label for="name">Name</label>
-                        <input name="name" type="text" class="bg-light form-control" placeholder="Steve">
+                        <input name="name" type="text" class="bg-light form-control" value="<%=tempCustomer.getName() %>" required="" >
                     </div>
                     <div class="col-md-6 pt-md-0 pt-3">
                         <label for="address">Address</label>
-                        <input name="address" type="text" class="bg-light form-control" placeholder="Smith">
+                        <input name="address" type="text" class="bg-light form-control" value="<%=tempCustomer.getAddress() %>" required="">
                     </div>
                 </div>
                 <div class="row py-2">
                     <div class="col-md-6">
                         <label for="email">Email Address</label>
-                        <input name="email" type="text" class="bg-light form-control" placeholder="steve_@email.com">
+                        <input name="email" type="text" class="bg-light form-control" value="<%=tempCustomer.getEmail() %>" required="">
                     </div>
                     <div class="col-md-6 pt-md-0 pt-3">
                         <label for="phone">Phone Number</label>
-                        <input name="phone" type="tel" class="bg-light form-control" placeholder="+1 213-548-6015">
+                        <input name="phone" type="tel" class="bg-light form-control" value="0<%=tempCustomer.getPhone_number() %>" required="">
                     </div>
                 </div>
 <!--                <div class="row py-2">

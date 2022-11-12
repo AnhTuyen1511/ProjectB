@@ -68,12 +68,19 @@ public class ManageUserLoginServlet extends HttpServlet {
                 }
             }
             if (mode.equals("viewProfile")) {
-                int id = Integer.parseInt(request.getParameter("cusID"));
-                Customer tempCustomer = myCustomerDAO.getCustomerByID(id);
-                request.setAttribute("tempCustomer", tempCustomer);
+                int customerID = Integer.parseInt(request.getParameter("customerID"));
+                Customer cus = myCustomerDAO.getCustomerByID(customerID);
+                request.setAttribute("cus", cus);
 
                 target = "UserProfile.jsp";
-
+            }
+            
+            if (mode.equals("editProfile")) {
+                int customerID = Integer.parseInt(request.getParameter("customerID"));
+                Customer cus = myCustomerDAO.getCustomerByID(customerID);
+                request.setAttribute("cus", cus);
+                
+                target = "EditUserProfile.jsp";
             }
 
             if (mode.equals("userLogout")) {

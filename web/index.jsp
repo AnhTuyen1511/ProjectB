@@ -49,15 +49,17 @@
                         </div>
                         <div class="col-md-6">
                             <div class="right-element">
-                                <% String txtAccount = "Login";
+                                <% Customer customer;
+                                    String txtAccount = "Login";
                                     String link = "UserLogin.jsp";
                                     String ss = (String) session.getAttribute("UserLogin");
-                                    
+
                                     if (ss != null) {
+                                        customer = (Customer) session.getAttribute("tempCustomer");
                                         txtAccount = ss;
-                                        link = "UserProfile.jsp";
-                                    }
-                                %>
+                                        link = "ManageUserLoginServlet?mode=viewProfile&customerID=";
+                                        link += customer.getCustomer_id();
+                                    }%>
                                 <a href=<%=link%> class="user-account for-buy" ><i class="icon icon-user"></i><span> <%=txtAccount%></span></a>
 
                                 <a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0 $)</span></a>
