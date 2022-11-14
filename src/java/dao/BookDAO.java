@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,6 +44,34 @@ public class BookDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return listBook;
+    }
+    public ArrayList<Book> getListBook_1() {
+        ArrayList<Book> listBook = new ArrayList<>();
+      
+        String query  = "select * from books inner join authors on  books.author_id=  authors.author_id inner join genre on books.genre_id = genre.genre_id;";
+         Statement st;
+        try {
+            Connection con = DBContext.getConnection();
+            st = con.prepareStatement(query);
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()){
+                Book book = new Book(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(5), 
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8), 
+                        rs.getInt(9),
+                        rs.getString(11), 
+                        rs.getString(15));
+                listBook.add(book);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
         return listBook;
     }
 

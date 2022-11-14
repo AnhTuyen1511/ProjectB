@@ -5,11 +5,12 @@
  */
 package servlet;
 
-import configPkg.ConfigInfo;
+import dao.BookDAO;
+import entity.Book;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuon
  */
-public class InitServlet extends HttpServlet {
+public class UserActivityServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +34,25 @@ public class InitServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            ServletContext servletctx = request.getServletContext();
-            String ctxFullPath = servletctx.getRealPath("\\");
-
-            //Set path to ConfigInfo, DAO can get the real path from ConfigInfo
-            ConfigInfo.setCtxRealPath(ctxFullPath);
-
-            String target = "UserActivityServlet?mode=userViewBook";
-            RequestDispatcher reqDispatch = request.getRequestDispatcher(target);
-            reqDispatch.forward(request, response);
+            BookDAO myBookDAO = new BookDAO();
+          String mode = request.getParameter("mode");
+          String target = "home.jsp";
+            if(mode.equals("userViewBook")){
+               ArrayList <Book> newList = new ArrayList<>();
+               ArrayList<Book> listBook = new ArrayList<>();
+               listBook = myBookDAO.getListBook_1();
+               for(int i = 0; i < listBook.size();i++){
+                   if(listBook.get(i).getBook_status()==1){
+                       newList.add(listBook.get(i));
+                   }
+               }
+               request.setAttribute("newList", newList);
+               target = "index.jsp";
+           }
+            RequestDispatcher rd = request.getRequestDispatcher(target);
+            rd.forward(request, response);
         }
     }
 

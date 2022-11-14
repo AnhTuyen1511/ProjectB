@@ -25,6 +25,8 @@ public class Book {
     private String description;
     private int book_status;
     private String picture;
+    private String author_name;
+    private String genre;
 
     public Book(int book_id, String title, int author_id, int genre_id, int price, int quantity, int yor, String description, int book_status) {
         this.book_id = book_id;
@@ -48,6 +50,21 @@ public class Book {
         this.description = description;
         this.book_status = book_status;
     }
+
+    public Book(int book_id, String title, int price, int quantity, int yor, String description, int book_status, String author_name, String genre) {
+        this.book_id = book_id;
+        this.title = title;
+        this.price = price;
+        this.quantity = quantity;
+        this.yor = yor;
+        this.description = description;
+        this.book_status = book_status;
+        this.author_name = author_name;
+        this.genre = genre;
+    }
+
+    
+    
 
     public Book(String title, int author_id, int genre_id, int price, int quantity, int yor, String description, int book_status, String picture) {
         this.title = title;
@@ -140,5 +157,22 @@ public class Book {
     public void setBook_status(int book_status) {
         this.book_status = book_status;
     }
+
+    public String getAuthor_name() {
+        return author_name;
+    }
+
+    public void setAuthor_name(String author_name) {
+        this.author_name = author_name;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+    
 
 }

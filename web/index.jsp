@@ -1,3 +1,6 @@
+<%@page import="entity.Book"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entity.Customer"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +27,7 @@
     </head>
 
     <body>
-
+        <% ArrayList<Book> listBook = (ArrayList<Book>)request.getAttribute("newList"); %>
         <div id="header-wrap">
             <div class="top-content">
                 <div class="container">
@@ -152,8 +155,8 @@
                         <div class="main-slider pattern-overlay">
                             <div class="slider-item">
                                 <div class="banner-content">
-                                    <h2 class="banner-title">Life of the Wild</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.</p>
+                                    <h2 class="banner-title"><%=listBook.get(0).getTitle() %></h2>
+                                    <p><%=listBook.get(0).getDescription()%></p>
                                     <div class="btn-wrap">
                                         <a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
                                     </div>
@@ -163,8 +166,8 @@
 
                             <div class="slider-item">
                                 <div class="banner-content">
-                                    <h2 class="banner-title">Birds gonna be Happy</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.</p>
+                                    <h2 class="banner-title"><%=listBook.get(1).getTitle() %></h2>
+                                    <p><%=listBook.get(1).getDescription() %></p>
                                     <div class="btn-wrap">
                                         <a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
                                     </div>
@@ -222,9 +225,9 @@
                                         <img src="images/product-item1.jpg" alt="Books" class="product-item">
                                         <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
                                         <figcaption>
-                                            <h3>Simple way of piece life</h3>
-                                            <p>Armor Ramsey</p>
-                                            <div class="item-price">$ 40.00</div>
+                                            <h3><%=listBook.get(2).getTitle() %></h3>
+                                            <p><%=listBook.get(2).getAuthor_name() %></p>
+                                            <div class="item-price"><%=listBook.get(2).getPrice() %> VND</div>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -234,9 +237,9 @@
                                         <img src="images/product-item2.jpg" alt="Books" class="product-item">
                                         <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
                                         <figcaption>
-                                            <h3>Great travel at desert</h3>
-                                            <p>Sanchit Howdy</p>
-                                            <div class="item-price">$ 38.00</div>
+                                            <h3><%=listBook.get(3).getTitle() %></h3>
+                                            <p><%=listBook.get(3).getAuthor_name() %></p>
+                                            <div class="item-price"><%=listBook.get(3).getPrice() %> VND</div>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -246,9 +249,9 @@
                                         <img src="images/product-item3.jpg" alt="Books" class="product-item">
                                         <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
                                         <figcaption>
-                                            <h3>The lady beauty Scarlett</h3>
-                                            <p>Arthur Doyle</p>
-                                            <div class="item-price">$ 45.00</div>
+                                            <h3><%=listBook.get(4).getTitle() %></h3>
+                                            <p><%=listBook.get(4).getAuthor_name() %></p>
+                                            <div class="item-price"><%=listBook.get(4).getPrice() %> VND</div>
                                         </figcaption>
                                     </figure>
                                 </div>
