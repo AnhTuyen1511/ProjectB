@@ -56,6 +56,10 @@
         <servlet-name>ManageUserLoginServlet</servlet-name>
         <servlet-class>servlet.ManageUserLoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditUserProfileServlet</servlet-name>
+        <servlet-class>servlet.EditUserProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>ManageUserLoginServlet</servlet-name>
         <url-pattern>/ManageUserLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserProfileServlet</servlet-name>
+        <url-pattern>/EditUserProfileServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

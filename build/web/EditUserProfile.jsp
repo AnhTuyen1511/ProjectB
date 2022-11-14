@@ -155,6 +155,8 @@
                 </div>
             </div>-->
             <div class="py-2">
+                <form action="EditUserProfileServlet?mode=editProfile&cusID=<%=tempCustomer.getCustomer_id() %>" method="POST">
+              
                 <div class="row py-2">
                     <div class="col-md-6">
                         <label for="name">Name</label>
@@ -175,6 +177,9 @@
                         <input name="phone" type="tel" class="bg-light form-control" value="0<%=tempCustomer.getPhone_number() %>" required="">
                     </div>
                 </div>
+                        <input name="password" value="<%=tempCustomer.getPassword() %>" type="hidden"/>
+                        <input name="username" value="<%=tempCustomer.getUsername() %>" type="hidden"/>
+                        <input name="status" value="<%=tempCustomer.getCustomer_status() %>" type="hidden"/>
 <!--                <div class="row py-2">
                     <div class="col-md-6">
                         <label for="country">Country</label>
@@ -201,6 +206,7 @@
                     <button class="btn btn-primary mr-3">Save Changes</button>
                     <button class="btn border button">Cancel</button>
                 </div>
+                 </form>
                 <div class="d-sm-flex align-items-center pt-3" id="deactivate">
                     <div>
                         <b>Deactivate your account</b>
@@ -210,6 +216,7 @@
                         <button class="btn danger">Deactivate</button>
                     </div>
                 </div>
+                 
             </div>
         </div>
     </body>
