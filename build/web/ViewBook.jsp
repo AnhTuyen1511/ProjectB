@@ -115,6 +115,7 @@
                                 </div>
                                 <span class="close" onclick="searchToggle(this, event);"></span>
                             </div>
+                            <a href="ManageBookServlet?mode=addBook" style="margin-top: 30px" class="btn btn-primary btn-block text-uppercase mb-3">Add new book</a>
                         </form>
                         <div class="tm-product-table-container " style="margin-top: 25px">
 
@@ -154,7 +155,7 @@
                                         <td><%=listBook.get(i).getPrice() %> </td>
                                         <td><%=listBook.get(i).getYor() %> </td>
                                         <td><%=listBook.get(i).getBook_status() %> </td>
-                                        <td><img src="bookImages/<%=listBook.get(i).getBook_id() %>.jpg" style="max-width: 100%;width: 115px;height: 115px;" alt="loading"> </td>
+                                        <td><img src="bookImages/<%=listBook.get(i).getBook_id()%>.jpg" style="max-width: 100%;width: 115px;height: 115px;" alt="loading"> </td>
 
                                         <td>
                                             <a href="ManageBookServlet?mode=disableBook&bookID=<%= listBook.get(i).getBook_id() %>" class="tm-product-delete-link"/>
@@ -174,7 +175,7 @@
                             </table>
                         </div><!--
                         <!-- table container -->
-                        <a href="ManageBookServlet?mode=addBook" class="btn btn-primary btn-block text-uppercase mb-3">Add new book</a>
+                        
                         <!--                        <button class="btn btn-primary btn-block text-uppercase">
                                                     Delete selected products
                                                 </button>-->

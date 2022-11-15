@@ -113,6 +113,7 @@
                                 </div>
                                 <span class="close" onclick="searchToggle(this, event);"></span>
                             </div>
+                            <a href="AddGenre.jsp" style="margin-top: 30px" class="btn btn-primary btn-block text-uppercase mb-3">Add new genre </a>
                         </form>
                         <div class="tm-product-table-container" style="margin-top: 25px">
                             <%
@@ -161,7 +162,7 @@
                             </table>
                         </div><!--
                         <!-- table container -->
-                        <a href="AddGenre.jsp" class="btn btn-primary btn-block text-uppercase mb-3">Add new genre </a>
+                        
                         <!--                        <button class="btn btn-primary btn-block text-uppercase">
                                                     Delete selected products
                                                 </button>-->

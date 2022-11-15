@@ -137,7 +137,7 @@
                                                     
                                             %>
                                            
-                                            <option selected="" value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_name() %> </option>
+                                            <option value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_name() %> </option>
                                             <% } %>
                                         </select>
                                     </div>

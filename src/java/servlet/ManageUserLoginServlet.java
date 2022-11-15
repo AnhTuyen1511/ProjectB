@@ -55,7 +55,7 @@ public class ManageUserLoginServlet extends HttpServlet {
                     String user = listCustomer.get(i).getUsername();
                     String pass = listCustomer.get(i).getPassword();
                     if (user.equals(username) && pass.equals(password)) {
-                        target = "index.jsp";
+                        target = "UserActivityServlet?mode=userViewBook";
                         mySession.setAttribute("UserLogin", listCustomer.get(i).getName());
                         mySession.setAttribute("tempCustomer", listCustomer.get(i));
                         break;
@@ -84,7 +84,7 @@ public class ManageUserLoginServlet extends HttpServlet {
             }
 
             if (mode.equals("userLogout")) {
-                target = "index.jsp";
+                target = "UserActivityServlet?mode=userViewBook";
                 mySession = request.getSession();
                 mySession.removeAttribute("UserLogin");
 
