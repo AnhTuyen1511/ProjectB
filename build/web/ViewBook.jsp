@@ -154,7 +154,7 @@
                                         <td><%=listBook.get(i).getPrice() %> </td>
                                         <td><%=listBook.get(i).getYor() %> </td>
                                         <td><%=listBook.get(i).getBook_status() %> </td>
-                                        <td><img src="bookImages/<%=listBook.get(i).getPicture() %>" style="max-width: 100%;width: 115px;height: 115px;" alt="loading"> </td>
+                                        <td><img src="bookImages/<%=listBook.get(i).getBook_id() %>.jpg" style="max-width: 100%;width: 115px;height: 115px;" alt="loading"> </td>
 
                                         <td>
                                             <a href="ManageBookServlet?mode=disableBook&bookID=<%= listBook.get(i).getBook_id() %>" class="tm-product-delete-link"/>

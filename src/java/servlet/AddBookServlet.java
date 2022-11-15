@@ -58,8 +58,10 @@ public class AddBookServlet extends HttpServlet {
 
             Book newBook = new Book(title, authorID, genreID, price, quantity, yor, description, status, pictureName);
 
-            myBookManager.addBook(newBook);
+            int newId=myBookManager.addBook(newBook);
 
+            pictureName = newId+".jpg";
+            
             ArrayList<Book> listBook = new ArrayList<>();
 
             listBook = myBookManager.getListBook();

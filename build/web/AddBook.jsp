@@ -131,8 +131,18 @@
                                         <label  for="name" >Author ID </label>
                                         <select class="custom-select tm-select-accounts"
                                                 id="category" name = "authorID">
-                                            <% for(int i = 0; i < listAuthor.size();i++){ %>
-                                            <option value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_id() %> </option>
+                                            <% 
+                                                String selected="";
+                                                for(int i = 0; i < listAuthor.size();i++){
+                                                    selected="";
+                                                if (listAuthor.get(i).getAuthor_id() == 1002)
+                                                {
+                                                    selected="selected";
+                                                }
+                                            
+                                            %>
+                                           
+                                            <option <%=selected %> value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_name() %> </option>
                                             <% } %>
                                         </select>
                                     </div>
@@ -142,7 +152,7 @@
                                         <select class="custom-select tm-select-accounts"
                                                 id="category" name = "genreID">
                                             <% for(int i = 0; i < listGenre.size();i++){ %>
-                                            <option value ="<%=listGenre.get(i).getGenre_id()%>" > <%=listGenre.get(i).getGenre_id()%> </option>
+                                            <option value ="<%=listGenre.get(i).getGenre_id()%>" > <%=listGenre.get(i).getGenre()%> </option>
                                             <% } %>
                                         </select>
                                     </div>                                    

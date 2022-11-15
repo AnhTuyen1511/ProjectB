@@ -50,8 +50,8 @@ public class BookManager {
 //        return resBook;
     }
 
-    public void addBook(Book book) {
-        this.myBookDao.insertBook(book);
+    public int addBook(Book book) {
+        return this.myBookDao.insertBook(book);
     }
 
 //    public boolean deleteBookbyID(int id) {

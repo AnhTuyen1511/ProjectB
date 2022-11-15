@@ -46,39 +46,43 @@ public class BookDAO {
         }
         return listBook;
     }
+
     public ArrayList<Book> getListBook_1() {
         ArrayList<Book> listBook = new ArrayList<>();
-      
-        String query  = "select * from books inner join authors on  books.author_id=  authors.author_id inner join genre on books.genre_id = genre.genre_id;";
-         Statement st;
+
+        String query = "select * from books inner join authors on  books.author_id=  authors.author_id inner join genre on books.genre_id = genre.genre_id;";
+        Statement st;
         try {
             Connection con = DBContext.getConnection();
             st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery(query);
-            while (rs.next()){
+            while (rs.next()) {
                 Book book = new Book(rs.getInt(1),
                         rs.getString(2),
-                        rs.getInt(5), 
+                        rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                        rs.getString(8), 
+                        rs.getString(8),
                         rs.getInt(9),
-                        rs.getString(11), 
+                        rs.getString(11),
                         rs.getString(15));
                 listBook.add(book);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+
         return listBook;
     }
 
-    public void insertBook(Book book) {
+    public int insertBook(Book book) {
+        int newID=0;
         try {
+            String sqlstm = "INSERT INTO books(title, author_id, genre_id , price, quantity, yor, description ,book_status) VALUE(?,?,?,?,?,?,?,?)";
+
             Connection con = DBContext.getConnection();
-            PreparedStatement pst = con.prepareStatement("INSERT INTO books(title, author_id, genre_id , price, quantity, yor, description ,book_status) VALUE(?,?,?,?,?,?,?,?)");
+            PreparedStatement pst = con.prepareStatement(sqlstm, PreparedStatement.RETURN_GENERATED_KEYS);
 
             pst.setString(1, book.getTitle());
             pst.setInt(2, book.getAuthor_id());
@@ -91,6 +95,13 @@ public class BookDAO {
 
             pst.executeUpdate();
 
+            ResultSet res = pst.getGeneratedKeys();
+            
+            while (res.next()) {
+                newID=res.getInt(1);
+                System.out.println("Generated key: ----------" +newID );
+            }
+
             pst.close();
             con.close();
 
@@ -98,6 +109,7 @@ public class BookDAO {
             System.out.println(ex.getMessage());
 
         }
+        return newID;
     }
 
     public void updateBook(Book book) {
@@ -183,6 +195,5 @@ public class BookDAO {
         }
 
     }
-    
 
 }
