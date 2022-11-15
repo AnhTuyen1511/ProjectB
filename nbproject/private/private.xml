@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/UserActivityServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/EditBookServlet.java</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/manager/BookManager.java</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/EditBook.jsp</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/index.jsp</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/dao/BookDAO.java</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/AddBookServlet.java</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/ManageBookServlet.java</file>
+            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/AddAuthor.jsp</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/ViewBook.jsp</file>
             <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/AddBook.jsp</file>
         </group>

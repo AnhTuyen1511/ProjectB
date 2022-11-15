@@ -56,7 +56,7 @@ public class AddBookServlet extends HttpServlet {
             Part filePart = request.getPart("image");
             int status = 1;
 
-            Book newBook = new Book(title, authorID, genreID, price, quantity, yor, description, status, pictureName);
+            Book newBook = new Book(title, authorID, genreID, price, quantity, yor, description, status);
 
             int newId=myBookManager.addBook(newBook);
 

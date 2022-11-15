@@ -124,7 +124,7 @@
                         </div>
                         <div class="row tm-edit-product-row">
                             <div class="col-xl-6 col-lg-6 col-md-10" id="add">
-                                <form action="EditBookServlet" method="post" class="tm-edit-product-form">
+                                <form action="EditBookServlet" method="post" class="tm-edit-product-form" enctype="multipart/form-data">
                                     <input type="hidden" name="mode" value="editBook">   
                                     <div class="form-group mb-3">
                                         <label  for="name" >ID </label>
@@ -136,19 +136,49 @@
                                         <input id="name" name="title" type="text"class="form-control validate" value="<%=editBook.getTitle() %>" required=""/>
                                     </div> 
 
-                                    <div class="form-group mb-3">
-                                        <label  for="name" >Author ID </label>
-                                        <input id="name" name="authorID" class="form-control validate" value="<%=editBook.getAuthor_id() %>"
-                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                               type="number" min = "<%=listAuthor.get(0).getAuthor_id() %>" max="<%=listAuthor.get(listAuthor.size()-1).getAuthor_id() %>" maxlength="4"  pattern="\d*" />
+                                   <div class="form-group mb-3">
+                                        <label  for="name" >Author </label>
+                                        <select class="custom-select tm-select-accounts"
+                                                id="category" name = "authorID">
+                                            <% 
+                                                
+                                                for(int i = 0; i < listAuthor.size();i++){
+                                                    String selected="";
+                                                    selected="";
+                                                if (listAuthor.get(i).getAuthor_id() == editBook.getAuthor_id())
+                                                {
+                                                    selected="selected";
+                                                }
+                                            
+                                            %>
+                                           
+                                            <option <%=selected %> value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_name() %> </option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                        
+                                      <div class="form-group mb-3">
+                                        <label  for="name" >Genre </label>
+                                        <select class="custom-select tm-select-accounts"
+                                                id="category" name = "genreID">
+                                            <% 
+                                                
+                                                for(int i = 0; i < listGenre.size();i++){
+                                                    String selected="";
+                                                    selected="";
+                                                if (listGenre.get(i).getGenre_id() == editBook.getGenre_id())
+                                                {
+                                                    selected="selected";
+                                                }
+                                            
+                                            %>
+                                           
+                                            <option <%=selected %> value ="<%=listGenre.get(i).getGenre_id() %>" > <%=listGenre.get(i).getGenre() %> </option>
+                                            <% } %>
+                                        </select>
                                     </div>
 
-                                    <div class="form-group mb-3">
-                                        <label  for="name" >Genre ID </label>
-                                        <input id="name" name="genreID" class="form-control validate" value="<%=editBook.getGenre_id()%>"
-                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                               type="number" min = "<%=listGenre.get(0).getGenre_id() %>" max="<%=listGenre.get(listGenre.size()-1).getGenre_id()%>" maxlength="4"  pattern="\d*" />
-                                    </div>
+                                    
 
 
 
@@ -191,7 +221,7 @@
 
 
                                 <div class="custom-file mt-3 mb-3">
-                                    <input id="fileInput" type="file" style="display:none;" accept=".png, .jpg, .jpeg, .gif" />
+                                    <input id="fileInput" name="image" type="file" style="display:none;" accept=".png, .jpg, .jpeg, .gif" />
                                     <input
                                         type="button"
                                         class="btn btn-primary btn-block mx-auto"

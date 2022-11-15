@@ -132,17 +132,12 @@
                                         <select class="custom-select tm-select-accounts"
                                                 id="category" name = "authorID">
                                             <% 
-                                                String selected="";
+                                                
                                                 for(int i = 0; i < listAuthor.size();i++){
-                                                    selected="";
-                                                if (listAuthor.get(i).getAuthor_id() == 1002)
-                                                {
-                                                    selected="selected";
-                                                }
-                                            
+                                                    
                                             %>
                                            
-                                            <option <%=selected %> value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_name() %> </option>
+                                            <option selected="" value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_name() %> </option>
                                             <% } %>
                                         </select>
                                     </div>

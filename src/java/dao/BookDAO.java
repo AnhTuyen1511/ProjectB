@@ -50,7 +50,7 @@ public class BookDAO {
     public ArrayList<Book> getListBook_1() {
         ArrayList<Book> listBook = new ArrayList<>();
 
-        String query = "select * from books inner join authors on  books.author_id=  authors.author_id inner join genre on books.genre_id = genre.genre_id;";
+        String query = "select * from books inner join authors on  books.author_id=  authors.author_id inner join genre on books.genre_id = genre.genre_id order by book_id;";
         Statement st;
         try {
             Connection con = DBContext.getConnection();
