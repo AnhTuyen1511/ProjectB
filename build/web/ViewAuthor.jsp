@@ -112,6 +112,7 @@
                                 </div>
                                 <span class="close" onclick="searchToggle(this, event);"></span>
                             </div>
+                            <a href="AddAuthor.jsp" style="margin-top: 30px" class="btn btn-primary btn-block text-uppercase mb-3">Add new author </a>
                         </form>
                         <div class="tm-product-table-container" style="margin-top: 25px">
                             <%
@@ -155,7 +156,6 @@
                             </table>
                         </div><!--
                         <!-- table container -->
-                        <a href="AddAuthor.jsp" class="btn btn-primary btn-block text-uppercase mb-3">Add new author </a>
                         <!--                        <button class="btn btn-primary btn-block text-uppercase">
                                                     Delete selected products
                                                 </button>-->

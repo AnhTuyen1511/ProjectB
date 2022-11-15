@@ -333,6 +333,7 @@ thead {
     padding: 13px 28px;
     transition: all 0.2s ease;
     max-width: 100%;
+   
 }
 .btn-small {
     padding: 10px 24px;
@@ -343,6 +344,7 @@ thead {
     border: 2px solid #f5a623;
     font-size: 90%;
     font-weight: 600;
+    
 }
 .btn-primary:active,
 .btn-primary:hover {

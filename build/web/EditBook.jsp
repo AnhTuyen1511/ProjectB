@@ -138,16 +138,42 @@
 
                                     <div class="form-group mb-3">
                                         <label  for="name" >Author ID </label>
-                                        <input id="name" name="authorID" class="form-control validate" value="<%=editBook.getAuthor_id() %>"
-                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                               type="number" min = "<%=listAuthor.get(0).getAuthor_id() %>" max="<%=listAuthor.get(listAuthor.size()-1).getAuthor_id() %>" maxlength="4"  pattern="\d*" />
+                                        <select class="custom-select tm-select-accounts"
+                                                id="category" name = "authorID">
+                                            <% 
+                                                String selected="";
+                                                for(int i = 0; i < listAuthor.size();i++){
+                                                    selected="";
+                                                if (listAuthor.get(i).getAuthor_id() == editBook.getAuthor_id())
+                                                {
+                                                    selected="selected";
+                                                }
+                                            
+                                            %>
+                                           
+                                            <option <%=selected %> value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_name() %> </option>
+                                            <% } %>
+                                        </select>
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label  for="name" >Genre ID </label>
-                                        <input id="name" name="genreID" class="form-control validate" value="<%=editBook.getGenre_id()%>"
-                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                               type="number" min = "<%=listGenre.get(0).getGenre_id() %>" max="<%=listGenre.get(listGenre.size()-1).getGenre_id()%>" maxlength="4"  pattern="\d*" />
+                                        <select class="custom-select tm-select-accounts"
+                                                id="category" name = "genreID">
+                                            <% 
+                                                String selectedGenre="";
+                                                for(int i = 0; i < listGenre.size();i++){
+                                                    selected="";
+                                                if (listGenre.get(i).getGenre_id() == editBook.getGenre_id())
+                                                {
+                                                    selectedGenre="selected";
+                                                }
+                                            
+                                            %>
+                                           
+                                            <option <%=selectedGenre %> value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_name() %> </option>
+                                            <% } %>
+                                        </select>
                                     </div>
 
 
