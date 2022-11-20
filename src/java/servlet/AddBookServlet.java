@@ -52,7 +52,6 @@ public class AddBookServlet extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             int price = Integer.parseInt(request.getParameter("price"));
             String description = request.getParameter("description");
-            String pictureName = title + ".jpg";
             Part filePart = request.getPart("image");
             int status = 1;
 
@@ -60,7 +59,7 @@ public class AddBookServlet extends HttpServlet {
 
             int newId=myBookManager.addBook(newBook);
 
-            pictureName = newId+".jpg";
+            String pictureName = newId+".jpg";
             
             ArrayList<Book> listBook = new ArrayList<>();
 

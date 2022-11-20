@@ -27,7 +27,7 @@
     </head>
 
     <body>
-        <% ArrayList<Book> listBook = (ArrayList<Book>)request.getAttribute("newList"); %>
+        <% ArrayList<Book> listBook = (ArrayList<Book>) request.getAttribute("newList"); %>
         <div id="header-wrap">
             <div class="top-content">
                 <div class="container">
@@ -92,7 +92,7 @@
 
                         <div class="col-md-2">
                             <div class="main-logo">
-                                <a href="index.html"><img src="images/main-logo.png" alt="logo"></a>
+                                <a href="UserActivityServlet?mode=userViewBook"><img src="images/main-logo.png" alt="logo"></a>
                             </div>
 
                         </div>
@@ -103,26 +103,26 @@
                                 <div class="main-menu stellarnav">
                                     <ul class="menu-list">
                                         <li class="menu-item active"><a href="#home" data-effect="Home">Home</a></li>
-                                        <li class="menu-item"><a href="#about" class="nav-link" data-effect="About">About</a></li>
+                                        <li class="menu-item"><a href="About.jsp" class="nav-link" data-effect="About">About</a></li>
                                         <li class="menu-item has-sub">
                                             <a href="#pages" class="nav-link" data-effect="Pages">Pages</a>
 
                                             <ul>
                                                 <li class="active"><a href="index.html">Home</a></li>
-                                                <li><a href="about.html">About</a></li>
+                                                <li><a href="About.jsp">About</a></li>
                                                 <li><a href="styles.html">Styles</a></li>
                                                 <li><a href="blog.html">Blog</a></li>
                                                 <li><a href="single-post.html">Post Single</a></li>
-                                                <li><a href="shop.html">Our Store</a></li>
+                                                <li><a href="Shop.jsp">Our Store</a></li>
                                                 <li><a href="single-product.html">Product Single</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
+                                                <li><a href="Contact.jsp">Contact</a></li>
                                                 <li><a href="thank-you.html">Thank You</a></li>
                                             </ul>
 
                                         </li>
-                                        <li class="menu-item"><a href="#popular-books" class="nav-link" data-effect="Shop">Shop</a></li>
+                                        <li class="menu-item"><a href="Shop.jsp" class="nav-link" data-effect="Shop">Shop</a></li>
                                         <li class="menu-item"><a href="#latest-blog" class="nav-link" data-effect="Articles">Articles</a></li>
-                                        <li class="menu-item"><a href="#contact" class="nav-link" data-effect="Contact">Contact</a></li>
+                                        <li class="menu-item"><a href="Contact.jsp" class="nav-link" data-effect="Contact">Contact</a></li>
                                     </ul>
 
                                     <div class="hamburger">
@@ -155,7 +155,7 @@
                         <div class="main-slider pattern-overlay">
                             <div class="slider-item">
                                 <div class="banner-content">
-                                    <h2 class="banner-title"><%=listBook.get(0).getTitle() %></h2>
+                                    <h2 class="banner-title"><%=listBook.get(0).getTitle()%></h2>
                                     <p><%=listBook.get(0).getDescription()%></p>
                                     <div class="btn-wrap">
                                         <a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
@@ -166,8 +166,8 @@
 
                             <div class="slider-item">
                                 <div class="banner-content">
-                                    <h2 class="banner-title"><%=listBook.get(1).getTitle() %></h2>
-                                    <p><%=listBook.get(1).getDescription() %></p>
+                                    <h2 class="banner-title"><%=listBook.get(1).getTitle()%></h2>
+                                    <p><%=listBook.get(1).getDescription()%></p>
                                     <div class="btn-wrap">
                                         <a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
                                     </div>
@@ -219,17 +219,18 @@
 
                         <div class="product-list" data-aos="fade-up">
                             <div class="row">
-
-                                <div class="col-md-3">
+                                <div class="col-md-3" >
+                                    <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(2).getBook_id()%>">
                                     <figure class="product-style">
-                                        <img src="images/product-item1.jpg" alt="Books" class="product-item">
-                                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
+                                        <img src="bookImages/<%=listBook.get(2).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                        <a href="Cart.jsp"><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
                                         <figcaption>
-                                            <h3><%=listBook.get(2).getTitle() %></h3>
-                                            <p><%=listBook.get(2).getAuthor_name() %></p>
-                                            <div class="item-price"><%=listBook.get(2).getPrice() %> VND</div>
+                                            <h3><%=listBook.get(2).getTitle()%></h3>
+                                            <p><%=listBook.get(2).getAuthor_name()%></p>
+                                            <div class="item-price"><%=listBook.get(2).getPrice()%> VND</div>
                                         </figcaption>
                                     </figure>
+                                        </a>
                                 </div>
 
                                 <div class="col-md-3">
@@ -237,9 +238,9 @@
                                         <img src="images/product-item2.jpg" alt="Books" class="product-item">
                                         <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
                                         <figcaption>
-                                            <h3><%=listBook.get(3).getTitle() %></h3>
-                                            <p><%=listBook.get(3).getAuthor_name() %></p>
-                                            <div class="item-price"><%=listBook.get(3).getPrice() %> VND</div>
+                                            <h3><%=listBook.get(3).getTitle()%></h3>
+                                            <p><%=listBook.get(3).getAuthor_name()%></p>
+                                            <div class="item-price"><%=listBook.get(3).getPrice()%> VND</div>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -249,9 +250,9 @@
                                         <img src="images/product-item3.jpg" alt="Books" class="product-item">
                                         <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
                                         <figcaption>
-                                            <h3><%=listBook.get(4).getTitle() %></h3>
-                                            <p><%=listBook.get(4).getAuthor_name() %></p>
-                                            <div class="item-price"><%=listBook.get(4).getPrice() %> VND</div>
+                                            <h3><%=listBook.get(4).getTitle()%></h3>
+                                            <p><%=listBook.get(4).getAuthor_name()%></p>
+                                            <div class="item-price"><%=listBook.get(4).getPrice()%> VND</div>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -279,7 +280,7 @@
                     <div class="col-md-12">
 
                         <div class="btn-wrap align-right">
-                            <a href="#" class="btn-accent-arrow">View all products <i class="icon icon-ns-arrow-right"></i></a>
+                            <a href="Shop.jsp" class="btn-accent-arrow">View all products <i class="icon icon-ns-arrow-right"></i></a>
                         </div>
 
                     </div>		
@@ -1077,7 +1078,7 @@
                             <div class="row">
 
                                 <div class="col-md-6">
-                                    <p>© 2022 All rights reserved. Free HTML Template by <a href="https://www.templatesjungle.com/" target="_blank">TemplatesJungle</a></p>
+                                    
                                 </div>
 
                                 <div class="col-md-6">

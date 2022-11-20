@@ -6,6 +6,7 @@ package dao;
 
 import entity.OrderDetail;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -41,5 +42,26 @@ public class OrderDetailDAO {
             System.out.println(ex.getMessage());
         }
         return listOrder;
+    }
+    
+    public void insertOrderDetail(OrderDetail orderDetail) {
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("INSERT INTO orderdetail (order_id, book_id,quantity, price) VALUE(?,?,?,?)");
+
+            pst.setInt(1, orderDetail.getOrder_id());
+            pst.setInt(2, orderDetail.getBook_id());
+            pst.setInt(3, orderDetail.getQuantity());
+            pst.setInt(4, orderDetail.getPrice());
+
+            pst.executeUpdate();
+
+            pst.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
     }
 }
