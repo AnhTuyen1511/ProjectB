@@ -76,8 +76,66 @@ public class BookDAO {
         return listBook;
     }
 
+    public ArrayList<Book> getListBookByGenre(int genreID) {
+        ArrayList<Book> listBook = new ArrayList<>();
+        try {
+
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM books Where genre_id = ?");
+            pst.setInt(1, genreID);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                Book book = new Book(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9));
+                listBook.add(book);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listBook;
+    }
+
+    public ArrayList<Book> getListBookByAuthor(int authorID) {
+        ArrayList<Book> listBook = new ArrayList<>();
+        try {
+
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM books Where author_id = ?");
+            pst.setInt(1, authorID);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                Book book = new Book(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9));
+                listBook.add(book);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listBook;
+    }
+
     public int insertBook(Book book) {
-        int newID=0;
+        int newID = 0;
         try {
             String sqlstm = "INSERT INTO books(title, author_id, genre_id , price, quantity, yor, description ,book_status) VALUE(?,?,?,?,?,?,?,?)";
 
@@ -96,10 +154,10 @@ public class BookDAO {
             pst.executeUpdate();
 
             ResultSet res = pst.getGeneratedKeys();
-            
+
             while (res.next()) {
-                newID=res.getInt(1);
-                System.out.println("Generated key: ----------" +newID );
+                newID = res.getInt(1);
+                System.out.println("Generated key: ----------" + newID);
             }
 
             pst.close();

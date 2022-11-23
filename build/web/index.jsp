@@ -1,3 +1,11 @@
+<%@page import="entity.Genre"%>
+<%@page import="entity.Genre"%>
+<%@page import="dao.GenreDAO"%>
+<%@page import="entity.Author"%>
+<%@page import="entity.Author"%>
+<%@page import="dao.AuthorDAO"%>
+<%@page import="dao.AuthorDAO"%>
+<%@page import="entity.Cart"%>
 <%@page import="entity.Book"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
@@ -25,11 +33,38 @@
         <script src="js/modernizr.js"></script>
 
     </head>
+    <%
+        int cartCount = 0;
+        ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listCart");
+        if (listCart != null) {
+            cartCount = listCart.size();
+        }
+
+        AuthorDAO myAuthorDAO = new AuthorDAO();
+        ArrayList<Author> list = myAuthorDAO.getListAuthor();
+        ArrayList<Author> listAuthor = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getAuthor_status() == 1) {
+                listAuthor.add(list.get(i));
+            }
+        }
+        GenreDAO myGenreDAO = new GenreDAO();
+        ArrayList<Genre> list_genre = myGenreDAO.getListGenre();
+        ArrayList<Genre> listGenre = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list_genre.get(i).getGenre_status() == 1) {
+                listGenre.add(list_genre.get(i));
+            }
+        }
+
+
+    %>
+
 
     <body>
         <% ArrayList<Book> listBook = (ArrayList<Book>) request.getAttribute("newList"); %>
         <div id="header-wrap">
-            <div class="top-content">
+            <div class="top-content" style="padding: 10px 0 0 0">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
@@ -65,7 +100,7 @@
                                     }%>
                                 <a href=<%=link%> class="user-account for-buy" ><i class="icon icon-user"></i><span> <%=txtAccount%></span></a>
 
-                                <a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0 $)</span></a>
+                                <a href="Cart.jsp" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart(<%=cartCount%>)</span></a>
 
                                 <div class="action-menu">
 
@@ -94,37 +129,43 @@
                             <div class="main-logo">
                                 <a href="UserActivityServlet?mode=userViewBook"><img src="images/main-logo.png" alt="logo"></a>
                             </div>
-
                         </div>
 
                         <div class="col-md-10">
-
                             <nav id="navbar">
                                 <div class="main-menu stellarnav">
                                     <ul class="menu-list">
-                                        <li class="menu-item active"><a href="#home" data-effect="Home">Home</a></li>
-                                        <li class="menu-item"><a href="About.jsp" class="nav-link" data-effect="About">About</a></li>
+                                        <li class="menu-item active"><a href="UserActivityServlet?mode=userViewBook" data-effect="Home">Home</a></li>
+
                                         <li class="menu-item has-sub">
-                                            <a href="#pages" class="nav-link" data-effect="Pages">Pages</a>
+                                            <a href="Genre.jsp" class="nav-link" data-effect="Pages">Genre</a>
 
                                             <ul>
-                                                <li class="active"><a href="index.html">Home</a></li>
-                                                <li><a href="About.jsp">About</a></li>
-                                                <li><a href="styles.html">Styles</a></li>
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-post.html">Post Single</a></li>
-                                                <li><a href="Shop.jsp">Our Store</a></li>
-                                                <li><a href="single-product.html">Product Single</a></li>
-                                                <li><a href="Contact.jsp">Contact</a></li>
-                                                <li><a href="thank-you.html">Thank You</a></li>
+                                                <%for (int i = 0; i < listGenre.size(); i++) {
+                                                %>
+                                                <li><a href="ManageBookServlet?mode=viewBookByGenre&genreID=<%=listGenre.get(i).getGenre_id()%>"><%=listGenre.get(i).getGenre()%></a></li>
+
+                                                <% } %>
+                                            </ul>
+
+                                        </li>
+
+
+                                        <li class="menu-item has-sub">
+                                            <a href="Author.jsp" class="nav-link" data-effect="Pages">Authors</a>
+
+                                            <ul>
+                                                <%for (int i = 0; i < listAuthor.size(); i++) {
+                                                %>
+                                                <li><a href="ManageBookServlet?mode=viewBookByAuthor&authorID=<%=listAuthor.get(i).getAuthor_id()%>"><%=listAuthor.get(i).getAuthor_name()%></a></li>
+
+                                                <% }%>
                                             </ul>
 
                                         </li>
                                         <li class="menu-item"><a href="Shop.jsp" class="nav-link" data-effect="Shop">Shop</a></li>
-                                        <li class="menu-item"><a href="#latest-blog" class="nav-link" data-effect="Articles">Articles</a></li>
                                         <li class="menu-item"><a href="Contact.jsp" class="nav-link" data-effect="Contact">Contact</a></li>
                                     </ul>
-
                                     <div class="hamburger">
                                         <span class="bar"></span>
                                         <span class="bar"></span>
@@ -152,16 +193,16 @@
                             <i class="icon icon-arrow-left"></i>
                         </button>
 
-                        <div class="main-slider pattern-overlay">
+                        <div class="main-slider pattern-overlay" style="padding: 0px;">
                             <div class="slider-item">
                                 <div class="banner-content">
-                                    <h2 class="banner-title"><%=listBook.get(0).getTitle()%></h2>
-                                    <p><%=listBook.get(0).getDescription()%></p>
+                                    <h2 class="banner-title"><%=listBook.get(20).getTitle()%></h2>
+                                    <p><%=listBook.get(20).getDescription()%></p>
                                     <div class="btn-wrap">
-                                        <a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(20).getBook_id()%>" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
                                     </div>
                                 </div><!--banner-content--> 
-                                <img src="images/main-banner1.jpg" alt="banner" class="banner-image">
+                                <img src="bookImages/<%=listBook.get(20).getBook_id()%>.jpg" alt="banner" class="banner-image">
                             </div><!--slider-item-->
 
                             <div class="slider-item">
@@ -169,10 +210,10 @@
                                     <h2 class="banner-title"><%=listBook.get(1).getTitle()%></h2>
                                     <p><%=listBook.get(1).getDescription()%></p>
                                     <div class="btn-wrap">
-                                        <a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(1).getBook_id()%>" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
                                     </div>
                                 </div><!--banner-content--> 
-                                <img src="images/main-banner2.jpg" alt="banner" class="banner-image">
+                                <img src="bookImages/<%=listBook.get(1).getBook_id()%>.jpg" alt="banner" class="banner-image">
                             </div><!--slider-item-->
 
                         </div><!--slider-->
@@ -187,32 +228,32 @@
 
         </section>
 
-        <section id="client-holder" data-aos="fade-up">
-            <div class="container">
-                <div class="row">
-                    <div class="inner-content">
-                        <div class="logo-wrap">
-                            <div class="grid">
-                                <a href="#"><img src="images/client-image1.png" alt="client"></a>
-                                <a href="#"><img src="images/client-image2.png" alt="client"></a>
-                                <a href="#"><img src="images/client-image3.png" alt="client"></a>
-                                <a href="#"><img src="images/client-image4.png" alt="client"></a>
-                                <a href="#"><img src="images/client-image5.png" alt="client"></a>
+        <!--        <section id="client-holder" data-aos="fade-up">
+                    <div class="container">
+                        <div class="row">
+                            <div class="inner-content">
+                                <div class="logo-wrap">
+                                    <div class="grid">
+                                        <a href="#"><img src="images/client-image1.png" alt="client"></a>
+                                        <a href="#"><img src="images/client-image2.png" alt="client"></a>
+                                        <a href="#"><img src="images/client-image3.png" alt="client"></a>
+                                        <a href="#"><img src="images/client-image4.png" alt="client"></a>
+                                        <a href="#"><img src="images/client-image5.png" alt="client"></a>
+                                    </div>
+                                </div>image-holder
                             </div>
-                        </div><!--image-holder-->
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
+                </section>-->
 
-        <section id="featured-books">
+        <section id="featured-books" style="margin-bottom: 30px">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
 
                         <div class="section-header align-center">
                             <div class="title">
-                                <span>Some quality items</span>
+
                             </div>
                             <h2 class="section-title">Featured Books</h2>
                         </div>
@@ -221,52 +262,58 @@
                             <div class="row">
                                 <div class="col-md-3" >
                                     <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(2).getBook_id()%>">
-                                    <figure class="product-style">
-                                        <img src="bookImages/<%=listBook.get(2).getBook_id()%>.jpg" alt="Books" class="product-item">
-                                        <a href="Cart.jsp"><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
-                                        <figcaption>
-                                            <h3><%=listBook.get(2).getTitle()%></h3>
-                                            <p><%=listBook.get(2).getAuthor_name()%></p>
-                                            <div class="item-price"><%=listBook.get(2).getPrice()%> VND</div>
-                                        </figcaption>
-                                    </figure>
-                                        </a>
+                                        <figure class="product-style">
+                                            <img src="bookImages/<%=listBook.get(2).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                            <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(2).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                            <figcaption>
+                                                <h3><%=listBook.get(2).getTitle()%></h3>
+                                                <p><%=listBook.get(2).getAuthor_name()%></p>
+                                                <div class="item-price"><%=listBook.get(2).getPrice()%> VND</div>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <figure class="product-style">
-                                        <img src="images/product-item2.jpg" alt="Books" class="product-item">
-                                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                        <figcaption>
-                                            <h3><%=listBook.get(3).getTitle()%></h3>
-                                            <p><%=listBook.get(3).getAuthor_name()%></p>
-                                            <div class="item-price"><%=listBook.get(3).getPrice()%> VND</div>
-                                        </figcaption>
-                                    </figure>
+                                    <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(3).getBook_id()%>">
+                                        <figure class="product-style">
+                                            <img src="bookImages/<%=listBook.get(3).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                            <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(3).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                            <figcaption>
+                                                <h3><%=listBook.get(3).getTitle()%></h3>
+                                                <p><%=listBook.get(3).getAuthor_name()%></p>
+                                                <div class="item-price"><%=listBook.get(3).getPrice()%> VND</div>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <figure class="product-style">
-                                        <img src="images/product-item3.jpg" alt="Books" class="product-item">
-                                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                        <figcaption>
-                                            <h3><%=listBook.get(4).getTitle()%></h3>
-                                            <p><%=listBook.get(4).getAuthor_name()%></p>
-                                            <div class="item-price"><%=listBook.get(4).getPrice()%> VND</div>
-                                        </figcaption>
-                                    </figure>
+                                    <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(4).getBook_id()%>">
+                                        <figure class="product-style">
+                                            <img src="bookImages/<%=listBook.get(4).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                            <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(4).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                            <figcaption>
+                                                <h3><%=listBook.get(4).getTitle()%></h3>
+                                                <p><%=listBook.get(4).getAuthor_name()%></p>
+                                                <div class="item-price"><%=listBook.get(4).getPrice()%> VND</div>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <figure class="product-style">
-                                        <img src="images/product-item4.jpg" alt="Books" class="product-item">
-                                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                        <figcaption>
-                                            <h3>Once upon a time</h3>
-                                            <p>Klien Marry</p>
-                                            <div class="item-price">$ 35.00</div>
-                                        </figcaption>
-                                    </figure>
+                                    <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(5).getBook_id()%>">
+                                        <figure class="product-style">
+                                            <img src="bookImages/<%=listBook.get(5).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                            <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(5).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                            <figcaption>
+                                                <h3><%=listBook.get(5).getTitle()%></h3>
+                                                <p><%=listBook.get(5).getAuthor_name()%> </p>
+                                                <div class="item-price"><%=listBook.get(5).getPrice()%> VND</div>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
                                 </div>
 
                             </div><!--ft-books-slider-->				
@@ -298,9 +345,11 @@
                         <div class="row">
 
                             <div class="col-md-6">
-                                <figure class="products-thumb">
-                                    <img src="images/single-image.jpg" alt="book" class="single-image">
-                                </figure>	
+                                <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(15).getBook_id()%>">
+                                    <figure class="products-thumb">
+                                        <img src="bookImages/<%=listBook.get(15).getBook_id()%>.jpg" alt="book" class="single-image">
+                                    </figure>
+                                </a>
                             </div>
 
                             <div class="col-md-6">
@@ -308,14 +357,15 @@
                                     <h2 class="section-title divider">Best Selling Book</h2>
 
                                     <div class="products-content">
-                                        <div class="author-name">By Timbur Hood</div>
-                                        <h3 class="item-title">Birds gonna be happy</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.</p>
-                                        <div class="item-price">$ 45.00</div>
+                                        <div class="author-name"><%=listBook.get(15).getAuthor_name()%></div>
+                                        <h3 class="item-title"><%=listBook.get(15).getTitle()%></h3>
+                                        <p><%=listBook.get(15).getDescription()%></p>
+                                        <div class="item-price"><%=listBook.get(15).getPrice()%> VND</div>
                                         <div class="btn-wrap">
-                                            <a href="#" class="btn-accent-arrow">shop it now <i class="icon icon-ns-arrow-right"></i></a>
+                                            <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(15).getBook_id()%>" class="btn-accent-arrow">shop it now <i class="icon icon-ns-arrow-right"></i></a>
                                         </div>
                                     </div>
+
 
                                 </div>
                             </div>
@@ -1078,7 +1128,7 @@
                             <div class="row">
 
                                 <div class="col-md-6">
-                                    
+
                                 </div>
 
                                 <div class="col-md-6">

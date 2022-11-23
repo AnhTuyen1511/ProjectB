@@ -5,7 +5,9 @@
  */
 package servlet;
 
+import dao.BookDAO;
 import dao.CustomerDAO;
+import entity.Book;
 import entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import manager.TestPasswordEncrypt;
 
 /**
  *
@@ -39,19 +42,31 @@ public class EditUserProfileServlet extends HttpServlet {
          CustomerDAO myCustomerDAO = new CustomerDAO();
          if(mode.equals("editProfile")){
              int id = Integer.parseInt(request.getParameter("cusID"));
+             Customer thisCus = myCustomerDAO.getCustomerByID(id);
              int phone = Integer.parseInt(request.getParameter("phone"));
-             int status = Integer.parseInt(request.getParameter("status"));
+             int status = thisCus.getCustomer_status();
              String name = request.getParameter("name");
-             String username = request.getParameter("username");
+             String username = thisCus.getUsername();
              String email = request.getParameter("email");
-             String password = request.getParameter("password");
+             String password = TestPasswordEncrypt.encriptPass(thisCus.getPassword());
              String address = request.getParameter("address");
              
              Customer edittedCustomer = new Customer(id, username, password, name, phone, address, email, status);
              myCustomerDAO.updateCustomer(edittedCustomer);
+             target = "ManageUserLoginServlet?mode=viewProfile&customerID=" + id;
+             
+         }
+         
+         if(mode.equals("resetPassword")){
+             int id = Integer.parseInt(request.getParameter("cusID"));
+             Customer thisCus = myCustomerDAO.getCustomerByID(id);
+             
+             
+            
              target = "ManageUserLoginServlet?mode=userLogin";
              
          }
+         
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }

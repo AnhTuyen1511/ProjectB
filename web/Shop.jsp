@@ -4,6 +4,12 @@
     Author     : BLC
 --%>
 
+<%@page import="dao.GenreDAO"%>
+<%@page import="entity.Genre"%>
+<%@page import="entity.Author"%>
+<%@page import="dao.AuthorDAO"%>
+<%@page import="entity.Cart"%>
+<%@page import="entity.Cart"%>
 <%@page import="entity.Customer"%>
 <%@page import="entity.Book"%>
 <%@page import="java.util.ArrayList"%>
@@ -37,12 +43,37 @@
         ArrayList<Book> listBook = myBookDAO.getListBook_1();
     %>
 
+    <%
+        int cartCount = 0;
+        ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listCart");
+        if (listCart != null) {
+            cartCount = listCart.size();
+        }
+
+        AuthorDAO myAuthorDAO = new AuthorDAO();
+        ArrayList<Author> list = myAuthorDAO.getListAuthor();
+        ArrayList<Author> listAuthor = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getAuthor_status() == 1) {
+                listAuthor.add(list.get(i));
+            }
+        }
+        GenreDAO myGenreDAO = new GenreDAO();
+        ArrayList<Genre> list_genre = myGenreDAO.getListGenre();
+        ArrayList<Genre> listGenre = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list_genre.get(i).getGenre_status() == 1) {
+                listGenre.add(list_genre.get(i));
+            }
+        }
+
+    %>
+
     <body>
 
 
         <div id="header-wrap">
-
-            <div class="top-content">
+            <div class="top-content" style="padding: 10px 0 0 0">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
@@ -77,7 +108,8 @@
                                         link += customer.getCustomer_id();
                                     }%>
                                 <a href=<%=link%> class="user-account for-buy" ><i class="icon icon-user"></i><span> <%=txtAccount%></span></a>
-                                <a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0 $)</span></a>
+
+                                <a href="Cart.jsp" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart(<%=cartCount%>)</span></a>
 
                                 <div class="action-menu">
 
@@ -106,37 +138,43 @@
                             <div class="main-logo">
                                 <a href="UserActivityServlet?mode=userViewBook"><img src="images/main-logo.png" alt="logo"></a>
                             </div>
-
                         </div>
 
                         <div class="col-md-10">
-
                             <nav id="navbar">
                                 <div class="main-menu stellarnav">
                                     <ul class="menu-list">
                                         <li class="menu-item active"><a href="#home" data-effect="Home">Home</a></li>
-                                        <li class="menu-item"><a href="About.jsp" class="nav-link" data-effect="About">About</a></li>
+
                                         <li class="menu-item has-sub">
-                                            <a href="#pages" class="nav-link" data-effect="Pages">Pages</a>
+                                            <a href="Genre.jsp" class="nav-link" data-effect="Pages">Genre</a>
 
                                             <ul>
-                                                <li class="active"><a href="index.html">Home</a></li>
-                                                <li><a href="About.jsp">About</a></li>
-                                                <li><a href="styles.html">Styles</a></li>
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-post.html">Post Single</a></li>
-                                                <li><a href="Shop.jsp">Our Store</a></li>
-                                                <li><a href="single-product.html">Product Single</a></li>
-                                                <li><a href="Contact.jsp">Contact</a></li>
-                                                <li><a href="thank-you.html">Thank You</a></li>
+                                                <%for (int i = 0; i < listGenre.size(); i++) {
+                                                %>
+                                                <li><a href="ManageBookServlet?mode=viewBookByGenre&genreID=<%=listGenre.get(i).getGenre_id()%>"><%=listGenre.get(i).getGenre()%></a></li>
+
+                                                <% } %>
+                                            </ul>
+
+                                        </li>
+
+
+                                        <li class="menu-item has-sub">
+                                            <a href="Author.jsp" class="nav-link" data-effect="Pages">Authors</a>
+
+                                            <ul>
+                                                <%for (int i = 0; i < listAuthor.size(); i++) {
+                                                %>
+                                                <li><a href="ManageBookServlet?mode=viewBookByAuthor&authorID=<%=listAuthor.get(i).getAuthor_id()%>"><%=listAuthor.get(i).getAuthor_name()%></a></li>
+
+                                                <% }%>
                                             </ul>
 
                                         </li>
                                         <li class="menu-item"><a href="Shop.jsp" class="nav-link" data-effect="Shop">Shop</a></li>
-                                        <li class="menu-item"><a href="#latest-blog" class="nav-link" data-effect="Articles">Articles</a></li>
                                         <li class="menu-item"><a href="Contact.jsp" class="nav-link" data-effect="Contact">Contact</a></li>
                                     </ul>
-
                                     <div class="hamburger">
                                         <span class="bar"></span>
                                         <span class="bar"></span>
@@ -178,14 +216,14 @@
                         <figure class="product-style">
                             <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(i).getBook_id()%>">
                                 <img src="bookImages/<%=listBook.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
-                                
+
                                 <figcaption>
                                     <h3><%=listBook.get(i).getTitle()%></h3>
                                     <p><%=listBook.get(i).getAuthor_name()%></p>
                                     <p><%=listBook.get(i).getGenre()%></p>
                                     <div class="item-price"><%=listBook.get(i).getPrice()%> VND</div>
                                 </figcaption>
-                                <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(i).getBook_id() %>"><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(i).getBook_id()%>"><button type="button" class="add-to-cart" data-product-tile="add-to-caok.get(i).getBook_id() %>"rt">Add to Cart</button></a>
                             </a>
                         </figure>
                         <% }%> 

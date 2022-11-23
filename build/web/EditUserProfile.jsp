@@ -177,9 +177,7 @@
                         <input name="phone" type="tel" class="bg-light form-control" value="0<%=tempCustomer.getPhone_number() %>" required="">
                     </div>
                 </div>
-                        <input name="password" value="<%=tempCustomer.getPassword() %>" type="hidden"/>
-                        <input name="username" value="<%=tempCustomer.getUsername() %>" type="hidden"/>
-                        <input name="status" value="<%=tempCustomer.getCustomer_status() %>" type="hidden"/>
+                        
 <!--                <div class="row py-2">
                     <div class="col-md-6">
                         <label for="country">Country</label>
@@ -204,16 +202,16 @@
                 </div>-->
                 <div class="py-3 pb-4 border-bottom">
                     <button class="btn btn-primary mr-3">Save Changes</button>
-                    <button class="btn border button">Cancel</button>
+                    <a href="ManageUserLoginServlet?mode=viewProfile&customerID=<%=tempCustomer.getCustomer_id() %>"><button class="btn border button">Cancel</button></a>
                 </div>
                  </form>
                 <div class="d-sm-flex align-items-center pt-3" id="deactivate">
                     <div>
-                        <b>Deactivate your account</b>
+                        <b>Reset your password</b>
                         <p>Details about your company account and password</p>
                     </div>
                     <div class="ml-auto">
-                        <button class="btn danger">Deactivate</button>
+                        <a><button class="btn danger">Reset Password</button></a>
                     </div>
                 </div>
                  

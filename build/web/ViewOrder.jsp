@@ -33,6 +33,28 @@
         
         -->
         <link rel="stylesheet" href="css/search_button.css" />
+
+        <style type="text/css">
+            a.button4{
+                display:inline-block;
+                padding:0.3em 1.2em;
+                margin:0 0.1em 0.1em 0;
+                border:0.16em solid rgba(255,255,255,0);
+                border-radius:2em;
+                box-sizing: border-box;
+                text-decoration:none;
+                font-family:'Roboto',sans-serif;
+                font-weight:300;
+                color:#FFFFFF;
+                text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+                text-align:center;
+                transition: all 0.2s;
+            }
+
+            a.button4:hover{
+                border-color: rgba(255,255,255,1);
+            }
+        </style>
     </head>
 
     <body id="reportsPage">
@@ -112,7 +134,7 @@
                                 <span class="close" onclick="searchToggle(this, event);"></span>
                             </div>
                         </form>
-                        <div class="tm-product-table-container" style="margin-top: 25px">
+                        <div class="tm-product-table-container" style="margin-top: 25px">    
                             <%
                                 ArrayList<Order> listOrder = (ArrayList<Order>) request.getAttribute("listOrder");
                             %>
@@ -127,29 +149,37 @@
                                         <th scope="col">Total</th>
                                         <th scope="col">Shipping status</th>
                                         <th scope="col">&nbsp;</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <% for (int i = 0; i < listOrder.size(); i++) {%>
+
                                     <tr>
 
                                         <td><%=listOrder.get(i).getOrder_id()%></td>
-                                        <td><%=listOrder.get(i).getCustomer_id() %></td>
-                                        <td><%=listOrder.get(i).getOrder_date() %> </td>
+                                        <td><%=listOrder.get(i).getCustomer_id()%></td>
+                                        <td><%=listOrder.get(i).getOrder_date()%> </td>
 
-                                        <td><%=listOrder.get(i).getTotal() %></td>
-                                        <td><%=listOrder.get(i).getShipping_status() %></td>
+                                        <td><%=listOrder.get(i).getTotal()%></td>
+                                        <td><%=listOrder.get(i).getShipping_status()%></td>
 
-<!--                                        <td><img src="dishImages/<% %>" style="max-width: 100%;width: 115px;height: 115px;" alt="loading" loading="lazy"> </td>-->
 
                                         <td>
-                                            <a href="EditGenre.jsp" class="tm-product-delete-link">
+                                            <a href="#" class="tm-product-delete-link">
                                                 <i class="fas fa-pen"></i>                                           
                                             </a>
 
                                         </td>
-                                    </tr>  
+
+                                        <td>
+                                            <a class="button4" href="ManageOrderServlet?mode=viewOrderDetail&orderID=<%=listOrder.get(i).getOrder_id()%>">
+                                               View                                        
+                                            </a>
+                                        </td>
+
+                                    </tr> 
+
                                     <% }%>                                                                      
                                 </tbody>
                             </table>
@@ -165,11 +195,16 @@
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script>
-                                    $(function () {
-                                        $(".tm-product-name").on("click", function () {
-                                            window.location.href = "edit-product.html";
-                                        });
-                                    });
+
+
+//                                    
+//                                    function winOpen(int orderID)
+//                                    {
+////                                    String str = "ManageOrderServlet?mode=viewOrderDetail&orderID=" + orderID;
+//                                    String str = "ViewOrderDetail.jsp";
+//                                    window.open(str);
+//                                    }
+
 
 
 

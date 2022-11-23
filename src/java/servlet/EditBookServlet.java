@@ -31,7 +31,7 @@ import manager.BookManager;
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
-        maxRequestSize = 1024 * 1024 * 100 )// 100 MB
+        maxRequestSize = 1024 * 1024 * 100)// 100 MB
 public class EditBookServlet extends HttpServlet {
 
     /**
@@ -84,13 +84,14 @@ public class EditBookServlet extends HttpServlet {
                 status = Integer.parseInt(request.getParameter("status"));
                 title = request.getParameter("title");
                 description = request.getParameter("description");
-                String pictureName = bookID +".jpg";
+                String pictureName = bookID + ".jpg";
                 Part imgFilePart = request.getPart("image");
 
-                Book newBook = new Book(bookID,title, authorID, genreID, price, quantity, yor, description, status);
+                Book newBook = new Book(bookID, title, authorID, genreID, price, quantity, yor, description, status);
                 myBookManager.updateBook(newBook);
-                 imgFilePart.write(ConfigInfo.getCtxRealPath() + "\\bookImages\\" + pictureName);
-
+                if (imgFilePart != null) {
+                    imgFilePart.write(ConfigInfo.getCtxRealPath() + "\\bookImages\\" + pictureName);
+                }
                 target = "ManageBookServlet?mode=viewBook";
             }
             RequestDispatcher rd = request.getRequestDispatcher(target);

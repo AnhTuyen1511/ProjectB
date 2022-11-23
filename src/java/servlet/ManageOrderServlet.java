@@ -6,7 +6,9 @@
 package servlet;
 
 import dao.OrderDAO;
+import dao.OrderDetailDAO;
 import entity.Order;
+import entity.OrderDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,13 +41,25 @@ public class ManageOrderServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String mode = request.getParameter("mode");
             String target = "home.jsp";
+            OrderDetailDAO myOrderDetailDAO = new OrderDetailDAO();
+            OrderDAO myOrderDAO = new OrderDAO();
             if (mode.equals("viewOrder")) {
                 List<Order> listOrder = new ArrayList<>();
-                OrderDAO dao = new OrderDAO();
-                listOrder = dao.getListOrder();
+                
+                listOrder = myOrderDAO.getListOrder();
 
                 target = "ViewOrder.jsp";
                 request.setAttribute("listOrder", listOrder);
+            }
+            
+            if (mode.equals("viewOrderDetail")){
+                int orderID = Integer.parseInt(request.getParameter("orderID"));
+                ArrayList<OrderDetail> listOrderDetail = myOrderDetailDAO.getListOrderDetailByOrder(orderID);
+                
+                target = "ViewOrderDetail.jsp";
+                
+                request.setAttribute("listOrderDetail", listOrderDetail);
+                
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(target);

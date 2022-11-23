@@ -1231,7 +1231,7 @@ img.post-image {
 /* -- Top Menu Part
 --------------------------------------------------------------*/
 .top-content {
-    padding: 20px 0;
+    padding: 5px 0 !important;
     border-bottom: 1px solid #E0E0E0;
 }
 .social-links ul {
@@ -1351,7 +1351,7 @@ img.post-image {
 /*----- Billboard
 --------------------------------------------------------------*/
 #billboard .main-slider {
-    padding: 120px 0;
+    padding: 20px 0;
 }
 .main-slider .slider-item {
     display: flex;
@@ -1373,7 +1373,7 @@ img.post-image {
 }
 #billboard .slick-dots {
     left: 200px;
-    bottom: 110px;
+    bottom: 10px !important;
     width: 10%;
     text-align: inherit;
 }

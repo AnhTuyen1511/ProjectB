@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import manager.CustomerManager;
+import manager.TestPasswordEncrypt;
 
 /**
  *
@@ -46,7 +47,7 @@ public class ManageUserLoginServlet extends HttpServlet {
 
             if (mode.equals("userLogin")) {
                 String username = request.getParameter("username");
-                String password = request.getParameter("password");
+                String password = TestPasswordEncrypt.encriptPass(request.getParameter("password"));
                 String mess = "";
 
                 ArrayList<Customer> listCustomer = new ArrayList<>();
@@ -74,12 +75,12 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 target = "UserProfile.jsp";
             }
-            
+
             if (mode.equals("editProfile")) {
                 int customerID = Integer.parseInt(request.getParameter("customerID"));
                 Customer cus = myCustomerDAO.getCustomerByID(customerID);
                 request.setAttribute("cus", cus);
-                
+
                 target = "EditUserProfile.jsp";
             }
 
@@ -96,7 +97,7 @@ public class ManageUserLoginServlet extends HttpServlet {
             if (mode.equals("userRegister")) {
                 String customerName = request.getParameter("name");
                 String R_username = request.getParameter("R_username");
-                String password = request.getParameter("R_password");
+                String password = TestPasswordEncrypt.encriptPass(request.getParameter("R_password"));
                 String address = request.getParameter("address");
                 String email = request.getParameter("email");
                 int phoneNumber = Integer.parseInt(request.getParameter("phone_number"));
