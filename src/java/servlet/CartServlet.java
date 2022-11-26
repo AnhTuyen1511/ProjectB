@@ -53,28 +53,93 @@ public class CartServlet extends HttpServlet {
             String target = "Cart.jsp";
             HttpSession session = request.getSession();
 
+            if (mode.equals("viewCart")) {
+                ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listCart");
+
+                if (listCart == null) {
+                    ArrayList<Cart> tempListCart = new ArrayList<>();
+                    session.setAttribute("listCart", tempListCart);
+
+                } else {
+                    session.setAttribute("listCart", listCart);
+                }
+
+                target = "Cart.jsp";
+            }
+
             if (mode.equals("addToCart")) {
                 ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listCart");
-                int bookID = Integer.parseInt(request.getParameter("bookID"));
-                Book book = myBookDAO.getBookByID(bookID);
-                if (listCart == null) {
-                    listCart = new ArrayList<>();
+                Customer customer = (Customer) session.getAttribute("tempCustomer");
+
+                if (customer != null) {
+                    int bookID = Integer.parseInt(request.getParameter("bookID"));
+                    Book book = myBookDAO.getBookByID(bookID);
+                    Cart cart;
+                    if (listCart == null) {
+                        listCart = new ArrayList<Cart>();
+                        cart = new Cart(bookID, book.getTitle(), book.getPrice(), 1);
+                        listCart.add(cart);
+                        session.setAttribute("listCart", listCart);
+                    } else {
+                        listCart = (ArrayList<Cart>) session.getAttribute("listCart");
+                        int index = isExisting(bookID, listCart);
+                        if (index == -1) {
+                            listCart.add(new Cart(bookID, book.getTitle(), book.getPrice(), 1));
+                        } else {
+                            int quantity = listCart.get(index).getQuantity() + 1;
+                            listCart.get(index).setQuantity(quantity);
+                        }
+                        session.setAttribute("listCart", listCart);
+                    }
+                    target = "Cart.jsp";
+                } else {
+                    target = "UserLogin.jsp";
                 }
-                Cart cart = new Cart(bookID, book.getTitle(), book.getPrice(), 1);
-                listCart.add(cart);
-                session.setAttribute("listCart", listCart);
-                target = "Cart.jsp";
 
                 RequestDispatcher rd = request.getRequestDispatcher(target);
                 rd.forward(request, response);
             }
+            if (mode.equals("downQuantity")) {
+                ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listCart");
+                int id = Integer.parseInt(request.getParameter("bookID"));
+
+                int index = isExisting(id, listCart);
+
+                int curQuantity = listCart.get(index).getQuantity();
+                if (curQuantity == 1) {
+                    listCart.remove(index);
+                } else {
+                    listCart.get(index).setQuantity(curQuantity - 1);
+                }
+
+                session.setAttribute("listCart", listCart);
+                target = "Cart.jsp";
+                RequestDispatcher rd = request.getRequestDispatcher(target);
+                rd.forward(request, response);
+
+            }
+            if (mode.equals("upQuantity")) {
+                ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listCart");
+                int id = Integer.parseInt(request.getParameter("bookID"));
+
+                int index = isExisting(id, listCart);
+
+                int curQuantity = listCart.get(index).getQuantity();
+
+                listCart.get(index).setQuantity(curQuantity + 1);
+
+                session.setAttribute("listCart", listCart);
+                target = "Cart.jsp";
+                RequestDispatcher rd = request.getRequestDispatcher(target);
+                rd.forward(request, response);
+
+            }
 
             if (mode.equals("checkout")) {
                 ArrayList<Cart> listOrder = (ArrayList<Cart>) session.getAttribute("listCart");
+
                 Customer customer = (Customer) session.getAttribute("tempCustomer");
 
-//                String pattern = "yyyy-MM-dd";
-//                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
                 String date = java.time.LocalDate.now().toString();
 
                 Order newOrder = new Order(customer.getCustomer_id(), date, 15000, "pending", 1);
@@ -120,6 +185,15 @@ public class CartServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private int isExisting(int id, ArrayList<Cart> listCart) {
+        for (int i = 0; i < listCart.size(); i++) {
+            if (listCart.get(i).getBookID() == id) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

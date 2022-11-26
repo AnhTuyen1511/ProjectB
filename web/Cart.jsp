@@ -44,7 +44,15 @@
     </head>
     <% ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listCart"); %>
     <%
+        int cartsize;
+        if (listCart != null) {
+            cartsize = listCart.size();
 
+        } else {
+            cartsize = 0;
+        }
+    %>
+    <%
         AuthorDAO myAuthorDAO = new AuthorDAO();
         ArrayList<Author> list = myAuthorDAO.getListAuthor();
         ArrayList<Author> listAuthor = new ArrayList<>();
@@ -88,6 +96,7 @@
                                 </ul>
                             </div><!--social-links-->
                         </div>
+
                         <div class="col-md-6">
                             <div class="right-element">
                                 <% Customer customer;
@@ -103,7 +112,11 @@
                                     }%>
                                 <a href=<%=link%> class="user-account for-buy" ><i class="icon icon-user"></i><span> <%=txtAccount%></span></a>
 
-                                <a href="Cart.jsp" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart(<%=listCart.size()%>)</span></a>
+                                <a href="Cart.jsp" class="cart for-buy"><i class="icon icon-clipboard"></i>
+                                    <span>
+
+                                        Cart(<%=cartsize%>)
+                                    </span></a>
 
                                 <div class="action-menu">
 
@@ -194,11 +207,13 @@
                             <div class="title">
                                 <div class="row">
                                     <div class="col"><h4><b>Shopping Cart</b></h4></div>
-                                    <div class="col align-self-center text-right text-muted"><%=listCart.size()%> items</div>
+                                    <div class="col align-self-center text-right text-muted"><%=cartsize%> items</div>
                                 </div>
                             </div> 
                             <div>
                                 <div class="row border-top border-bottom" >
+                                    <% if (listCart != null) {
+                                    %>
                                     <% for (int i = 0; i < listCart.size(); i++) {%>
 
                                     <div class="row main align-items-center">
@@ -208,11 +223,12 @@
                                             <div class="row"></div>
                                         </div>
                                         <div class="col">
-                                            <a href="#">-</a><a href="#" class="border"><%=listCart.get(i).getQuantity()%></a><a href="#">+</a>
+                                            <a href="CartServlet?mode=downQuantity&bookID=<%=listCart.get(i).getBookID()%>">-</a><a href="" class="border"><%=listCart.get(i).getQuantity()%></a><a href="CartServlet?mode=upQuantity&bookID=<%=listCart.get(i).getBookID()%>">+</a>
                                         </div>
                                         <div class="col"><%=listCart.get(i).getPrice()%><span class="close">&#10005;</span></div>
                                     </div>
                                     <%}%>
+
                                 </div>
                             </div> 
                         </div>
@@ -223,175 +239,185 @@
                             <hr>
                             <div class="row">
                                 <div class="col" style="padding-left:0;">ITEMS <%=listCart.size()%></div>
-                                <div class="col text-right"> VND</div>
+                                <div class="col text-right"> </div>
                             </div>
                             <form>
                                 <p>SHIPPING</p>
-                                <select><option class="text-muted">Standard-Delivery- VND</option></select>
-                                <p>GIVE CODE</p>
-                                <input id="code" placeholder="Enter your code">
+                                <select><option class="text-muted">Standard-Delivery- 30000 VND</option></select>
+                                <!--                                <p>GIVE CODE</p>
+                                                                <input id="code" placeholder="Enter your code">-->
                             </form>
                             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                 <div class="col">TOTAL PRICE</div>
-                                <div class="col text-right">VNĐ</div>
+                                <div class="col text-right">
+                                    <%
+                                        int total = 0;
+                                        for (int i = 0; i < listCart.size(); i++) {
+                                            total += listCart.get(i).getPrice() * listCart.get(i).getQuantity();
+                                        }
+                                        total += 30000;
+                                    %>
+                                    <%=total%> VND
+                                </div>
                             </div>
-                            <a href="CartServlet?mode=checkout"><button class="btn">CHECKOUT</button> </a>
+                            <a href="CartServlet?mode=checkout"><button class="btn">PLACE ORDER</button> </a>
                         </div>
 
                     </div>
                     </section>
+                    <%}%>
                 </div>
 
 
-                <footer id="footer">
-                    <div class="container">
-                        <div class="row">
-
-                            <div class="col-md-4">
-
-                                <div class="footer-item">
-                                    <div class="company-brand">
-                                        <img src="images/main-logo.png" alt="logo" class="footer-logo" style="width: 300px">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames semper erat ac in suspendisse iaculis.</p>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-2">
-
-                                <div class="footer-menu">
-                                    <h5>About Us</h5>
-                                    <ul class="menu-list">
-                                        <li class="menu-item">
-                                            <a href="#">vision</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">articles </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">careers</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">service terms</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">donate</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                            <div class="col-md-2">
-
-                                <div class="footer-menu">
-                                    <h5>Discover</h5>
-                                    <ul class="menu-list">
-                                        <li class="menu-item">
-                                            <a href="#">Home</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">Books</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">Authors</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">Subjects</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">Advanced Search</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                            <div class="col-md-2">
-
-                                <div class="footer-menu">
-                                    <h5>My account</h5>
-                                    <ul class="menu-list">
-                                        <li class="menu-item">
-                                            <a href="#">Sign In</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">View Cart</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">My Wishtlist</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">Track My Order</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                            <div class="col-md-2">
-
-                                <div class="footer-menu">
-                                    <h5>Help</h5>
-                                    <ul class="menu-list">
-                                        <li class="menu-item">
-                                            <a href="#">Help center</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">Report a problem</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">Suggesting edits</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#">Contact us</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- / row -->
-
-                    </div>
-                </footer>
-
-                <div id="footer-bottom">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <div class="copyright">
-                                    <div class="row">
-
-                                        <div class="col-md-6">
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="social-links align-right">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#"><i class="icon icon-facebook"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="icon icon-twitter"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="icon icon-youtube-play"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="icon icon-behance-square"></i></a>
-                                                    </li>
-                                                </ul>
+                <!--                <footer id="footer">
+                                    <div class="container">
+                                        <div class="row">
+                
+                                            <div class="col-md-4">
+                
+                                                <div class="footer-item">
+                                                    <div class="company-brand">
+                                                        <img src="images/main-logo.png" alt="logo" class="footer-logo" style="width: 300px">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames semper erat ac in suspendisse iaculis.</p>
+                                                    </div>
+                                                </div>
+                
                                             </div>
+                
+                                            <div class="col-md-2">
+                
+                                                <div class="footer-menu">
+                                                    <h5>About Us</h5>
+                                                    <ul class="menu-list">
+                                                        <li class="menu-item">
+                                                            <a href="#">vision</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">articles </a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">careers</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">service terms</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">donate</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                
+                                            </div>
+                                            <div class="col-md-2">
+                
+                                                <div class="footer-menu">
+                                                    <h5>Discover</h5>
+                                                    <ul class="menu-list">
+                                                        <li class="menu-item">
+                                                            <a href="#">Home</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">Books</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">Authors</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">Subjects</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">Advanced Search</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                
+                                            </div>
+                                            <div class="col-md-2">
+                
+                                                <div class="footer-menu">
+                                                    <h5>My account</h5>
+                                                    <ul class="menu-list">
+                                                        <li class="menu-item">
+                                                            <a href="#">Sign In</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">View Cart</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">My Wishtlist</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">Track My Order</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                
+                                            </div>
+                                            <div class="col-md-2">
+                
+                                                <div class="footer-menu">
+                                                    <h5>Help</h5>
+                                                    <ul class="menu-list">
+                                                        <li class="menu-item">
+                                                            <a href="#">Help center</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">Report a problem</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">Suggesting edits</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="#">Contact us</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                
+                                            </div>
+                
                                         </div>
-
+                                         / row 
+                
                                     </div>
-                                </div><!--grid-->
+                                </footer>-->
 
-                            </div><!--footer-bottom-content-->
-                        </div>
-                    </div>
-                </div>
+                <!--                <div id="footer-bottom">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                
+                                                <div class="copyright">
+                                                    <div class="row">
+                
+                                                        <div class="col-md-6">
+                                                        </div>
+                
+                                                        <div class="col-md-6">
+                                                            <div class="social-links align-right">
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="#"><i class="icon icon-facebook"></i></a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#"><i class="icon icon-twitter"></i></a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#"><i class="icon icon-youtube-play"></i></a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#"><i class="icon icon-behance-square"></i></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                
+                                                    </div>
+                                                </div>grid
+                
+                                            </div>footer-bottom-content
+                                        </div>
+                                    </div>
+                                </div>-->
 
                 <script src="js/jquery-1.11.0.min.js"></script>
                 <script src="js/plugins.js"></script>

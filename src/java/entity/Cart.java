@@ -4,11 +4,13 @@
  */
 package entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author BLC
  */
-public class Cart {
+public class Cart implements Serializable{
     private int bookID;
     private String title;
     private int price;

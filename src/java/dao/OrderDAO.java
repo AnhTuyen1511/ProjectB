@@ -46,7 +46,35 @@ public class OrderDAO {
         }
         return listOrder;
     }
-  
+    
+    public ArrayList<Order> getListOrderByCustomerID(int customerID) {
+
+        ArrayList<Order> listOrder = new ArrayList<>();
+
+        try {
+            Connection con = DBContext.getConnection();
+            String query = "SELECT * FROM orders WHERE customer_id = "+customerID;
+            Statement st = con.prepareStatement(query);
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                Order order = new Order(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6)
+                );
+                listOrder.add(order);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listOrder;
+    }
+    
+    
     
     public int saveOrders(Order order) {
         int newID=0;

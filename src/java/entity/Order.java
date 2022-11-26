@@ -27,6 +27,16 @@ public class Order {
         this.order_status = order_status;
     }
 
+    public Order(int customer_id, String order_date, int order_status) {
+        this.customer_id = customer_id;
+        this.order_date = order_date;
+        this.order_status = order_status;
+    }
+
+  
+    
+    
+
     public Order(int customer_id, String order_date, int total, String shipping_status, int order_status) {
         this.customer_id = customer_id;
         this.order_date = order_date;

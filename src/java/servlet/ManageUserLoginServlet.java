@@ -88,6 +88,7 @@ public class ManageUserLoginServlet extends HttpServlet {
                 target = "UserActivityServlet?mode=userViewBook";
                 mySession = request.getSession();
                 mySession.removeAttribute("UserLogin");
+                mySession.removeAttribute("listCart");
 
             }
             if (mode.equals("forgetPass")) {

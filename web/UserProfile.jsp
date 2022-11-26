@@ -4,6 +4,8 @@
     Author     : BLC
 --%>
 
+<%@page import="entity.Order"%>
+<%@page import="dao.OrderDAO"%>
 <%@page import="entity.Genre"%>
 <%@page import="dao.GenreDAO"%>
 <%@page import="entity.Author"%>
@@ -36,6 +38,7 @@
         <link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
         <link rel="stylesheet" type="text/css" href="css/vendor.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="ordertracking.css">
 
         <!-- script
         ================================================== -->
@@ -55,11 +58,13 @@
             }
 
             .profile .card {
+                padding: 15px;
                 width: 350px;
                 background-image: white;
                 border: none;
                 cursor: pointer;
                 transition: all 0.5s;
+                margin: 0;
             }
 
             .profile .image img {
@@ -176,10 +181,9 @@
             }
         }
 
-
+        OrderDAO myOrderDAO = new OrderDAO();
     %>
     <body>
-
         <div id="header-wrap">
             <div class="top-content" style="padding: 10px 0 0 0">
                 <div class="container">
@@ -204,11 +208,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="right-element">
-                                <% Customer customer;
-                                    String txtAccount = "Login";
+                                <%                                    String txtAccount = "Login";
                                     String link = "UserLogin.jsp";
                                     String ss = (String) session.getAttribute("UserLogin");
-
+                                    Customer customer;
                                     if (ss != null) {
                                         customer = (Customer) session.getAttribute("tempCustomer");
                                         txtAccount = ss;
@@ -298,62 +301,121 @@
                 </div>
             </header>
 
-        </div><!--header-wrap-->
+        </div>
+        <!--header-wrap-->
         <% Customer tempCustomer = (Customer) request.getAttribute("cus");%>
-        <div class="profile" style="max-width: 100%">
-            <div class="container-fluid d-flex justify-content-center" style="width: 100%"> 
-                <div class="card p-4"> 
-                    <div class=" image d-flex flex-column justify-content-center align-items-center"> 
 
-                        <button class="btn btn-secondary"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" height="100" width="100" style="max-width: 100%" />
-                            <!--https://i.imgur.com/wvxPV9S.png-->
+        <div class="container-fluid" style="display: inline-block">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="profile" style="max-width: 100%">
+                        <div class="container" style="width: 100%"> 
+                            <div class="card"> 
+                                <div class=" image d-flex flex-column justify-content-center align-items-center"> 
 
-                        </button> <span class="name mt-3"><%=tempCustomer.getName()%> </span> 
+                                    <button class="btn btn-secondary"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" height="100" width="100" style="max-width: 100%" />
+                                        <!--https://i.imgur.com/wvxPV9S.png-->
 
-                        <span class="idd">@<%=tempCustomer.getUsername()%></span> 
+                                    </button> <span class="name mt-3"><%=tempCustomer.getName()%> </span> 
 
-                        <div class=" d-flex mt-2"> 
-                            <a href="ManageUserLoginServlet?mode=editProfile&customerID=<%=tempCustomer.getCustomer_id()%>" class="logout"><button class="btn1 btn-dark">Edit Profile</button></a>
+                                    <span class="idd">@<%=tempCustomer.getUsername()%></span> 
+
+                                    <div class=" d-flex mt-2"> 
+                                        <a href="ManageUserLoginServlet?mode=editProfile&customerID=<%=tempCustomer.getCustomer_id()%>" class="logout"><button class="btn1 btn-dark">Edit Profile</button></a>
+                                    </div>
+                                    <br>
+                                    <span class="idd">Email: <%=tempCustomer.getEmail()%></span> 
+                                    <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
+                                        <span class="number"><span class="idd">Phone Number: </span>0<%=tempCustomer.getPhone_number()%></span> 
+                                    </div> 
+
+                                    <div class="text mt-3">   
+                                        <span>
+                                            <span class="idd">Address: </span><%=tempCustomer.getAddress()%>
+                                        </span> 
+                                    </div> 
+                                    <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> 
+                                        <span><i class="fa fa-twitter"></i></span> 
+                                        <span><i class="fa fa-facebook-f"></i></span> 
+                                        <span><i class="fa fa-instagram"></i></span> 
+                                        <span><i class="fa fa-linkedin"></i></span> </div>
+                                    <a href="ManageUserLoginServlet?mode=userLogout" class="logout"><button class="btn1 btn-dark">Logout</button></a>
+                                    <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2021</span> 
+                                    </div> 
+                                </div>
+                            </div>
                         </div>
-                        <br>
-                        <span class="idd">Email: <%=tempCustomer.getEmail()%></span> 
-                        <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
-                            <span class="number"><span class="idd">Phone Number: </span>0<%=tempCustomer.getPhone_number()%></span> 
-                        </div> 
-
-                        <div class="text mt-3">   
-                            <span>
-                                <span class="idd">Address: </span><%=tempCustomer.getAddress()%>
-                            </span> 
-                        </div> 
-                        <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> 
-                            <span><i class="fa fa-twitter"></i></span> 
-                            <span><i class="fa fa-facebook-f"></i></span> 
-                            <span><i class="fa fa-instagram"></i></span> 
-                            <span><i class="fa fa-linkedin"></i></span> </div>
-                        <a href="ManageUserLoginServlet?mode=userLogout" class="logout"><button class="btn1 btn-dark">Logout</button></a>
-                        <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2021</span> 
-                        </div> 
                     </div>
                 </div>
-            </div>
-        </div>
-        <script>
-            function hide() {
-                var litag = document.getElementsByClassName('user-account for-buy'), i;
+                <div class="col-md-9" style="display: flex">
+                    <div class="order-tracking">
+                        <div class="container">
+                            <div class="d-flex row">
+                                <div class="col-md-10">
+                                    <div class="rounded">
+                                        <div class="table-responsive table-borderless">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Order #</th>
+                                                        <th>Customer</th>
+                                                        <th>status</th>
+                                                        <th>Total</th>
+                                                        <th>Created</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-body">
+                                                    <%
 
-                for (i = 0; i < litag.length; i += 1) {
-                    if (session === null) {
-                        litag[i].style.display = 'none';
+                                                        customer = (Customer) session.getAttribute("tempCustomer");
+                                                        ArrayList<Order> listOrder = myOrderDAO.getListOrderByCustomerID(customer.getCustomer_id());
+                                                        if (listOrder.size() != 0) {
+                                                            for (int i = 0; i < listOrder.size(); i++) {
+                                                    %>
+
+                                                    <tr class="cell-1">
+                                                        <td><%=i+1%></td>
+                                                        <td><%=customer.getName()%></td>
+                                                        <td><span><%=listOrder.get(i).getShipping_status()%></span></td>
+                                                        <td><%=listOrder.get(i).getTotal()%></td>
+                                                        <td><%=listOrder.get(i).getOrder_date()%></td>
+                                                        <td><a href="#viewOrderDetail"><i class="fa fa-ellipsis-h text-black-50"></i></td></a>
+                                                    </tr>
+                                                    <% }
+                                                            
+
+                                                        }
+                                                    %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+
+            </div>
+
+
+            <script>
+                function hide() {
+                    var litag = document.getElementsByClassName('user-account for-buy'), i;
+
+                    for (i = 0; i < litag.length; i += 1) {
+                        if (session === null) {
+                            litag[i].style.display = 'none';
+                        }
                     }
+
                 }
 
-            }
-
-        </script>
-        <script src="js/jquery-1.11.0.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/script.js"></script>
+            </script>
+            <script src="js/jquery-1.11.0.min.js"></script>
+            <script src="js/plugins.js"></script>
+            <script src="js/script.js"></script>
 
     </body>
 </html>
