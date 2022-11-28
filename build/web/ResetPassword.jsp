@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile Update</title>
+        <title>Reset Password</title>
         <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
         <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" >
         <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" >
@@ -135,7 +135,7 @@
         </style>
     </head>
     <body>
-        <% Customer tempCustomer = (Customer) request.getAttribute("cus");%>
+        <% Customer tempCustomer = (Customer) session.getAttribute("tempCustomer"); %>
         <div class="wrapper bg-white mt-sm-5">
             <h4 class="pb-4 border-bottom">Reset Account Password</h4>
 

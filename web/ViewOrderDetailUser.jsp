@@ -4,6 +4,9 @@
     Author     : BLC
 --%>
 
+<%@page import="dao.BookDAO"%>
+<%@page import="dao.OrderDetailDAO"%>
+<%@page import="entity.OrderDetail"%>
 <%@page import="entity.Order"%>
 <%@page import="dao.OrderDAO"%>
 <%@page import="entity.Genre"%>
@@ -19,7 +22,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile</title>
+        <title>Profile - Order</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
@@ -182,6 +185,8 @@
         }
 
         OrderDAO myOrderDAO = new OrderDAO();
+        OrderDetailDAO myOrderDetailDAO = new OrderDetailDAO();
+        BookDAO myBookDAO = new BookDAO();
     %>
     <body>
         <div id="header-wrap">
@@ -303,7 +308,7 @@
 
         </div>
         <!--header-wrap-->
-        <% Customer tempCustomer = (Customer) request.getAttribute("cus");%>
+        <% Customer tempCustomer = (Customer) session.getAttribute("tempCustomer");%>
 
         <div class="container-fluid" style="display: inline-block">
             <div class="row">
@@ -357,30 +362,28 @@
                                             <table class="table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Order #</th>
-                                                        <th>Customer</th>
-                                                        <th>status</th>
-                                                        <th>Total</th>
-                                                        <th>Created</th>
-                                                        <th></th>
+                                                        <th>Item #</th>
+                                                        <th>Title</th>
+                                                        <th>Quantity</th>
+                                                        <th>Price</th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody class="table-body">
                                                     <%
-
                                                         customer = (Customer) session.getAttribute("tempCustomer");
-                                                        ArrayList<Order> listOrder = myOrderDAO.getListOrderByCustomerID(customer.getCustomer_id());
-                                                        if (listOrder.size() != 0) {
-                                                            for (int i = 0; i < listOrder.size(); i++) {
+
+                                                        int orderID = Integer.parseInt(request.getAttribute("orderID").toString());
+                                                        ArrayList<OrderDetail> listOrderDetail = myOrderDetailDAO.getListOrderDetailByOrder(orderID);
+                                                        if (listOrderDetail.size() != 0) {
+                                                            for (int i = 0; i < listOrderDetail.size(); i++) {
                                                     %>
 
                                                     <tr class="cell-1">
                                                         <td><%=i + 1%></td>
-                                                        <td><%=customer.getName()%></td>
-                                                        <td><span><%=listOrder.get(i).getShipping_status()%></span></td>
-                                                        <td><%=listOrder.get(i).getTotal()%></td>
-                                                        <td><%=listOrder.get(i).getOrder_date()%></td>
-                                                        <td><a href="ManageUserLoginServlet?mode=viewOrderDetailUser&orderID=<%=listOrder.get(i).getOrder_id()%>"><i class="fa fa-ellipsis-h text-black-50"></i></td></a>
+                                                        <td><%=myBookDAO.getBookByID(listOrderDetail.get(i).getBook_id()).getTitle()%></td>
+                                                        <td><%=listOrderDetail.get(i).getQuantity()%></td>
+                                                        <td><%=listOrderDetail.get(i).getPrice()%></td>
                                                     </tr>
                                                     <% }
 

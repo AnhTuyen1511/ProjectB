@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Reset Password</title>
+        <title>Change Password</title>
         <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
         <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" >
         <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" >
@@ -135,7 +135,7 @@
         </style>
     </head>
     <body>
-        <% Customer tempCustomer = (Customer) session.getAttribute("tempCustomer"); %>
+        <% Customer tempCustomer = (Customer) request.getAttribute("cus");%>
         <div class="wrapper bg-white mt-sm-5">
             <h4 class="pb-4 border-bottom">Reset Account Password</h4>
 
@@ -155,14 +155,8 @@
                             </div>
                         </div>-->
             <div class="py-2">
-                <form action="EditUserProfileServlet?mode=resetPassword&cusID=<%=tempCustomer.getCustomer_id()%>" method="POST">
+                <form action="ManageUserLoginServlet?mode=changePassword&cusID=<%=tempCustomer.getCustomer_id()%>" method="POST">
 
-                    <div class="row py-2">
-                        <div class="col-md-6">
-                            <label for="name">Old Password</label>
-                            <input name="oldPass" type="text" class="bg-light form-control" required="" >
-                        </div>
-                    </div>
                     <div class="row py-2">
                         <div class="col-md-6">
                             <label for="email">New Password</label>

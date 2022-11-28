@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login</title>
         <link rel="stylesheet" href="css/loginstyle.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
@@ -68,7 +68,7 @@
 
                     <div class="other">
                         <!--      Forgot Password button-->
-                        <a href="#"><button class="btn submits frgt-pass">Forgot Password</button></a>
+                        <a href="ForgetPassword.jsp" ><button class="btn submits frgt-pass">Forgot Password</button></a>
                         <!--     Sign Up button -->
                         <a href="UserRegister.jsp"><button class="btn submits sign-up">Sign Up 
                             <!--         Sign Up font icon -->

@@ -45,6 +45,7 @@ public class CustomerDAO {
         }
         return listCus;
     }
+
     public void insertCustomer(Customer customer) {
         try {
             Connection con = DBContext.getConnection();
@@ -64,10 +65,10 @@ public class CustomerDAO {
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-    
+
         }
     }
-    
+
     public Customer getCustomerByID(int id) {
         Customer customer = null;
         try {
@@ -88,7 +89,7 @@ public class CustomerDAO {
                 );
             }
             con.close();
-pst.close();
+            pst.close();
             rs.close();
 
         } catch (SQLException ex) {
@@ -96,7 +97,37 @@ pst.close();
         }
         return customer;
     }
-       public void disableCustomer(int id) {
+
+    public Customer getCustomerByEmail(String email) {
+        Customer customer = null;
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM customer WHERE email = ?");
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                customer = new Customer(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8)
+                );
+            }
+            con.close();
+            pst.close();
+            rs.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return customer;
+    }
+
+    public void disableCustomer(int id) {
 
         try {
             Connection con = DBContext.getConnection();
@@ -122,6 +153,7 @@ pst.close();
             System.out.println(ex.getMessage());
         }
     }
+
     public void updateCustomer(Customer customer) {
         try {
             Connection con = DBContext.getConnection();
@@ -130,12 +162,12 @@ pst.close();
             PreparedStatement pst = con.prepareStatement(query);
 
             pst.setInt(8, customer.getCustomer_id());
-            pst.setString(1,customer.getUsername());
-            pst.setString(2,customer.getPassword());
+            pst.setString(1, customer.getUsername());
+            pst.setString(2, customer.getPassword());
             pst.setString(3, customer.getName());
             pst.setInt(4, customer.getPhone_number());
             pst.setString(5, customer.getAddress());
-            pst.setString(6, customer.getEmail());        
+            pst.setString(6, customer.getEmail());
             pst.setInt(7, customer.getCustomer_status());
 
             pst.executeUpdate();
@@ -146,6 +178,25 @@ pst.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-    }   
+    }
+
+    public void updatePassword(Customer customer, String pass) {
+        try {
+            Connection con = DBContext.getConnection();
+
+            String query = "UPDATE customer SET password = ? WHERE customer_id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+
+            pst.setString(1, pass);
+            pst.setInt(2, customer.getCustomer_id());
+            pst.executeUpdate();
+
+            pst.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
 }

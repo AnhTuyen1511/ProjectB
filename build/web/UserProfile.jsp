@@ -220,7 +220,7 @@
                                     }%>
                                 <a href=<%=link%> class="user-account for-buy" ><i class="icon icon-user"></i><span> <%=txtAccount%></span></a>
 
-                                <a href="Cart.jsp" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart(<%=cartCount%>)</span></a>
+                                <a href="CartServlet?mode=viewCart" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart(<%=cartCount%>)</span></a>
 
                                 <div class="action-menu">
 
@@ -375,15 +375,14 @@
                                                     %>
 
                                                     <tr class="cell-1">
-                                                        <td><%=i+1%></td>
+                                                        <td><%=i + 1%></td>
                                                         <td><%=customer.getName()%></td>
                                                         <td><span><%=listOrder.get(i).getShipping_status()%></span></td>
                                                         <td><%=listOrder.get(i).getTotal()%></td>
                                                         <td><%=listOrder.get(i).getOrder_date()%></td>
-                                                        <td><a href="#viewOrderDetail"><i class="fa fa-ellipsis-h text-black-50"></i></td></a>
+                                                        <td><a href="ManageUserLoginServlet?mode=viewOrderDetailUser&orderID=<%=listOrder.get(i).getOrder_id()%>"><i class="fa fa-ellipsis-h text-black-50"></i></td></a>
                                                     </tr>
                                                     <% }
-                                                            
 
                                                         }
                                                     %>

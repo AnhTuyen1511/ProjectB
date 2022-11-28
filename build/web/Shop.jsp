@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Book Store</title>
+        <title>Book Store - Shop</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -109,7 +109,7 @@
                                     }%>
                                 <a href=<%=link%> class="user-account for-buy" ><i class="icon icon-user"></i><span> <%=txtAccount%></span></a>
 
-                                <a href="Cart.jsp" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart(<%=cartCount%>)</span></a>
+                                <a href="CartServlet?mode=viewCart" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart(<%=cartCount%>)</span></a>
 
                                 <div class="action-menu">
 
@@ -144,7 +144,7 @@
                             <nav id="navbar">
                                 <div class="main-menu stellarnav">
                                     <ul class="menu-list">
-                                        <li class="menu-item active"><a href="#home" data-effect="Home">Home</a></li>
+                                        <li class="menu-item active"><a href="UserActivityServlet?mode=userViewBook" data-effect="Home">Home</a></li>
 
                                         <li class="menu-item has-sub">
                                             <a href="Genre.jsp" class="nav-link" data-effect="Pages">Genre</a>

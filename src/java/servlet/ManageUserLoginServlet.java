@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import manager.CustomerManager;
-import manager.TestPasswordEncrypt;
+import manager.EncryptPassword;
 
 /**
  *
@@ -47,7 +47,7 @@ public class ManageUserLoginServlet extends HttpServlet {
 
             if (mode.equals("userLogin")) {
                 String username = request.getParameter("username");
-                String password = TestPasswordEncrypt.encriptPass(request.getParameter("password"));
+                String password = EncryptPassword.encriptPass(request.getParameter("password"));
                 String mess = "";
 
                 ArrayList<Customer> listCustomer = new ArrayList<>();
@@ -75,6 +75,15 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 target = "UserProfile.jsp";
             }
+             if (mode.equals("viewOrderDetailUser")) {
+                
+               int orderID = Integer.parseInt(request.getParameter("orderID"));
+                request.setAttribute("orderID", orderID);
+
+                target = "ViewOrderDetailUser.jsp";
+            }
+            
+            
 
             if (mode.equals("editProfile")) {
                 int customerID = Integer.parseInt(request.getParameter("customerID"));
@@ -91,14 +100,11 @@ public class ManageUserLoginServlet extends HttpServlet {
                 mySession.removeAttribute("listCart");
 
             }
-            if (mode.equals("forgetPass")) {
-
-            }
 
             if (mode.equals("userRegister")) {
                 String customerName = request.getParameter("name");
                 String R_username = request.getParameter("R_username");
-                String password = TestPasswordEncrypt.encriptPass(request.getParameter("R_password"));
+                String password = EncryptPassword.encriptPass(request.getParameter("R_password"));
                 String address = request.getParameter("address");
                 String email = request.getParameter("email");
                 int phoneNumber = Integer.parseInt(request.getParameter("phone_number"));
@@ -120,6 +126,44 @@ public class ManageUserLoginServlet extends HttpServlet {
                 if (exist == false) {
                     myCustomerManager.addCustomer(newCustomer);
                     target = "UserLogin.jsp";
+                }
+            }
+
+            if (mode.equals("enterOTP")) {
+                int valueOTP = Integer.parseInt(request.getParameter("otpCode"));
+                String email = (String) mySession.getAttribute("email");
+                Customer customer = myCustomerDAO.getCustomerByEmail(email);
+                request.setAttribute("cus", customer);
+                int value = (int) mySession.getAttribute("otp");
+
+                if (valueOTP == value) {
+                    target = "ChangePassword.jsp";
+                    request.setAttribute("email", email);
+                } else {
+                    target = "EnterOtp.jsp";
+                    String mess = "Wrong OTP";
+                    request.setAttribute("mess", mess);
+                }
+
+            }
+            if (mode.equals("changePassword")) {
+                int cusID = Integer.parseInt(request.getParameter("cusID"));
+                Customer customer = myCustomerDAO.getCustomerByID(cusID);
+                String newPass = request.getParameter("newPass");
+                String cfPass = request.getParameter("cfPass");
+                if (newPass.equals(cfPass)) {
+                    String password = EncryptPassword.encriptPass(cfPass);
+                    System.out.println(password);
+                    myCustomerDAO.updatePassword(customer, password);
+                    String mess = "Password Updated";
+                    request.setAttribute("mess", mess);
+                    System.out.println(mess);
+                    target = "UserLogin.jsp";
+                } else {
+                    String mess = "Password does not match!";
+                    request.setAttribute("mess", mess);
+                    System.out.println(mess);
+
                 }
             }
 

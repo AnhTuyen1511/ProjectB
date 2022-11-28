@@ -21,7 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
  *
  * @author BLC
  */
-public class TestPasswordEncrypt {
+public class EncryptPassword {
 
     /**
      * @param args the command line arguments

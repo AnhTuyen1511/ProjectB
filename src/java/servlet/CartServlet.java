@@ -59,12 +59,13 @@ public class CartServlet extends HttpServlet {
                 if (listCart == null) {
                     ArrayList<Cart> tempListCart = new ArrayList<>();
                     session.setAttribute("listCart", tempListCart);
-
                 } else {
                     session.setAttribute("listCart", listCart);
                 }
 
                 target = "Cart.jsp";
+                RequestDispatcher rd = request.getRequestDispatcher(target);
+                rd.forward(request, response);
             }
 
             if (mode.equals("addToCart")) {
@@ -134,15 +135,31 @@ public class CartServlet extends HttpServlet {
                 rd.forward(request, response);
 
             }
+            if (mode.equals("deleteItem")) {
+                ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listCart");
+                int id = Integer.parseInt(request.getParameter("bookID"));
+
+                for (int i = 0; i < listCart.size(); i++) {
+                    if (id == listCart.get(i).getBookID()) {
+                        listCart.remove(i);
+                        break;
+                    }
+                }
+                session.setAttribute("listCart", listCart);
+                target = "Cart.jsp";
+                RequestDispatcher rd = request.getRequestDispatcher(target);
+                rd.forward(request, response);
+            }
 
             if (mode.equals("checkout")) {
                 ArrayList<Cart> listOrder = (ArrayList<Cart>) session.getAttribute("listCart");
+                int total = Integer.parseInt(request.getParameter("cartTotal"));
 
                 Customer customer = (Customer) session.getAttribute("tempCustomer");
 
                 String date = java.time.LocalDate.now().toString();
 
-                Order newOrder = new Order(customer.getCustomer_id(), date, 15000, "pending", 1);
+                Order newOrder = new Order(customer.getCustomer_id(), date, total, "pending", 1);
 
                 int orderID = myOrderDAO.saveOrders(newOrder);
                 if (orderID != 0) {

@@ -64,6 +64,10 @@
         <servlet-name>UserActivityServlet</servlet-name>
         <servlet-class>servlet.UserActivityServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForgetPasswordServlet</servlet-name>
+        <servlet-class>servlet.ForgetPasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>UserActivityServlet</servlet-name>
         <url-pattern>/UserActivityServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgetPasswordServlet</servlet-name>
+        <url-pattern>/ForgetPasswordServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

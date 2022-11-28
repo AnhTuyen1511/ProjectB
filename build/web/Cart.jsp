@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Book Store</title>
+        <title>Cart</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,15 +43,7 @@
 
     </head>
     <% ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listCart"); %>
-    <%
-        int cartsize;
-        if (listCart != null) {
-            cartsize = listCart.size();
 
-        } else {
-            cartsize = 0;
-        }
-    %>
     <%
         AuthorDAO myAuthorDAO = new AuthorDAO();
         ArrayList<Author> list = myAuthorDAO.getListAuthor();
@@ -103,7 +95,6 @@
                                     String txtAccount = "Login";
                                     String link = "UserLogin.jsp";
                                     String ss = (String) session.getAttribute("UserLogin");
-
                                     if (ss != null) {
                                         customer = (Customer) session.getAttribute("tempCustomer");
                                         txtAccount = ss;
@@ -112,11 +103,8 @@
                                     }%>
                                 <a href=<%=link%> class="user-account for-buy" ><i class="icon icon-user"></i><span> <%=txtAccount%></span></a>
 
-                                <a href="Cart.jsp" class="cart for-buy"><i class="icon icon-clipboard"></i>
-                                    <span>
+                                <a href="CartServlet?mode=viewCart" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart(<%=listCart.size()%>)</span></a>
 
-                                        Cart(<%=cartsize%>)
-                                    </span></a>
 
                                 <div class="action-menu">
 
@@ -207,7 +195,7 @@
                             <div class="title">
                                 <div class="row">
                                     <div class="col"><h4><b>Shopping Cart</b></h4></div>
-                                    <div class="col align-self-center text-right text-muted"><%=cartsize%> items</div>
+                                    <div class="col align-self-center text-right text-muted"><%=listCart.size()%> items</div>
                                 </div>
                             </div> 
                             <div>
@@ -225,7 +213,7 @@
                                         <div class="col">
                                             <a href="CartServlet?mode=downQuantity&bookID=<%=listCart.get(i).getBookID()%>">-</a><a href="" class="border"><%=listCart.get(i).getQuantity()%></a><a href="CartServlet?mode=upQuantity&bookID=<%=listCart.get(i).getBookID()%>">+</a>
                                         </div>
-                                        <div class="col"><%=listCart.get(i).getPrice()%><span class="close">&#10005;</span></div>
+                                        <div class="col"><%=listCart.get(i).getPrice()%> VND <a href="CartServlet?mode=deleteItem&bookID=<%=listCart.get(i).getBookID()%>" ><span class="close">&#10005;</span></a></div>
                                     </div>
                                     <%}%>
 
@@ -257,12 +245,15 @@
                                         }
                                         total += 30000;
                                     %>
+
                                     <%=total%> VND
                                 </div>
                             </div>
-                            <a href="CartServlet?mode=checkout"><button class="btn">PLACE ORDER</button> </a>
+                            <form action="CartServlet?mode=checkout" method="post">
+                                <input type="hidden" name="cartTotal" value="<%=total%>">
+                                <a href="CartServlet?mode=checkout"><button type="submit" class="btn">PLACE ORDER</button> </a>
+                            </form>
                         </div>
-
                     </div>
                     </section>
                     <%}%>
