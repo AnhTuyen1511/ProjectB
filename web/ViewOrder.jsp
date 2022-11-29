@@ -33,6 +33,7 @@
         
         -->
         <link rel="stylesheet" href="css/search_button.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <style type="text/css">
             a.button4{
@@ -56,6 +57,14 @@
             }
         </style>
     </head>
+    <%
+        ArrayList<String> listStatus = new ArrayList<>();
+        listStatus.add("pending");
+        listStatus.add("In Transit");
+        listStatus.add("Out For Delivery");
+        listStatus.add("Completed");
+        listStatus.add("Rejected");
+    %>
 
     <body id="reportsPage">
         <nav class="navbar navbar-expand-xl">
@@ -153,8 +162,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for (int i = 0; i < listOrder.size(); i++) {%>
 
+
+                                    <% for (int i = 0; i < listOrder.size(); i++) {%>
+                                <form action="ManageOrderServlet?mode=updateShippingStatus" method="post">
                                     <tr>
 
                                         <td><%=listOrder.get(i).getOrder_id()%></td>
@@ -162,25 +173,42 @@
                                         <td><%=listOrder.get(i).getOrder_date()%> </td>
 
                                         <td><%=listOrder.get(i).getTotal()%></td>
-                                        <td><%=listOrder.get(i).getShipping_status()%></td>
-
 
                                         <td>
-                                            <a href="#" class="tm-product-delete-link">
-                                                <i class="fas fa-pen"></i>                                           
-                                            </a>
+                                            <select class="custom-select tm-select-accounts"
+                                                    id="category" name="shipping_status">
+                                                <%
 
+                                                    for (int j = 0; j < listStatus.size(); j++) {
+                                                        String selected = "";
+                                                        if (listOrder.get(i).getShipping_status().equals(listStatus.get(j))) {
+                                                            selected = "selected";
+                                                        }
+                                                %>
+
+                                                <option <%=selected%> value ="<%=listStatus.get(j)%>" > <%=listStatus.get(j)%> </option>
+                                                <%}%>
+                                            </select>
                                         </td>
-
+                                        <td>
+                                            <input type="hidden" name="orderID" value="<%=listOrder.get(i).getOrder_id()%>">
+                                            <button type="submit" style="border: none; background: none;">
+                                                <a class="tm-product-delete-link">
+                                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>                                          
+                                                </a>
+                                            </button>
+                                        </td>
                                         <td>
                                             <a class="button4" href="ManageOrderServlet?mode=viewOrderDetail&orderID=<%=listOrder.get(i).getOrder_id()%>">
-                                               View                                        
+                                                View                                        
                                             </a>
                                         </td>
 
                                     </tr> 
+                                </form>
+                                <% }%>  
 
-                                    <% }%>                                                                      
+
                                 </tbody>
                             </table>
                         </div><!--

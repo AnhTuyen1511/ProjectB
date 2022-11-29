@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import manager.EncryptPassword;
 
 /**
@@ -38,6 +39,7 @@ public class EditUserProfileServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             String mode = request.getParameter("mode");
+             HttpSession mySession = request.getSession();
             String target = "";
             CustomerDAO myCustomerDAO = new CustomerDAO();
             if (mode.equals("editProfile")) {
@@ -63,6 +65,7 @@ public class EditUserProfileServlet extends HttpServlet {
                 String oldPass = EncryptPassword.encriptPass(request.getParameter("oldPass"));
                 String newPass = request.getParameter("newPass");
                 String cfPass = request.getParameter("cfPass");
+                target="ResetPassword.jsp";
 
                 if (oldPass.equals(customer.getPassword())) {
                     if (newPass.equals(cfPass)) {
@@ -72,8 +75,10 @@ public class EditUserProfileServlet extends HttpServlet {
                         String mess = "Password Updated";
                         request.setAttribute("mess", mess);
                         System.out.println(mess);
+                        mySession.removeAttribute("UserLogin");
                         target = "UserLogin.jsp";
                     } else {
+                        target="ResetPassword.jsp";
                         String mess = "Password does not match!";
                         request.setAttribute("mess", mess);
                         System.out.println(mess);

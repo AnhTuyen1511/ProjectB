@@ -43,15 +43,7 @@ public class ForgetPasswordServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet forgetPasswordServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet forgetPasswordServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    
         }
     }
 
@@ -102,7 +94,7 @@ public class ForgetPasswordServlet extends HttpServlet {
                         props.put("mail.smtp.starttls.enable", "true");
 			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("anh.nguyenthiphuong.set18@eiu.edu.vn", "sukkmzfgnubvvpaf");// Put your email
+					return new PasswordAuthentication("booksaw.store@gmail.com", "txncrtnvthlaigum");// Put your email
 																									// id and
 																									// password here
 				}
@@ -112,8 +104,8 @@ public class ForgetPasswordServlet extends HttpServlet {
 				MimeMessage message = new MimeMessage(session);
 				message.setFrom(new InternetAddress(email));// change accordingly
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-				message.setSubject("Hello");
-				message.setText("your OTP is: " + otpvalue);
+				message.setSubject("Confirm your account");
+				message.setText("Your OTP is: " + otpvalue);
 				// send message
 				Transport.send(message);
 				System.out.println("message sent successfully");

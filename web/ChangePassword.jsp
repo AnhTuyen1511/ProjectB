@@ -160,18 +160,18 @@
                     <div class="row py-2">
                         <div class="col-md-6">
                             <label for="email">New Password</label>
-                            <input name="newPass" type="text" class="bg-light form-control" required="">
+                            <input name="newPass" type="password" class="bg-light form-control" required="">
                         </div>
                     </div>
                     <div class="row py-2">
                         <div class="col-md-6">
                             <label for="name">Confirm Password</label>
-                            <input name="cfPass" type="text" class="bg-light form-control" required="" >
+                            <input name="cfPass" type="password" class="bg-light form-control" required="" >
                         </div>
                     </div>
                     <div class="py-3 pb-4 border-bottom">
-                        <button class="btn btn-primary mr-3">Save Changes</button>
-                        <button class="btn border button">Cancel</button>
+                        <button type="submit" class="btn btn-primary mr-3">Save Changes</button>
+                        <a href="UserLogin.jsp"><button type="button" class="btn border button">Cancel</button></a>
                     </div>
                 </form>
             </div>

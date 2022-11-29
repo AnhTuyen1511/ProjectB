@@ -41,6 +41,11 @@
     <%
         BookDAO myBookDAO = new BookDAO();
         ArrayList<Book> listBook = myBookDAO.getListBook_1();
+        for (int i = 0; i < listBook.size(); i++) {
+            if (listBook.get(i).getBook_status() == 0) {
+                listBook.remove(i);
+            }
+        }
     %>
 
     <%

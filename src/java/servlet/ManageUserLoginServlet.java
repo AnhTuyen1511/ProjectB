@@ -75,15 +75,13 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 target = "UserProfile.jsp";
             }
-             if (mode.equals("viewOrderDetailUser")) {
-                
-               int orderID = Integer.parseInt(request.getParameter("orderID"));
+            if (mode.equals("viewOrderDetailUser")) {
+
+                int orderID = Integer.parseInt(request.getParameter("orderID"));
                 request.setAttribute("orderID", orderID);
 
                 target = "ViewOrderDetailUser.jsp";
             }
-            
-            
 
             if (mode.equals("editProfile")) {
                 int customerID = Integer.parseInt(request.getParameter("customerID"));
@@ -160,9 +158,11 @@ public class ManageUserLoginServlet extends HttpServlet {
                     System.out.println(mess);
                     target = "UserLogin.jsp";
                 } else {
+
                     String mess = "Password does not match!";
                     request.setAttribute("mess", mess);
                     System.out.println(mess);
+                    target = "ResetPassword.jsp";
 
                 }
             }

@@ -76,7 +76,7 @@
                                 </div>
 
 
-                                <a href="LoginServlet?mode=userLogout" class="logout">Logout</a>       
+                                <a href="adminLogin.jsp" class="logout">Logout</a>       
                             </div>
                         </div>
                     </div>

@@ -144,7 +144,7 @@
                                         <li class="menu-item active"><a href="UserActivityServlet?mode=userViewBook" data-effect="Home">Home</a></li>
 
                                         <li class="menu-item has-sub">
-                                            <a href="Genre.jsp" class="nav-link" data-effect="Pages">Genre</a>
+                                            <a href="ManageBookServlet?mode=viewBookByGenre&genreID=<%=listGenre.get(0).getGenre_id()%>" class="nav-link" data-effect="Pages">Genre</a>
 
                                             <ul>
                                                 <%for (int i = 0; i < listGenre.size(); i++) {
@@ -158,7 +158,7 @@
 
 
                                         <li class="menu-item has-sub">
-                                            <a href="Author.jsp" class="nav-link" data-effect="Pages">Authors</a>
+                                            <a href="ManageBookServlet?mode=viewBookByAuthor&authorID=<%=listAuthor.get(0).getAuthor_id()%>" class="nav-link" data-effect="Pages">Authors</a>
 
                                             <ul>
                                                 <%for (int i = 0; i < listAuthor.size(); i++) {

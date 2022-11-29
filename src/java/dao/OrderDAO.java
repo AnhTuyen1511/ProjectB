@@ -46,14 +46,14 @@ public class OrderDAO {
         }
         return listOrder;
     }
-    
+
     public ArrayList<Order> getListOrderByCustomerID(int customerID) {
 
         ArrayList<Order> listOrder = new ArrayList<>();
 
         try {
             Connection con = DBContext.getConnection();
-            String query = "SELECT * FROM orders WHERE customer_id = "+customerID;
+            String query = "SELECT * FROM orders WHERE customer_id = " + customerID;
             Statement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery(query);
 
@@ -73,11 +73,9 @@ public class OrderDAO {
         }
         return listOrder;
     }
-    
-    
-    
+
     public int saveOrders(Order order) {
-        int newID=0;
+        int newID = 0;
         try {
             String sqlstm = "INSERT INTO orders(customer_id, order_date, total , shipping_status, order_status) VALUE(?,?,?,?,?)";
 
@@ -86,17 +84,17 @@ public class OrderDAO {
 
             pst.setInt(1, order.getCustomer_id());
             pst.setString(2, order.getOrder_date());
-            pst.setInt(3, order.getTotal() );
-           pst.setString(4, order.getShipping_status() );
-           pst.setInt(5, order.getOrder_status() );
+            pst.setInt(3, order.getTotal());
+            pst.setString(4, order.getShipping_status());
+            pst.setInt(5, order.getOrder_status());
 
             pst.executeUpdate();
 
             ResultSet res = pst.getGeneratedKeys();
-            
+
             while (res.next()) {
-                newID=res.getInt(1);
-                System.out.println("Generated key: ----------" +newID );
+                newID = res.getInt(1);
+                System.out.println("Generated key: ----------" + newID);
             }
 
             pst.close();
@@ -107,5 +105,55 @@ public class OrderDAO {
 
         }
         return newID;
+    }
+
+    public Order getOrderByID(int id) {
+        Order order = null;
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM orders WHERE order_id = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                order = new Order(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6));
+            }
+            con.close();
+            pst.close();
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return order;
+    }
+
+    public void updateOrder(Order order) {
+        try {
+            Connection con = DBContext.getConnection();
+
+            String query = "UPDATE orders SET customer_id = ?, order_date = ?, total = ? , shipping_status = ?, order_status = ? WHERE order_id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+
+            pst.setInt(6, order.getOrder_id());
+            pst.setInt(1, order.getCustomer_id());
+            pst.setString(2, order.getOrder_date());
+            pst.setInt(3, order.getTotal());
+            pst.setString(4, order.getShipping_status());
+            pst.setInt(5, order.getOrder_status());
+
+            pst.executeUpdate();
+
+            pst.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

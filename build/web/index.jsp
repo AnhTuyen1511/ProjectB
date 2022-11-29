@@ -138,7 +138,7 @@
                                         <li class="menu-item active"><a href="UserActivityServlet?mode=userViewBook" data-effect="Home">Home</a></li>
 
                                         <li class="menu-item has-sub">
-                                            <a href="Genre.jsp" class="nav-link" data-effect="Pages">Genre</a>
+                                            <a href="ManageBookServlet?mode=viewBookByGenre&genreID=<%=listGenre.get(0).getGenre_id()%>" class="nav-link" data-effect="Pages">Genre</a>
 
                                             <ul>
                                                 <%for (int i = 0; i < listGenre.size(); i++) {
@@ -152,7 +152,7 @@
 
 
                                         <li class="menu-item has-sub">
-                                            <a href="Author.jsp" class="nav-link" data-effect="Pages">Authors</a>
+                                            <a href="ManageBookServlet?mode=viewBookByAuthor&authorID=<%=listAuthor.get(0).getAuthor_id()%>" class="nav-link" data-effect="Pages">Authors</a>
 
                                             <ul>
                                                 <%for (int i = 0; i < listAuthor.size(); i++) {
@@ -731,7 +731,7 @@
             <div class="inner-content">
                 <h2 class="section-title divider">Quote of the day</h2>
                 <blockquote data-aos="fade-up">
-                    <q>?The more that you read, the more things you will know. The more that you learn, the more places you?ll go.?</q>
+                    <q>The more that you read, the more things you will know. The more that you learn, the more places you'll go.</q>
                     <div class="author-name">Dr. Seuss</div>			
                 </blockquote>
             </div>		

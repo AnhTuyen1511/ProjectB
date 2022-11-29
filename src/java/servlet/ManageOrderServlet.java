@@ -45,21 +45,38 @@ public class ManageOrderServlet extends HttpServlet {
             OrderDAO myOrderDAO = new OrderDAO();
             if (mode.equals("viewOrder")) {
                 List<Order> listOrder = new ArrayList<>();
-                
+
                 listOrder = myOrderDAO.getListOrder();
 
                 target = "ViewOrder.jsp";
                 request.setAttribute("listOrder", listOrder);
             }
-            
-            if (mode.equals("viewOrderDetail")){
+
+            if (mode.equals("viewOrderDetail")) {
                 int orderID = Integer.parseInt(request.getParameter("orderID"));
                 ArrayList<OrderDetail> listOrderDetail = myOrderDetailDAO.getListOrderDetailByOrder(orderID);
-                
+
                 target = "ViewOrderDetail.jsp";
-                
+
                 request.setAttribute("listOrderDetail", listOrderDetail);
-                
+
+            }
+
+            if (mode.equals("updateShippingStatus")) {
+                List<Order> listOrder = new ArrayList<>();
+
+                int orderID = Integer.parseInt(request.getParameter("orderID"));
+                Order order = myOrderDAO.getOrderByID(orderID);
+                String shipping_status = request.getParameter("shipping_status");
+                System.out.println(shipping_status);
+                System.out.println(order.getOrder_id());
+
+                order.setShipping_status(shipping_status);
+
+                myOrderDAO.updateOrder(order);
+                target = "ViewOrder.jsp";
+                listOrder = myOrderDAO.getListOrder();
+                request.setAttribute("listOrder", listOrder);
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(target);

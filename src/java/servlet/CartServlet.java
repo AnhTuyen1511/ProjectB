@@ -175,8 +175,9 @@ public class CartServlet extends HttpServlet {
 
                             int restQuantity = quantityOfBooks - quantityOfBuy;
                             book.setQuantity(restQuantity);
-
                             myBookDAO.updateBook(book);
+                            
+                            
                             request.setAttribute("message", "Payment Success");
                             session.removeAttribute("listCart");
                             request.getRequestDispatcher("OrderSuccess.jsp").forward(request, response);

@@ -21,7 +21,6 @@ public class BookDAO {
         ArrayList<Book> listBook = new ArrayList<>();
 
         try {
-
             Connection con = DBContext.getConnection();
             String query = "SELECT * FROM books;";
             Statement st = con.prepareStatement(query);
