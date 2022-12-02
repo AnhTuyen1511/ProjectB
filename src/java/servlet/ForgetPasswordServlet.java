@@ -105,7 +105,7 @@ public class ForgetPasswordServlet extends HttpServlet {
 				message.setFrom(new InternetAddress(email));// change accordingly
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 				message.setSubject("Confirm your account");
-				message.setText("Your OTP is: " + otpvalue);
+				message.setText("Your validate code is: " + otpvalue);
 				// send message
 				Transport.send(message);
 				System.out.println("message sent successfully");
@@ -114,7 +114,7 @@ public class ForgetPasswordServlet extends HttpServlet {
 			catch (MessagingException e) {
 				throw new RuntimeException(e);
 			}
-			dispatcher = request.getRequestDispatcher("EnterOTP.jsp");
+			dispatcher = request.getRequestDispatcher("EnterValidateCode.jsp");
 			request.setAttribute("message","OTP is sent to your email id");
 			//request.setAttribute("connection", con);
 			mySession.setAttribute("otp",otpvalue); 

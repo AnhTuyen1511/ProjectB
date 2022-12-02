@@ -32,6 +32,7 @@
             https://templatemo.com/tm-524-product-admin
         -->
         <link rel="stylesheet" href="css/search_button.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
         <style>
 
 

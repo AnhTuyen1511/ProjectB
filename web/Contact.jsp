@@ -30,7 +30,7 @@
         <link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
         <link rel="stylesheet" type="text/css" href="css/vendor.css">
         <link rel="stylesheet" type="text/css" href="style.css">
-
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
         <!-- script
         ================================================== -->
         <script src="js/modernizr.js"></script>
@@ -207,11 +207,11 @@
 
                         <div class="contact-detail d-flex flex-wrap mt-4">
                             <div class="detail mr-6 mb-4">
-                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Thanks for reaching out to BookSaw. In order to ensure you receive a quick reply, please fill out our Contact Us form.</p>
                                 <ul class="list-unstyled list-icon">
-                                    <li><i class="icon icon-phone"></i>+1650-243-0000</li>
-                                    <li><i class="icon icon-envelope-o"></i><a href="mailto:info@yourcompany.com">info@yourcompany.com</a></li>
-                                    <li><i class="icon icon-location2"></i>North Melbourne VIC 3051, Australia</li>
+                                    <li><i class="icon icon-phone"></i>+84 0969847491</li>
+                                    <li><i class="icon icon-envelope-o"></i><a href="mailto:info@yourcompany.com">booksaw.store@gmail.com</a></li>
+                                    <li><i class="icon icon-location2"></i>Eatern International University / Binh Duong / Vietnam</li>
                                 </ul>
                             </div><!--detail-->
                             <div class="detail mb-4">
@@ -232,7 +232,7 @@
 
                         <div class="contact-information">
                             <h2>Send A Message</h2>
-                            <form name="contactform" action="contact.php" method="post" class="contact-form d-flex flex-wrap mt-4">
+                            <form name="contactform" action="#" method="post" class="contact-form d-flex flex-wrap mt-4">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <input type="text" minlength="2" name="name" placeholder="Name" class="u-full-width" required>

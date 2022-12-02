@@ -25,6 +25,7 @@
         Product Admin CSS Template
         https://templatemo.com/tm-524-product-admin
     -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
 </head>
 
 <body id="reportsPage">

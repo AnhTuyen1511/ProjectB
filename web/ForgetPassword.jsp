@@ -12,6 +12,7 @@
         <title>Forget Password</title>
         <link rel="stylesheet" href="css/loginstyle.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
         <meta charset=UTF-8" />
     </head>
     <body class="align">
@@ -24,7 +25,7 @@
                 <header class="head-form">
                     <h2>Forget Password</h2>
                       
-                    <p>Enter email here to get OTP code</p>
+                    <p>Enter email here to get validate code</p>
                 </header>
                 <!--     End  header Content  -->
                 <br>
@@ -83,7 +84,7 @@
                         <input class="form-input" type="email" placeholder="Email" id="pwd"  name="email" required="" >
                         <br>
                         
-                        <button class="log-in"> Get OTP </button>
+                        <button class="log-in"> Get Validate Code </button>
                     </form>
                 </div>
             </div> 

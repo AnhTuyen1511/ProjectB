@@ -34,6 +34,7 @@
         
         -->
         <link rel="stylesheet" href="css/search_button.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
     </head>
 
     <body id="reportsPage">

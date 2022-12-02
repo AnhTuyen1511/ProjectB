@@ -26,6 +26,8 @@
             Product Admin CSS Template
             https://templatemo.com/tm-524-product-admin
         -->
+        
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
         <style>
             a:link, a:visited {
                 background-color: #f5a623;

@@ -31,6 +31,7 @@
         <link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
         <link rel="stylesheet" type="text/css" href="css/vendor.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
 
         <!-- script
         ================================================== -->
@@ -200,10 +201,10 @@
                     <div class="col-md-6 pl-5">
                         <div class="product-detail">
                             <h1><%=book.getTitle()%> </h1>
-                            <p>Author: <%=myAuthorDAO.getAuthorByID(book.getAuthor_id()).getAuthor_name()%></p>
-                            <p>Genre: <%=myGenreDAO.getGenreByID(book.getGenre_id()).getGenre()%></p>
-                            <p>Year of release: <%=book.getYor()%> </p>
-                            <span class="price colored">Price: <%=book.getPrice()%> VND</span>
+                            <p><span style="font-weight: bold">Author: </span><%=myAuthorDAO.getAuthorByID(book.getAuthor_id()).getAuthor_name()%></p>
+                            <p><span style="font-weight: bold">Genre: </span><%=myGenreDAO.getGenreByID(book.getGenre_id()).getGenre()%></p>
+                            <p><span style="font-weight: bold">Year of release: </span><%=book.getYor()%> </p>
+                            <span class="price colored"><span style="font-weight: bold">Price: </span><%=book.getPrice()%> VND</span>
                             <br>
                             <p>
                                 <%= book.getDescription()%>
@@ -211,7 +212,7 @@
 
 
                             <a href="CartServlet?mode=addToCart&bookID=<%=book.getBook_id()%>"> <button type="submit" name="add-to-cart" value="27545" class="button">Add to cart</button> </a>
-                            <button type="submit" name="buy-now" value="27545" class="button">Buy Now</button>
+<!--                            <button type="submit" name="buy-now" value="27545" class="button">Buy Now</button>-->
 
                         </div>
                     </div>

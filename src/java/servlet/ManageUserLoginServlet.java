@@ -46,12 +46,14 @@ public class ManageUserLoginServlet extends HttpServlet {
             HttpSession mySession = request.getSession();
 
             if (mode.equals("userLogin")) {
+                ArrayList<Customer> listCustomer = new ArrayList<>();
+                listCustomer = myCustomerDAO.getListCustomer();
+                
                 String username = request.getParameter("username");
                 String password = EncryptPassword.encriptPass(request.getParameter("password"));
                 String mess = "";
 
-                ArrayList<Customer> listCustomer = new ArrayList<>();
-                listCustomer = myCustomerDAO.getListCustomer();
+                
                 for (int i = 0; i < listCustomer.size(); i++) {
                     String user = listCustomer.get(i).getUsername();
                     String pass = listCustomer.get(i).getPassword();

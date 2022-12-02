@@ -39,6 +39,7 @@
         <link rel="stylesheet" type="text/css" href="css/vendor.css">
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="ordertracking.css">
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
 
         <!-- script
         ================================================== -->
@@ -154,6 +155,26 @@
             .profile .date {
                 background-color: #ccc
             }
+
+            a.button4{
+                display:inline-block;
+                padding:0.3em 1.2em;
+                margin:0 0.1em 0.1em 0;
+                border:0.16em solid rgba(255,255,255,0);
+                border-radius:2em;
+                box-sizing: border-box;
+                text-decoration:none;
+                font-family:'Roboto',sans-serif;
+                font-weight:300;
+                color:black;
+                text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+                text-align:center;
+                transition: all 0.2s;
+            }
+
+            a.button4:hover{
+                border-color: rgba(0,0,0,1);
+            }
         </style>
 
     </head>
@@ -265,7 +286,7 @@
                                                 %>
                                                 <li><a href="ManageBookServlet?mode=viewBookByGenre&genreID=<%=listGenre.get(i).getGenre_id()%>"><%=listGenre.get(i).getGenre()%></a></li>
 
-                                                <% } %>
+                                                <% }%>
                                             </ul>
 
                                         </li>
@@ -380,7 +401,7 @@
                                                         <td><span><%=listOrder.get(i).getShipping_status()%></span></td>
                                                         <td><%=listOrder.get(i).getTotal()%></td>
                                                         <td><%=listOrder.get(i).getOrder_date()%></td>
-                                                        <td><a href="ManageUserLoginServlet?mode=viewOrderDetailUser&orderID=<%=listOrder.get(i).getOrder_id()%>"><i class="fa fa-ellipsis-h text-black-50"></i></td></a>
+                                                        <td><a class="button4" href="ManageUserLoginServlet?mode=viewOrderDetailUser&orderID=<%=listOrder.get(i).getOrder_id()%>">View</td></a>
                                                     </tr>
                                                     <% }
 

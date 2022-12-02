@@ -3,21 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Project_B/ProjectB/web/ViewOrderDetailUser.jsp</file>
-            <file>file:/D:/Project_B/ProjectB/web/ViewBookByGenre.jsp</file>
-            <file>file:/D:/Project_B/ProjectB/web/Cart.jsp</file>
-            <file>file:/D:/Project_B/ProjectB/web/ViewBookDetail.jsp</file>
-            <file>file:/D:/Project_B/ProjectB/web/ViewBookByAuthor.jsp</file>
-            <file>file:/D:/Project_B/ProjectB/web/ViewOrder.jsp</file>
-            <file>file:/D:/Project_B/ProjectB/web/Shop.jsp</file>
-            <file>file:/D:/Project_B/ProjectB/src/java/servlet/ManageBookServlet.java</file>
-            <file>file:/D:/Project_B/ProjectB/src/java/servlet/UserActivityServlet.java</file>
-            <file>file:/D:/Project_B/ProjectB/web/UserProfile.jsp</file>
-            <file>file:/D:/Project_B/ProjectB/web/home.jsp</file>
             <file>file:/D:/Project_B/ProjectB/web/index.jsp</file>
             <file>file:/D:/Project_B/ProjectB/src/java/dao/BookDAO.java</file>
-            <file>file:/D:/Project_B/ProjectB/web/Contact.jsp</file>
-            <file>file:/D:/Project_B/ProjectB/src/java/servlet/ViewBookDetailServlet.java</file>
+            <file>file:/D:/Project_B/ProjectB/web/Cart.jsp</file>
+            <file>file:/D:/Project_B/ProjectB/web/ViewBookDetail.jsp</file>
+            <file>file:/D:/Project_B/ProjectB/src/java/servlet/ManageUserLoginServlet.java</file>
         </group>
     </open-files>
 </project-private>

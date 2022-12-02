@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <!-- https://getbootstrap.com/ -->
         <link rel="stylesheet" href="css/templatemo-style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
         <!--
             Product Admin CSS Template
             https://templatemo.com/tm-524-product-admin

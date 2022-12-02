@@ -42,7 +42,7 @@
         <link rel="stylesheet" type="text/css" href="css/vendor.css">
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="ordertracking.css">
-
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
         <!-- script
         ================================================== -->
         <script src="js/modernizr.js"></script>
