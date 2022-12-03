@@ -180,7 +180,7 @@ public class CartServlet extends HttpServlet {
                             request.setAttribute("message", "Payment Success");
                             session.removeAttribute("listCart");
                             session.setAttribute("tempCustomer", customer);
-                            request.getRequestDispatcher("ManageUserLoginServlet?mode=viewProfile&customerID=" + customer.getCustomer_id() + "").forward(request, response);
+                            request.getRequestDispatcher("ManageUserLoginServlet?mode=viewProfile&customerID=" + customer.getCustomer_id()).forward(request, response);
                         } else {
                             request.setAttribute("message", "Out Of Stock!");
                             request.getRequestDispatcher("OrderSuccess.jsp").forward(request, response);

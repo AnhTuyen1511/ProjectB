@@ -77,6 +77,8 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 target = "UserProfile.jsp";
             }
+            
+            
             if (mode.equals("viewOrderDetailUser")) {
 
                 int orderID = Integer.parseInt(request.getParameter("orderID"));
@@ -140,7 +142,7 @@ public class ManageUserLoginServlet extends HttpServlet {
                     target = "ChangePassword.jsp";
                     request.setAttribute("email", email);
                 } else {
-                    target = "EnterOtp.jsp";
+                    target = "EnterValidateCode.jsp";
                     String mess = "Wrong OTP";
                     request.setAttribute("mess", mess);
                 }

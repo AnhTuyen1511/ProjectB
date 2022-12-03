@@ -364,6 +364,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Item #</th>
+                                                        <th></th>
                                                         <th>Title</th>
                                                         <th>Quantity</th>
                                                         <th>Price</th>
@@ -382,6 +383,7 @@
 
                                                     <tr class="cell-1">
                                                         <td><%=i + 1%></td>
+                                                        <td><img src="bookImages/<%=listOrderDetail.get(i).getBook_id()%>.jpg" style="max-width: 100%;width: 80px;height: 120px;" alt="loading"> </td>
                                                         <td><%=myBookDAO.getBookByID(listOrderDetail.get(i).getBook_id()).getTitle()%></td>
                                                         <td><%=listOrderDetail.get(i).getQuantity()%></td>
                                                         <td><%=listOrderDetail.get(i).getPrice()%></td>

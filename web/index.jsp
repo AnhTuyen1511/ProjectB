@@ -330,7 +330,7 @@
                     <div class="col-md-12">
 
                         <div class="btn-wrap align-right">
-                            <a href="Shop.jsp" class="btn-accent-arrow">View all products <i class="icon icon-ns-arrow-right"></i></a>
+                            <a href="ShopServlet?mode=viewShop" class="btn-accent-arrow">View all products <i class="icon icon-ns-arrow-right"></i></a>
                         </div>
 
                     </div>		
