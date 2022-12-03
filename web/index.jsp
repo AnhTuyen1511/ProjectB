@@ -1,3 +1,4 @@
+<%@page import="dao.BookDAO"%>
 <%@page import="entity.Genre"%>
 <%@page import="entity.Genre"%>
 <%@page import="dao.GenreDAO"%>
@@ -57,7 +58,7 @@
                 listGenre.add(list_genre.get(i));
             }
         }
-
+        BookDAO myBookDAO = new BookDAO();
 
     %>
 
@@ -106,11 +107,12 @@
                                 <div class="action-menu">
 
                                     <div class="search-bar">
-                                        <a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+                                        <a type="submit" class="search-button search-toggle" data-selector="#header-wrap">
                                             <i class="icon icon-search"></i>
                                         </a>
-                                        <form role="search" method="get" class="search-box">
-                                            <input class="search-field text search-input" placeholder="Search" type="search">
+                                        <form action="ShopServlet" role="search" method="get" class="search-box">
+                                            <input name="searchInput" class="search-field text search-input" placeholder="Search" type="search">
+                                            <input type="hidden" name="mode" value="search">
                                         </form>
                                     </div>
                                 </div>
@@ -146,7 +148,7 @@
                                                 %>
                                                 <li><a href="ManageBookServlet?mode=viewBookByGenre&genreID=<%=listGenre.get(i).getGenre_id()%>"><%=listGenre.get(i).getGenre()%></a></li>
 
-                                                <% } %>
+                                                <% }%>
                                             </ul>
 
                                         </li>
@@ -164,7 +166,7 @@
                                             </ul>
 
                                         </li>
-                                        <li class="menu-item"><a href="Shop.jsp" class="nav-link" data-effect="Shop">Shop</a></li>
+                                        <li class="menu-item"><a href="ShopServlet?mode=viewShop" class="nav-link" data-effect="Shop">Shop</a></li>
                                         <li class="menu-item"><a href="Contact.jsp" class="nav-link" data-effect="Contact">Contact</a></li>
                                     </ul>
                                     <div class="hamburger">
@@ -394,329 +396,190 @@
 
                         <ul class="tabs">
                             <li data-tab-target="#all-genre" class="active tab">All Genre</li>
-                            <li data-tab-target="#business" class="tab">Business</li>
-                            <li data-tab-target="#technology" class="tab">Technology</li>
-                            <li data-tab-target="#romantic" class="tab">Romantic</li>
-                            <li data-tab-target="#adventure" class="tab">Adventure</li>
-                            <li data-tab-target="#fictional" class="tab">Fictional</li>
+                            <li data-tab-target="#action" class="tab">Action and Adventure</li>
+                            <li data-tab-target="#classics" class="tab">Classics</li>
+                            <li data-tab-target="#comic" class="tab">Comic</li>
+                            <li data-tab-target="#detective" class="tab">Detective</li>
+                            <li data-tab-target="#children" class="tab">Children's literature</li>
                         </ul>
 
                         <div class="tab-content">
                             <div id="all-genre" data-tab-content class="active">
                                 <div class="row">
+                                    <%
+                                        for (int i = 0; i < listBook.size(); i++) {
+                                            if (i == 4) {
+                                                break;
+                                            }
+                                    %>
 
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item1.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Portrait photography</h3>
-                                                <p>Adam Silber</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item2.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Once upon a time</h3>
-                                                <p>Klien Marry</p>
-                                                <div class="item-price">$ 35.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item3.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Tips of simple lifestyle</h3>
-                                                <p>Bratt Smith</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item4.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Just felt from outside</h3>
-                                                <p>Nicole Wilson</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
+                                    <div class="col-md-3" >
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(i).getBook_id()%>">
+                                            <figure class="product-style">
+                                                <img src="bookImages/<%=listBook.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                                <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(i).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                                <figcaption>
+                                                    <h3><%=listBook.get(i).getTitle()%></h3>
+                                                    <p><%=listBook.get(i).getAuthor_name()%></p>
+                                                    <div class="item-price"><%=listBook.get(i).getPrice()%> VND</div>
+                                                </figcaption>
+                                            </figure>
+                                        </a>
+                                    </div> 
+                                    <%}%>
                                 </div>
                                 <div class="row">
+                                    <%
+                                        for (int i = 4; i < listBook.size(); i++) {
+                                            if (i == 8) {
+                                                break;
+                                            }
+                                    %>
 
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item5.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Peaceful Enlightment</h3>
-                                                <p>Marmik Lama</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item6.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Great travel at desert</h3>
-                                                <p>Sanchit Howdy</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item7.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Life among the pirates</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item8.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Simple way of piece life</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <div id="business" data-tab-content>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item2.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Peaceful Enlightment</h3>
-                                                <p>Marmik Lama</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item4.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Great travel at desert</h3>
-                                                <p>Sanchit Howdy</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item6.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Life among the pirates</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item8.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Simple way of piece life</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
+                                    <div class="col-md-3" >
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(i).getBook_id()%>">
+                                            <figure class="product-style">
+                                                <img src="bookImages/<%=listBook.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                                <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(i).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                                <figcaption>
+                                                    <h3><%=listBook.get(i).getTitle()%></h3>
+                                                    <p><%=listBook.get(i).getAuthor_name()%></p>
+                                                    <div class="item-price"><%=listBook.get(i).getPrice()%> VND</div>
+                                                </figcaption>
+                                            </figure>
+                                        </a>
+                                    </div> 
+                                    <%}%>
                                 </div>
                             </div>
 
-                            <div id="technology" data-tab-content>
+                            <div id="action" data-tab-content>
                                 <div class="row">
+                                    <%
+                                        ArrayList<Book> listAction = myBookDAO.getListBookByGenre(1001);
+                                        for (int i = 0; i < listAction.size(); i++) {
+                                            if (i == 4) {
+                                                break;
+                                            }
+                                    %>
                                     <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item1.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Peaceful Enlightment</h3>
-                                                <p>Marmik Lama</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listAction.get(i).getBook_id()%>">
+                                            <figure class="product-style">
+                                                <img src="bookImages/<%=listAction.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                                <a href="CartServlet?mode=addToCart&bookID=<%=listAction.get(i).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                                <figcaption>
+                                                    <h3><%=listAction.get(i).getTitle()%></h3>
+                                                    <p><%=myAuthorDAO.getAuthorByID(listAction.get(i).getAuthor_id()).getAuthor_name()%> </p>
+                                                    <div class="item-price"><%=listAction.get(i).getPrice()%> VND</div>
+                                                </figcaption>
+                                            </figure>
+                                        </a>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item3.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Great travel at desert</h3>
-                                                <p>Sanchit Howdy</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item5.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Life among the pirates</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item7.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Simple way of piece life</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
+                                    <%}%>
                                 </div>
                             </div>
 
-                            <div id="romantic" data-tab-content>
+                            <div id="classics" data-tab-content>
                                 <div class="row">
+                                    <%
+                                        ArrayList<Book> listClassics = myBookDAO.getListBookByGenre(1002);
+                                        for (int i = 0; i < listClassics.size(); i++) {
+                                            if (i == 4) {
+                                                break;
+                                            }
+                                    %>
                                     <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item1.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Peaceful Enlightment</h3>
-                                                <p>Marmik Lama</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listClassics.get(i).getBook_id()%>">
+                                            <figure class="product-style">
+                                                <img src="bookImages/<%=listClassics.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                                <a href="CartServlet?mode=addToCart&bookID=<%=listClassics.get(i).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                                <figcaption>
+                                                    <h3><%=listClassics.get(i).getTitle()%></h3>
+                                                    <p><%=myAuthorDAO.getAuthorByID(listClassics.get(i).getAuthor_id()).getAuthor_name()%> </p>
+                                                    <div class="item-price"><%=listClassics.get(i).getPrice()%> VND</div>
+                                                </figcaption>
+                                            </figure>
+                                        </a>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item3.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Great travel at desert</h3>
-                                                <p>Sanchit Howdy</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item5.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Life among the pirates</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item7.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Simple way of piece life</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
+                                    <%}%>
                                 </div>
                             </div>
 
-                            <div id="adventure" data-tab-content>
+                            <div id="comic" data-tab-content>
                                 <div class="row">
+                                    <%
+                                        ArrayList<Book> listComic = myBookDAO.getListBookByGenre(1003);
+                                        for (int i = 0; i < listComic.size(); i++) {
+                                            if (i == 4) {
+                                                break;
+                                            }
+                                    %>
                                     <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item5.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Life among the pirates</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listComic.get(i).getBook_id()%>">
+                                            <figure class="product-style">
+                                                <img src="bookImages/<%=listComic.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                                <a href="CartServlet?mode=addToCart&bookID=<%=listComic.get(i).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                                <figcaption>
+                                                    <h3><%=listComic.get(i).getTitle()%></h3>
+                                                    <p><%=myAuthorDAO.getAuthorByID(listComic.get(i).getAuthor_id()).getAuthor_name()%> </p>
+                                                    <div class="item-price"><%=listComic.get(i).getPrice()%> VND</div>
+                                                </figcaption>
+                                            </figure>
+                                        </a>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item7.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Simple way of piece life</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
+                                    <%}%>
                                 </div>
                             </div>
 
-                            <div id="fictional" data-tab-content>
+                            <div id="detective" data-tab-content>
                                 <div class="row">
+                                    <%
+                                        ArrayList<Book> listDetective = myBookDAO.getListBookByGenre(1004);
+                                        for (int i = 0; i < listDetective.size(); i++) {
+                                            if (i == 4) {
+                                                break;
+                                            }
+                                    %>
                                     <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item5.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Life among the pirates</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listDetective.get(i).getBook_id()%>">
+                                            <figure class="product-style">
+                                                <img src="bookImages/<%=listDetective.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                                <a href="CartServlet?mode=addToCart&bookID=<%=listDetective.get(i).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                                <figcaption>
+                                                    <h3><%=listDetective.get(i).getTitle()%></h3>
+                                                    <p><%=myAuthorDAO.getAuthorByID(listDetective.get(i).getAuthor_id()).getAuthor_name()%> </p>
+                                                    <div class="item-price"><%=listDetective.get(i).getPrice()%> VND</div>
+                                                </figcaption>
+                                            </figure>
+                                        </a>
                                     </div>
+                                    <%}%>
+                                </div>
+                            </div>
 
+                            <div id="children" data-tab-content>
+                                <div class="row">
+                                    <%
+                                        ArrayList<Book> listchildren = myBookDAO.getListBookByGenre(1005);
+                                        for (int i = 0; i < listchildren.size(); i++) {
+                                            if (i == 4) {
+                                                break;
+                                            }
+                                    %>
                                     <div class="col-md-3">
-                                        <figure class="product-style">
-                                            <img src="images/tab-item7.jpg" alt="Books" class="product-item">
-                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                            <figcaption>
-                                                <h3>Simple way of piece life</h3>
-                                                <p>Armor Ramsey</p>
-                                                <div class="item-price">$ 40.00</div>
-                                            </figcaption>
-                                        </figure>
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listchildren.get(i).getBook_id()%>">
+                                            <figure class="product-style">
+                                                <img src="bookImages/<%=listchildren.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                                <a href="CartServlet?mode=addToCart&bookID=<%=listchildren.get(i).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
+                                                <figcaption>
+                                                    <h3><%=listchildren.get(i).getTitle()%></h3>
+                                                    <p><%=myAuthorDAO.getAuthorByID(listchildren.get(i).getAuthor_id()).getAuthor_name()%> </p>
+                                                    <div class="item-price"><%=listchildren.get(i).getPrice()%> VND</div>
+                                                </figcaption>
+                                            </figure>
+                                        </a>
                                     </div>
+                                    <%}%>
                                 </div>
                             </div>
 
@@ -751,60 +614,70 @@
                 <div class="row">
                     <div class="inner-content">	
                         <div class="product-list" data-aos="fade-up">
-                            <div class="grid product-grid">				
+                            <div class="grid product-grid">
+                                <%
+                                    for (int i = 0; i < listBook.size(); i++) {
+                                        if (i == 5) {
+                                            break;
+                                        }
+
+                                %>
+
                                 <figure class="product-style">
-                                    <img src="images/product-item5.jpg" alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
+                                    <img src="bookImages/<%=listBook.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
+                                    <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(i).getBook_id()%>" ><button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button></a>
                                     <figcaption>
-                                        <h3>Simple way of piece life</h3>
-                                        <p>Armor Ramsey</p>
-                                        <div class="item-price">
-                                            <span class="prev-price">$ 50.00</span>$ 40.00</div>
+                                        <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(i).getBook_id()%>" style="text-decoration: none">
+                                            <h3><%=listBook.get(i).getTitle()%></h3></a>
+                                        <p><%=listBook.get(i).getAuthor_name()%></p>
+                                        <div class="item-price"><%=listBook.get(i).getPrice()%> VND</div>
                                     </figcaption>
                                 </figure>
 
-                                <figure class="product-style">
-                                    <img src="images/product-item6.jpg" alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                    <figcaption>
-                                        <h3>Great travel at desert</h3>
-                                        <p>Sanchit Howdy</p>
-                                        <div class="item-price">
-                                            <span class="prev-price">$ 30.00</span>$ 38.00</div>
-                                    </figcaption>
-                                </figure>
+                                <%}%>
 
-                                <figure class="product-style">
-                                    <img src="images/product-item7.jpg" alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                    <figcaption>
-                                        <h3>The lady beauty Scarlett</h3>
-                                        <p>Arthur Doyle</p>
-                                        <div class="item-price">
-                                            <span class="prev-price">$ 35.00</span>$ 45.00</div>
-                                    </figcaption>
-                                </figure>
-
-                                <figure class="product-style">
-                                    <img src="images/product-item8.jpg" alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                    <figcaption>
-                                        <h3>Once upon a time</h3>
-                                        <p>Klien Marry</p>
-                                        <div class="item-price">
-                                            <span class="prev-price">$ 25.00</span>$ 35.00</div>
-                                    </figcaption>
-                                </figure>
-
-                                <figure class="product-style">
-                                    <img src="images/product-item2.jpg" alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                    <figcaption>
-                                        <h3>Simple way of piece life</h3>
-                                        <p>Armor Ramsey</p>
-                                        <div class="item-price">$ 40.00</div>
-                                    </figcaption>
-                                </figure>					
+                                <!--                                <figure class="product-style">
+                                                                    <img src="images/product-item6.jpg" alt="Books" class="product-item">
+                                                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
+                                                                    <figcaption>
+                                                                        <h3>Great travel at desert</h3>
+                                                                        <p>Sanchit Howdy</p>
+                                                                        <div class="item-price">
+                                                                            <span class="prev-price">$ 30.00</span>$ 38.00</div>
+                                                                    </figcaption>
+                                                                </figure>
+                                
+                                                                <figure class="product-style">
+                                                                    <img src="images/product-item7.jpg" alt="Books" class="product-item">
+                                                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
+                                                                    <figcaption>
+                                                                        <h3>The lady beauty Scarlett</h3>
+                                                                        <p>Arthur Doyle</p>
+                                                                        <div class="item-price">
+                                                                            <span class="prev-price">$ 35.00</span>$ 45.00</div>
+                                                                    </figcaption>
+                                                                </figure>
+                                
+                                                                <figure class="product-style">
+                                                                    <img src="images/product-item8.jpg" alt="Books" class="product-item">
+                                                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
+                                                                    <figcaption>
+                                                                        <h3>Once upon a time</h3>
+                                                                        <p>Klien Marry</p>
+                                                                        <div class="item-price">
+                                                                            <span class="prev-price">$ 25.00</span>$ 35.00</div>
+                                                                    </figcaption>
+                                                                </figure>
+                                
+                                                                <figure class="product-style">
+                                                                    <img src="images/product-item2.jpg" alt="Books" class="product-item">
+                                                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
+                                                                    <figcaption>
+                                                                        <h3>Simple way of piece life</h3>
+                                                                        <p>Armor Ramsey</p>
+                                                                        <div class="item-price">$ 40.00</div>
+                                                                    </figcaption>
+                                                                </figure>					-->
                             </div><!--grid-->
                         </div>
                     </div><!--inner-content-->
@@ -848,37 +721,37 @@
             </div>
         </section>
 
-        
 
-<!--        <section id="download-app" class="leaf-pattern-overlay">
-            <div class="corner-pattern-overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+
+        <!--        <section id="download-app" class="leaf-pattern-overlay">
+                    <div class="corner-pattern-overlay"></div>
+                    <div class="container">
                         <div class="row">
-
-                            <div class="col-md-5">
-                                <figure>
-                                    <img src="images/device.png" alt="phone" class="single-image">
-                                </figure>
-                            </div>
-
-                            <div class="col-md-7">
-                                <div class="app-info">
-                                    <h2 class="section-title divider">Download our app now !</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames semper erat ac in suspendisse iaculis.</p>
-                                    <div class="google-app">
-                                        <img src="images/google-play.jpg" alt="google play">
-                                        <img src="images/app-store.jpg" alt="app store">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="row">
+        
+                                    <div class="col-md-5">
+                                        <figure>
+                                            <img src="images/device.png" alt="phone" class="single-image">
+                                        </figure>
                                     </div>
+        
+                                    <div class="col-md-7">
+                                        <div class="app-info">
+                                            <h2 class="section-title divider">Download our app now !</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames semper erat ac in suspendisse iaculis.</p>
+                                            <div class="google-app">
+                                                <img src="images/google-play.jpg" alt="google play">
+                                                <img src="images/app-store.jpg" alt="app store">
+                                            </div>
+                                        </div>
+                                    </div>
+        
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>-->
+                </section>-->
 
         <footer id="footer">
             <div class="container">

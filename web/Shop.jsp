@@ -40,13 +40,7 @@
 
     </head>
     <%
-        BookDAO myBookDAO = new BookDAO();
-        ArrayList<Book> listBook = myBookDAO.getListBook_1();
-        for (int i = 0; i < listBook.size(); i++) {
-            if (listBook.get(i).getBook_status() == 0) {
-                listBook.remove(i);
-            }
-        }
+        ArrayList<Book> listBook = (ArrayList<Book>) request.getAttribute("listBook");
     %>
 
     <%
@@ -120,11 +114,12 @@
                                 <div class="action-menu">
 
                                     <div class="search-bar">
-                                        <a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+                                        <a type="submit" class="search-button search-toggle" data-selector="#header-wrap">
                                             <i class="icon icon-search"></i>
                                         </a>
-                                        <form role="search" method="get" class="search-box">
-                                            <input class="search-field text search-input" placeholder="Search" type="search">
+                                        <form action="ShopServlet" role="search" method="get" class="search-box">
+                                            <input name="searchInput" class="search-field text search-input" placeholder="Search" type="search">
+                                            <input type="hidden" name="mode" value="search">
                                         </form>
                                     </div>
                                 </div>
@@ -178,7 +173,7 @@
                                             </ul>
 
                                         </li>
-                                        <li class="menu-item"><a href="Shop.jsp" class="nav-link" data-effect="Shop">Shop</a></li>
+                                        <li class="menu-item"><a href="ShopServlet?mode=viewShop" class="nav-link" data-effect="Shop">Shop</a></li>
                                         <li class="menu-item"><a href="Contact.jsp" class="nav-link" data-effect="Contact">Contact</a></li>
                                     </ul>
                                     <div class="hamburger">
@@ -205,7 +200,7 @@
                         <div class="colored">
                             <h1 class="page-title">Shop</h1>
                             <div class="breadcum-items">
-                                <span class="item"><a href="index.html">Home /</a></span>
+                                <span class="item"><a href="UserActivityServlet?mode=userViewBook">Home /</a></span>
                                 <span class="item colored">Shop</span>
                             </div>
                         </div>
@@ -225,16 +220,14 @@
 
                                 <figcaption>
                                     <h3><%=listBook.get(i).getTitle()%></h3>
-                                    <p><%=listBook.get(i).getAuthor_name()%></p>
-                                    <p><%=listBook.get(i).getGenre()%></p>
+                                    <p><%=myAuthorDAO.getAuthorByID(listBook.get(i).getAuthor_id()).getAuthor_name()%></p>
+                                    <p><%=myGenreDAO.getGenreByID(listBook.get(i).getGenre_id()).getGenre()%></p>
                                     <div class="item-price"><%=listBook.get(i).getPrice()%> VND</div>
                                 </figcaption>
                                 <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(i).getBook_id()%>"><button type="button" class="add-to-cart" data-product-tile="add-to-caok.get(i).getBook_id() %>"rt">Add to Cart</button></a>
                             </a>
                         </figure>
-                        <% }%> 
-
-
+                        <% }%>  //
                     </div>
 
                 </div>
@@ -363,7 +356,6 @@
                             <div class="row">
 
                                 <div class="col-md-6">
-                                    <p>© 2022 All rights reserved. Free HTML Template by <a href="https://www.templatesjungle.com/" target="_blank">TemplatesJungle</a></p>
                                 </div>
 
                                 <div class="col-md-6">

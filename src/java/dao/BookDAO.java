@@ -133,6 +133,50 @@ public class BookDAO {
         return listBook;
     }
 
+    public ArrayList<Book> getListBookSearching(String input) {
+        ArrayList<Book> listBook = new ArrayList<>();
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM books WHERE title like ?");
+            pst.setString(1, "%" + input + "%");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+
+                Book book = new Book(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9));
+                listBook.add(book);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listBook;
+    }
+
+    public int count(String input) {
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM books WHERE title like ?");
+            pst.setString(1, "%" + input + "%");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+
     public int insertBook(Book book) {
         int newID = 0;
         try {

@@ -119,11 +119,12 @@
                                 <div class="action-menu">
 
                                     <div class="search-bar">
-                                        <a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+                                        <a type="submit" class="search-button search-toggle" data-selector="#header-wrap">
                                             <i class="icon icon-search"></i>
                                         </a>
-                                        <form role="search" method="get" class="search-box">
-                                            <input class="search-field text search-input" placeholder="Search" type="search">
+                                        <form action="ShopServlet" role="search" method="get" class="search-box">
+                                            <input name="searchInput" class="search-field text search-input" placeholder="Search" type="search">
+                                            <input type="hidden" name="mode" value="search">
                                         </form>
                                     </div>
                                 </div>
@@ -177,7 +178,7 @@
                                             </ul>
 
                                         </li>
-                                        <li class="menu-item"><a href="Shop.jsp" class="nav-link" data-effect="Shop">Shop</a></li>
+                                        <li class="menu-item"><a href="ShopServlet?mode=viewShop" class="nav-link" data-effect="Shop">Shop</a></li>
                                         <li class="menu-item"><a href="Contact.jsp" class="nav-link" data-effect="Contact">Contact</a></li>
                                     </ul>
                                     <div class="hamburger">
@@ -204,7 +205,7 @@
                         <div class="colored">
                             <h1 class="page-title">Shop</h1>
                             <div class="breadcum-items">
-                                <span class="item"><a href="index.html">Home /</a></span>
+                                <span class="item"><a href="UserActivityServlet?mode=userViewBook">Home /</a></span>
                                 <span class="item colored">Books in <%=myGenreDAO.getGenreByID(listBook.get(0).getGenre_id()).getGenre()%></span>
                             </div>
                         </div>

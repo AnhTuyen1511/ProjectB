@@ -106,11 +106,12 @@
                                 <div class="action-menu">
 
                                     <div class="search-bar">
-                                        <a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+                                        <a type="submit" class="search-button search-toggle" data-selector="#header-wrap">
                                             <i class="icon icon-search"></i>
                                         </a>
-                                        <form role="search" method="get" class="search-box">
-                                            <input class="search-field text search-input" placeholder="Search" type="search">
+                                        <form action="ShopServlet" role="search" method="get" class="search-box">
+                                            <input name="searchInput" class="search-field text search-input" placeholder="Search" type="search">
+                                            <input type="hidden" name="mode" value="search">
                                         </form>
                                     </div>
                                 </div>
@@ -164,7 +165,7 @@
                                             </ul>
 
                                         </li>
-                                        <li class="menu-item"><a href="Shop.jsp" class="nav-link" data-effect="Shop">Shop</a></li>
+                                        <li class="menu-item"><a href="ShopServlet?mode=viewShop" class="nav-link" data-effect="Shop">Shop</a></li>
                                         <li class="menu-item"><a href="Contact.jsp" class="nav-link" data-effect="Contact">Contact</a></li>
                                     </ul>
                                     <div class="hamburger">
@@ -190,7 +191,7 @@
                     <div class="col-md-12">
                         <h1 class="page-title">Contact us</h1>
                         <div class="breadcrumbs">
-                            <span class="item"><a href="index.html">Home /</a></span>
+                            <span class="item"><a href="UserActivityServlet?mode=userViewBook">Home /</a></span>
                             <span class="item">Contact us</span>
                         </div>
                     </div>
@@ -209,7 +210,7 @@
                             <div class="detail mr-6 mb-4">
                                 <p>Thanks for reaching out to BookSaw. In order to ensure you receive a quick reply, please fill out our Contact Us form.</p>
                                 <ul class="list-unstyled list-icon">
-                                    <li><i class="icon icon-phone"></i>+84 0969847491</li>
+                                    <li><i class="icon icon-phone"></i>+84 0123456789</li>
                                     <li><i class="icon icon-envelope-o"></i><a href="mailto:info@yourcompany.com">booksaw.store@gmail.com</a></li>
                                     <li><i class="icon icon-location2"></i>Eatern International University / Binh Duong / Vietnam</li>
                                 </ul>
