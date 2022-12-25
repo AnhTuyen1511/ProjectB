@@ -215,7 +215,7 @@
                     <div class="products-grid grid">
                         <% for (int i = 0; i < listBook.size(); i++) {%>
                         <figure class="product-style">
-                            <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(i).getBook_id()%>">
+                            <a href="ViewBookDetailServlet?mode=bookDetail&bookID=<%=listBook.get(i).getBook_id()%>" style="text-decoration: none ">
                                 <img src="bookImages/<%=listBook.get(i).getBook_id()%>.jpg" alt="Books" class="product-item">
 
                                 <figcaption>
@@ -227,7 +227,7 @@
                                 <a href="CartServlet?mode=addToCart&bookID=<%=listBook.get(i).getBook_id()%>"><button type="button" class="add-to-cart" data-product-tile="add-to-caok.get(i).getBook_id() %>"rt">Add to Cart</button></a>
                             </a>
                         </figure>
-                        <% }%>  //
+                        <% }%>  
                     </div>
 
                 </div>

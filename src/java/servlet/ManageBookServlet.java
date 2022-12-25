@@ -94,10 +94,20 @@ public class ManageBookServlet extends HttpServlet {
                 myBookDAO.disableBook(id);
                 target = "ManageBookServlet?mode=viewBook";
             }
+            if(mode.equals("search")){
+                String input = request.getParameter("searchInput");
+                ArrayList<Book> listBook = myBookDAO.getListBookSearching(input);
+                
+                request.setAttribute("listBook", listBook);
+                target = "ViewBook.jsp";
+
+                
+            }
 
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

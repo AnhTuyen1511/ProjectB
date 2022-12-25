@@ -68,6 +68,31 @@ public class CustomerDAO {
 
         }
     }
+    public ArrayList<Customer> getListCustomerSearching(String input) {
+        ArrayList<Customer> listCustomer = new ArrayList<>();
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM customer WHERE name like ?");
+            pst.setString(1, "%" + input + "%");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+
+                Customer customer = new Customer(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8));
+                listCustomer.add(customer);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listCustomer;
+    }
 
     public Customer getCustomerByID(int id) {
         Customer customer = null;

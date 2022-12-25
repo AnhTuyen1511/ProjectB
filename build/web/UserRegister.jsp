@@ -28,8 +28,11 @@
                     <!--<p>login here using your username and password</p>-->
                 </header>
                 <!--     End  header Content  -->
+                 <span style="color: red">${registerMess}</span>
                 <br>
+                 
                 <div class="field-set">
+                  
                     <form action = "ManageUserLoginServlet" method="post">
                         <input name="mode" type="hidden" value="userRegister" /> 
                         <!--   user name -->

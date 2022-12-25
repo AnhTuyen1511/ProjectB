@@ -129,7 +129,7 @@
                                         <input id="name" name="title" type="text"class="form-control validate" required=""/>
                                     </div> 
                                     <div class="form-group mb-3">
-                                        <label  for="name" >Author ID </label>
+                                        <label  for="name" >Author </label>
                                         <select class="custom-select tm-select-accounts"
                                                 id="category" name = "authorID">
                                             <% 
@@ -144,7 +144,7 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label  for="name" >Genre ID </label>
+                                        <label  for="name" >Genre </label>
                                         <select class="custom-select tm-select-accounts"
                                                 id="category" name = "genreID">
                                             <% for(int i = 0; i < listGenre.size();i++){ %>

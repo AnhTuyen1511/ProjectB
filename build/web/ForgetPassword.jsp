@@ -30,53 +30,10 @@
                 <!--     End  header Content  -->
                 <br>
                 <div class="field-set">
+                     
                     <form action = "ForgetPasswordServlet" method="post">
                         
-                        <!--   user name -->
-<!--                        <span class="input-item">
-
-
-
-                            <i class="fa fa-group"></i>
-                        </span>
-                           user name Input
-
-                             
-                        <input class="form-input" id="txt-input" type="text" placeholder="Name" required="" name="name"  >
-                        <br>
-                        <span class="input-item">
-                            <i class="fa fa-user-circle"></i>
-                        </span>
-                           Password Input
-                        <input class="form-input" type="text" placeholder="Username" id="pwd"  name="R_username" required="" >
-
-                        <br>
-                        <span class="input-item">
-                            <i class="fa fa-key"></i>
-                        </span>
-                           Password Input
-                        <input class="form-input" type="password" placeholder="Password" id="pwd"  name="R_password" required="" >
-
-                        <br>
-
-
-                           Password 
-
-                        <span class="input-item">
-                            <i class=" fa fa-address-card-o" ></i>
-                        </span>-->
-                        <!--   Password Input-->
-<!--                        <input class="form-input" type="text" placeholder="Address" id="pwd"  name="address" required="" >
-
-                        
-                        <br>
-                        <span class="input-item">
-                            <i class="fa fa-phone" style="font-size: 21px;"></i>
-                        </span>
-                           Password Input
-                        <input class="form-input" type="number" placeholder="Phone number" id="pwd"  name="phone_number"  required="">
-
-                        <br>-->
+                     
                         <span class="input-item">
                             <i class="fa fa-envelope-o"></i>
                         </span>

@@ -143,7 +143,7 @@ public class ManageUserLoginServlet extends HttpServlet {
                     request.setAttribute("email", email);
                 } else {
                     target = "EnterValidateCode.jsp";
-                    String mess = "Wrong OTP";
+                    String mess = "Enter the wrong code";
                     request.setAttribute("mess", mess);
                 }
 

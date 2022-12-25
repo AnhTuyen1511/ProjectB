@@ -38,6 +38,7 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col-12">
+                                <span style="color: red">${mess}</span>
                                 <form action="LoginServlet" method="post" class="tm-login-form">
                                     <div class="form-group">
                                         <input type="hidden" name="mode" value="loginAdmin">

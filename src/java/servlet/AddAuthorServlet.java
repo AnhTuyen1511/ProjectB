@@ -56,10 +56,6 @@ public class AddAuthorServlet extends HttpServlet {
             String target = "ManageAuthorServlet?mode=viewAuthor";
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
-
-//            target = "ManageBookServlet?mode=addBook";
-//            rd = request.getRequestDispatcher(target);
-//            rd.forward(request, response);
         }
 
     }

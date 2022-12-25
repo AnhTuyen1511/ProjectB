@@ -108,7 +108,10 @@
                             <div class="search-wrapper">
 
                                 <div class="input-holder">
-                                    <input type="text" class="search-input" placeholder="Type to search" name="search" />
+                                     <form action="ManageGenreServlet" method="post">
+                                        <input type="text" class="search-input" placeholder="Type to search" name="searchInput" />
+                                        <input type="hidden" name="mode" value="search">
+                                    </form>
                                     <button type="submit" class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
 
                                 </div>

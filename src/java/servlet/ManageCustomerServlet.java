@@ -56,6 +56,15 @@ public class ManageCustomerServlet extends HttpServlet {
 
                 target = "ManageCustomerServlet?mode=viewCustomer";
             }
+            if(mode.equals("search")){
+                String input = request.getParameter("searchInput");
+                ArrayList<Customer> listCustomer = myCustomerDAO.getListCustomerSearching(input);
+                
+                request.setAttribute("listCustomer", listCustomer);
+                target = "ViewCustomer.jsp";
+
+                
+            }
             
 
             RequestDispatcher rd = request.getRequestDispatcher(target);

@@ -353,6 +353,7 @@
                         </div>
                     </div>
                 </div>
+                                    
                 <div class="col-md-9" style="display: flex">
                     <div class="order-tracking">
                         <div class="container">
@@ -363,6 +364,7 @@
                                             <table class="table">
                                                 <thead>
                                                     <tr>
+                                                        
                                                         <th>Item #</th>
                                                         <th></th>
                                                         <th>Title</th>

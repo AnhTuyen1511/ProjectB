@@ -139,4 +139,27 @@ public class AuthorDAO {
 
     }
 
+    public ArrayList<Author> getListAuthorSearching(String input) {
+        ArrayList<Author> listAuthor = new ArrayList<>();
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM authors WHERE author_name like ?");
+            pst.setString(1, "%" + input + "%");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+
+                Author author = new Author(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4)
+                );
+                listAuthor.add(author);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listAuthor;
+    }
+
 }

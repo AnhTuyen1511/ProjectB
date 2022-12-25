@@ -30,6 +30,7 @@
                 <!--     End  header Content  -->
                 <br>
                 <div class="field-set">
+                    <span style="color: red">${mess}</span>
                     <form action = "ManageUserLoginServlet" method="post">
                         <input name="mode" type="hidden" value="enterOTP" /> 
                         <input name="email" type="hidden" value="<%=session.getAttribute("email") %>" /> 

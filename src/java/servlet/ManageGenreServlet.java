@@ -58,6 +58,16 @@ public class ManageGenreServlet extends HttpServlet {
                 target = "ManageGenreServlet?mode=viewGenre";
 
             }
+            
+            if(mode.equals("search")){
+                String input = request.getParameter("searchInput");
+                ArrayList<Genre> listGenre = myGenreDAO.getListGenreSearching(input);
+                
+                request.setAttribute("listGenre", listGenre);
+                target = "ViewGenre.jsp";
+
+                
+            }
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }

@@ -132,6 +132,24 @@ public class OrderDAO {
 
         return order;
     }
+    public void removeOrderByID(int orderID){
+        try {
+            Connection con = DBContext.getConnection();
+
+            String query = "DELETE from orders WHERE order_id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+
+            pst.setInt(1, orderID);
+
+            pst.executeUpdate();
+
+            pst.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     public void updateOrder(Order order) {
         try {
@@ -155,5 +173,30 @@ public class OrderDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public ArrayList<Order> getListOrderSearching(String input) {
+        ArrayList<Order> listOrder = new ArrayList<>();
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM orders WHERE order_id like ?");
+            pst.setString(1, "%" + input + "%");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+
+                Order order = new Order(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6)
+                );
+                listOrder.add(order);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listOrder;
     }
 }

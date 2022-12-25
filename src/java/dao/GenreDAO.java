@@ -138,4 +138,27 @@ public class GenreDAO {
         }
 
     }
+    
+    public ArrayList<Genre> getListGenreSearching(String input) {
+        ArrayList<Genre> listGenre = new ArrayList<>();
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM genre WHERE genre like ?");
+            pst.setString(1, "%" + input + "%");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+
+                Genre genre = new Genre(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4)
+                );
+                listGenre.add(genre);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listGenre;
+    }
 }

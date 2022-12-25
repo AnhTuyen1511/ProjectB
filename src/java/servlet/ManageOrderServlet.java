@@ -78,6 +78,15 @@ public class ManageOrderServlet extends HttpServlet {
                 listOrder = myOrderDAO.getListOrder();
                 request.setAttribute("listOrder", listOrder);
             }
+            if(mode.equals("search")){
+                String input = request.getParameter("searchInput");
+                ArrayList<Order> listOrder = myOrderDAO.getListOrderSearching(input);
+                
+                request.setAttribute("listOrder", listOrder);
+                target = "ViewOrder.jsp";
+
+                
+            }
 
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
