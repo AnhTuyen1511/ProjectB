@@ -72,6 +72,46 @@
         <servlet-name>ShopServlet</servlet-name>
         <servlet-class>servlet.ShopServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StaffManageServlet</servlet-name>
+        <servlet-class>servlet.StaffManageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageStaffServlet</servlet-name>
+        <servlet-class>servlet.ManageStaffServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStaffServlet</servlet-name>
+        <servlet-class>servlet.AddStaffServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetJson</servlet-name>
+        <servlet-class>servlet.Json.GetJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerJson</servlet-name>
+        <servlet-class>servlet.Json.CustomerJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PrintBillServlet</servlet-name>
+        <servlet-class>servlet.PrintBillServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookJson</servlet-name>
+        <servlet-class>servlet.Json.BookJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GenreJson</servlet-name>
+        <servlet-class>servlet.Json.GenreJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AuthorJson</servlet-name>
+        <servlet-class>servlet.Json.AuthorJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListBookByGenreJson</servlet-name>
+        <servlet-class>servlet.Json.ListBookByGenreJson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -152,6 +192,46 @@
         <servlet-name>ShopServlet</servlet-name>
         <url-pattern>/ShopServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffManageServlet</servlet-name>
+        <url-pattern>/StaffManageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageStaffServlet</servlet-name>
+        <url-pattern>/ManageStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStaffServlet</servlet-name>
+        <url-pattern>/AddStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetJson</servlet-name>
+        <url-pattern>/GetJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerJson</servlet-name>
+        <url-pattern>/CustomerJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrintBillServlet</servlet-name>
+        <url-pattern>/PrintBillServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookJson</servlet-name>
+        <url-pattern>/BookJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenreJson</servlet-name>
+        <url-pattern>/GenreJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthorJson</servlet-name>
+        <url-pattern>/AuthorJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListBookByGenreJson</servlet-name>
+        <url-pattern>/ListBookByGenreJson</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -160,6 +240,10 @@
     <servlet>
         <servlet-name>adminLogin</servlet-name>
         <jsp-file>/adminLogin.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>staffLogin</servlet-name>
+        <jsp-file>/staffLogin.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>

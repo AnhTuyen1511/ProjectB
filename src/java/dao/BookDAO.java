@@ -45,11 +45,10 @@ public class BookDAO {
         }
         return listBook;
     }
-
     public ArrayList<Book> getListBook_1() {
         ArrayList<Book> listBook = new ArrayList<>();
 
-        String query = "select * from books inner join authors on  books.author_id=  authors.author_id inner join genre on books.genre_id = genre.genre_id order by book_id;";
+        String query = "select * from books inner join authors on  books.author_id=  authors.author_id inner join genre on books.genre_id = genre.genre_id inner join picture on books.book_id = picture.book_id order by books.book_id";
         Statement st;
         try {
             Connection con = DBContext.getConnection();
@@ -64,7 +63,8 @@ public class BookDAO {
                         rs.getString(8),
                         rs.getInt(9),
                         rs.getString(11),
-                        rs.getString(15));
+                        rs.getString(15),
+                        rs.getString(19));
                 listBook.add(book);
             }
 
@@ -212,6 +212,7 @@ public class BookDAO {
         }
         return newID;
     }
+   
 
     public void updateBook(Book book) {
         try {

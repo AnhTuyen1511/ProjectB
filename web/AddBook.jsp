@@ -92,7 +92,11 @@
                                 <i class="fas fa-user"></i> CUSTOMER
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="ManageStaffServlet?mode=viewStaff">
+                                <i class="fas fa-user-plus"></i> STAFF
+                            </a>
+                        </li>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="Billing.jsp">
                                                         <i class="fas fa-money-bill-wave"></i> 
@@ -132,13 +136,13 @@
                                         <label  for="name" >Author </label>
                                         <select class="custom-select tm-select-accounts"
                                                 id="category" name = "authorID">
-                                            <% 
-                                                
-                                                for(int i = 0; i < listAuthor.size();i++){
-                                                    
+                                            <%
+
+                                                for (int i = 0; i < listAuthor.size(); i++) {
+
                                             %>
-                                           
-                                            <option value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_name() %> </option>
+
+                                            <option value ="<%=listAuthor.get(i).getAuthor_id()%>" > <%=listAuthor.get(i).getAuthor_name()%> </option>
                                             <% } %>
                                         </select>
                                     </div>
@@ -147,9 +151,9 @@
                                         <label  for="name" >Genre </label>
                                         <select class="custom-select tm-select-accounts"
                                                 id="category" name = "genreID">
-                                            <% for(int i = 0; i < listGenre.size();i++){ %>
+                                            <% for (int i = 0; i < listGenre.size(); i++) {%>
                                             <option value ="<%=listGenre.get(i).getGenre_id()%>" > <%=listGenre.get(i).getGenre()%> </option>
-                                            <% } %>
+                                            <% }%>
                                         </select>
                                     </div>                                    
 

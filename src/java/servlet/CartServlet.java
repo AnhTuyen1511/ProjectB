@@ -44,7 +44,7 @@ public class CartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             BookDAO myBookDAO = new BookDAO();
             OrderDAO myOrderDAO = new OrderDAO();
@@ -177,18 +177,19 @@ public class CartServlet extends HttpServlet {
                             book.setQuantity(restQuantity);
                             myBookDAO.updateBook(book);
 
-                            request.setAttribute("message", "Payment Success");
-                            session.removeAttribute("listCart");
-                            session.setAttribute("tempCustomer", customer);
-                            request.getRequestDispatcher("ManageUserLoginServlet?mode=viewProfile&customerID=" + customer.getCustomer_id()).forward(request, response);
                         } else {
                             myOrderDAO.removeOrderByID(orderID);
                             out.println("<script type=\"text/javascript\">");
-                            out.println("alert('Out of stock!');");
                             out.println("location='CartServlet?mode=viewCart';");
-                            out.println("</script>");     
+                            out.println("alert('Out of stock!');");
+                            out.println("</script>");
+                            break;
                         }
                     }
+                    request.setAttribute("message", "Payment Success");
+                    session.removeAttribute("listCart");
+                    session.setAttribute("tempCustomer", customer);
+                    request.getRequestDispatcher("ManageUserLoginServlet?mode=viewProfile&customerID=" + customer.getCustomer_id()).forward(request, response);
                 }
 
             }

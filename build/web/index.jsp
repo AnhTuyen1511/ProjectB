@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="dao.CustomerDAO"%>
 <%@page import="dao.BookDAO"%>
 <%@page import="entity.Genre"%>
 <%@page import="entity.Genre"%>
@@ -59,10 +62,8 @@
             }
         }
         BookDAO myBookDAO = new BookDAO();
-
     %>
-
-
+    
     <body>
         <% ArrayList<Book> listBook = (ArrayList<Book>) request.getAttribute("newList"); %>
         <div id="header-wrap">

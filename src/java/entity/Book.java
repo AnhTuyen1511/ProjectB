@@ -51,7 +51,7 @@ public class Book {
         this.book_status = book_status;
     }
 
-    public Book(int book_id, String title, int price, int quantity, int yor, String description, int book_status, String author_name, String genre) {
+    public Book(int book_id, String title, int price, int quantity, int yor, String description, int book_status, String author_name, String genre, String picture) {
         this.book_id = book_id;
         this.title = title;
         this.price = price;
@@ -61,12 +61,14 @@ public class Book {
         this.book_status = book_status;
         this.author_name = author_name;
         this.genre = genre;
+        this.picture = picture;
     }
 
     
     
 
-    public Book(String title, int author_id, int genre_id, int price, int quantity, int yor, String description, int book_status, String picture) {
+    public Book(int book_id, String title, int author_id, int genre_id, int price, int quantity, int yor, String description, int book_status, String picture) {
+        this.book_id = book_id;
         this.title = title;
         this.author_id = author_id;
         this.genre_id = genre_id;

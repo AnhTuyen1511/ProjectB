@@ -86,10 +86,9 @@ public class EditBookServlet extends HttpServlet {
                 description = request.getParameter("description");
                 String pictureName = bookID + ".jpg";
                 Part imgFilePart = request.getPart("image");
-
                 Book newBook = new Book(bookID, title, authorID, genreID, price, quantity, yor, description, status);
                 myBookManager.updateBook(newBook);
-                if (imgFilePart != null) {
+                   if (imgFilePart != null) {
                     imgFilePart.write(ConfigInfo.getCtxRealPath() + "\\bookImages\\" + pictureName);
                 }
                 target = "ManageBookServlet?mode=viewBook";

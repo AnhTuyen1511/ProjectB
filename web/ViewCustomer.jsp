@@ -86,13 +86,17 @@
                                 <i class="fas fa-user"></i> CUSTOMER
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ManageStaffServlet?mode=viewStaff">
+                                <i class="fas fa-user-plus"></i> STAFF
+                            </a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link d-block" href='LoginServlet?mode=logout'>
                                 Admin, <b>Logout</b>
                             </a>
-
                         </li>
 
                     </ul>
@@ -123,9 +127,7 @@
                             %>
                             <table class="table table-hover tm-table-small tm-product-table">
                                 <thead>
-
                                     <tr>
-
                                         <th scope="col">ID </th>
                                         <th scope="col">Username</th>
                                         <th scope="col">Name</th>
@@ -134,8 +136,6 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">&nbsp;</th>
-
-
                                     </tr>
                                 </thead>
                                 <tbody>

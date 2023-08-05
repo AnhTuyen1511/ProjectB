@@ -5,7 +5,10 @@
 package servlet;
 
 import configPkg.ConfigInfo;
+import dao.BookDAO;
+import dao.PictureDAO;
 import entity.Book;
+import entity.Picture;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -44,6 +47,7 @@ public class AddBookServlet extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
 
             BookManager myBookManager = new BookManager();
+            PictureDAO myPictureDAO = new PictureDAO();
             String target = "ViewBook.jsp";
             String title = request.getParameter("title");
             int authorID = Integer.parseInt(request.getParameter("authorID"));
@@ -54,20 +58,20 @@ public class AddBookServlet extends HttpServlet {
             String description = request.getParameter("description");
             Part filePart = request.getPart("image");
             int status = 1;
-
+             
             Book newBook = new Book(title, authorID, genreID, price, quantity, yor, description, status);
-
             int newId=myBookManager.addBook(newBook);
-
             String pictureName = newId+".jpg";
-            
             ArrayList<Book> listBook = new ArrayList<>();
-
             listBook = myBookManager.getListBook();
+            
             filePart.write(ConfigInfo.getCtxRealPath() + "\\bookImages\\" + pictureName);
+            String baseUrl = "http://localhost:8080/ProjectB_BookSaw";
+            String pictureUrl = baseUrl + "/bookImages/" + pictureName;
+            Picture picture = new Picture(newId, pictureUrl);
+            myPictureDAO.insertImage(picture);
             request.setAttribute("listBook", listBook);
             target = "ManageBookServlet?mode=viewBook";
-
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }

@@ -86,10 +86,15 @@
                                 <i class="fas fa-user"></i> CUSTOMER
                             </a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="ManageStaffServlet?mode=viewStaff">
+                               <i class="fas fa-user-plus"></i> STAFF
+                            </a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link d-block" href='LoginServlet?mode=logout'>
+                            <a class="nav-link d-block" href='adminLogin.jsp'>
                                 Admin, <b>Logout</b>
                             </a>
 

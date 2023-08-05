@@ -96,6 +96,11 @@
                                 <i class="fas fa-user"></i> CUSTOMER
                             </a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="ManageStaffServlet?mode=viewStaff">
+                               <i class="fas fa-user-plus"></i> STAFF
+                            </a>
+                        </li>
 
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="Billing.jsp">

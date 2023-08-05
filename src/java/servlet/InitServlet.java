@@ -5,9 +5,13 @@
  */
 package servlet;
 
+
 import configPkg.ConfigInfo;
+import dao.CustomerDAO;
+import entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -33,18 +37,7 @@ public class InitServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            ServletContext servletctx = request.getServletContext();
-            String ctxFullPath = servletctx.getRealPath("\\");
-
-            //Set path to ConfigInfo, DAO can get the real path from ConfigInfo
-            ConfigInfo.setCtxRealPath(ctxFullPath);
-
-            String target = "UserActivityServlet?mode=userViewBook";
-            RequestDispatcher reqDispatch = request.getRequestDispatcher(target);
-            reqDispatch.forward(request, response);
-        }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,6 +53,18 @@ public class InitServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+         try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            ServletContext servletctx = request.getServletContext();
+            String ctxFullPath = servletctx.getRealPath("\\");
+
+            //Set path to ConfigInfo, DAO can get the real path from ConfigInfo
+            ConfigInfo.setCtxRealPath(ctxFullPath);
+           // request.setAttribute("listCustomer", listCustomer);
+            String target = "UserActivityServlet?mode=userViewBook";
+            RequestDispatcher reqDispatch = request.getRequestDispatcher(target);
+            reqDispatch.forward(request, response);
+        }
     }
 
     /**

@@ -6,7 +6,9 @@
 package servlet;
 
 import dao.AdminDAO;
+import dao.StaffDAO;
 import entity.Admin;
+import entity.Staff;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -40,22 +42,23 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = "";
         String password = "";
-        ArrayList<Admin> list = new ArrayList<>();
-        AdminDAO adminDao = new AdminDAO();
-        list = adminDao.getAdmin();
-        for (int i = 0; i < list.size(); i++) {
-            username = list.get(i).getUsername();
-            password = list.get(i).getPassword();
 
-        }
         String userNameForm = request.getParameter("username");
         String passwordForm = request.getParameter("password");
 
         String mode = request.getParameter("mode");
         String target = "home.jsp";
         if (mode.equals("loginAdmin")) {
+            ArrayList<Admin> list = new ArrayList<>();
+            AdminDAO adminDao = new AdminDAO();
+            list = adminDao.getAdmin();
+            for (int i = 0; i < list.size(); i++) {
+                username = list.get(i).getUsername();
+                password = list.get(i).getPassword();
+
+            }
             if (userNameForm.equals(username) && passwordForm.equals(password)) {
-                target = "home.jsp";
+                target = "ManageBookServlet?mode=viewBook";
                 session.setAttribute("adminLogin", username);
             } else {
                 target = "adminLogin.jsp";
@@ -68,60 +71,25 @@ public class LoginServlet extends HttpServlet {
             session = request.getSession();
             session.removeAttribute("userLogin");
         }
+        if (mode.equals("loginStaff")) {
+            ArrayList<Staff> listStaff = new ArrayList<>();
+            StaffDAO staffDao = new StaffDAO();
+            listStaff = staffDao.getStaff();
+            for (int i = 0; i < listStaff.size(); i++) {
+                if (userNameForm.equals(listStaff.get(i).getUsername()) && passwordForm.equals(listStaff.get(i).getPassword())) {
+                    target = "StaffManageServlet?mode=StaffViewBook";
+                    session.setAttribute("staffLogin", listStaff.get(i).getStaff_name());
+                    break;
+                } else {
+                    target = "staffLogin.jsp";
+                    String mess = "Username or password invalid";
+                    request.setAttribute("mess", mess);
+                }
+            }
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher(target);
-        rd.forward(request, response);
-
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection con = DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword);
-//            Statement st = con.createStatement();
-//            ResultSet rs = st.executeQuery(query1);
-//
-//            String userNameForm = request.getParameter("username");
-//            String passwordForm = request.getParameter("password");
-//            boolean check = false;
-//
-//            if ((userNameForm != "") && (passwordForm != "")) {
-//                while (rs.next()) {
-//                    if ((rs.getString("username").equals(userNameForm))
-//                            & (rs.getString("password").equals(passwordForm))) {
-//
-//                        HttpSession mySession = ((HttpServletRequest) request).getSession(true);
-//                        // set gia tri
-//                        mySession.setAttribute("username", userNameForm);
-//                        mySession.setAttribute("password", passwordForm);
-//
-//                        RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-//                        rd.forward(request, response);
-//
-//                        check = true;
-//                        break;
-//                    } else {
-//                        continue;
-//                    }
-//                }
-//                if (!check) {
-//                    RequestDispatcher rd = request.getRequestDispatcher("loginError.jsp");
-//                    rd.forward(request, response);
-//                }
-//            } else if (!check) {
-//                System.out.println("fail2");
-//                RequestDispatcher rd = request.getRequestDispatcher("loginError.jsp");
-//                rd.forward(request, response);
-//            }
-//
-//            st.close();
-//            con.close();
-//
-//        } catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//        
-//        
-//        
+        rd.forward(request, response);     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
