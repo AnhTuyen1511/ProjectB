@@ -66,6 +66,7 @@
     
     <body>
         <% ArrayList<Book> listBook = (ArrayList<Book>) request.getAttribute("newList"); %>
+        <% System.out.print("hehehehhehe" + listBook.size()); %>
         <div id="header-wrap">
             <div class="top-content" style="padding: 10px 0 0 0">
                 <div class="container">
@@ -188,7 +189,6 @@
         </div><!--header-wrap-->
 
         <section id="billboard">
-
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">

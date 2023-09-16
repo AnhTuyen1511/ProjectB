@@ -48,7 +48,7 @@ public class ShopServlet extends HttpServlet {
                 }
                 
                 request.setAttribute("listBook", listBook);
-                target = "CustomerPage/Shop.jsp";
+                target = "Shop.jsp";
             }
             
             if (mode.equals("search")) {

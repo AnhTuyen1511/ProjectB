@@ -10,34 +10,26 @@ package entity;
  * @author phuon
  */
 public class Discount {
-    private int code;
-    private  int book_id;
+    private String code;
     private int percent;
-    private int quantity;
+    private String startDate;
+    private String endDate;
     private int status;
 
-    public Discount(int code, int book_id, int percent, int quantity, int status) {
+    public Discount(String code, int percent, String startDate, String endDate, int status) {
         this.code = code;
-        this.book_id = book_id;
         this.percent = percent;
-        this.quantity = quantity;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.status = status;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
-    }
-
-    public int getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
     }
 
     public int getPercent() {
@@ -48,12 +40,20 @@ public class Discount {
         this.percent = percent;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public int getStatus() {
@@ -63,10 +63,8 @@ public class Discount {
     public void setStatus(int status) {
         this.status = status;
     }
+
     
-    
-    
- 
     
 }
 

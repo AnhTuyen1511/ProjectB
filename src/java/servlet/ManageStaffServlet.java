@@ -47,7 +47,7 @@ public class ManageStaffServlet extends HttpServlet {
             }
             if (mode.equals("disableStaff")) {
                 int id = Integer.parseInt(request.getParameter("staffID"));
-                myStaffDAO.getStaff();
+                myStaffDAO.disableStaff(id);
                 target = "ManageStaffServlet?mode=viewStaff";
             }
             

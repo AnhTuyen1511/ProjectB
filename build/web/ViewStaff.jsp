@@ -136,6 +136,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">&nbsp;</th>
+                                        <th scope="col">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -152,6 +153,12 @@
                                         <td>
                                             <a href="ManageStaffServlet?mode=disableStaff&staffID=<%=listStaff.get(i).getStaff_id()%>" class="tm-product-delete-link"/>
                                             <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                        </td>
+                                        <td>
+                                            <a href="EditStaffServlet?mode=viewStaff&staffID=<%=listStaff.get(i).getStaff_id()%>" class="tm-product-delete-link">
+                                                <i class="fas fa-pen"></i>                                           
+                                            </a>
+
                                         </td>
                                     </tr>  
                                     <% }%>                                                                      
