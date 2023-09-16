@@ -5,22 +5,19 @@
 package servlet.Json;
 
 import com.google.gson.Gson;
-import dao.GenreDAO;
-import entity.Genre;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author phuon
  */
-public class GenreJson extends HttpServlet {
+public class SentOTPServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +31,18 @@ public class GenreJson extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SentOTPServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SentOTPServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,20 +57,14 @@ public class GenreJson extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GenreDAO myGenre = new GenreDAO() ;
-        Gson gson = new Gson();
-        List<Genre> listGenre = myGenre.getListGenre();
-        List<Genre> listNewGenre = new ArrayList<>();
-        for (int i = 0; i < listGenre.size(); i++) {
-           if( listGenre.get(i).getGenre_status() == 1){
-               listNewGenre.add(listGenre.get(i));
-           }
-        }
-        String json = gson.toJson(listNewGenre);
+          HttpSession mySession = request.getSession();
+        Integer value = (Integer) mySession.getAttribute("otp");  
+         Gson gson = new Gson();
+        String json = gson.toJson(value);
+        System.out.println("Received value: " + value);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
-      //  System.out.println(json);
     }
 
     /**

@@ -4,11 +4,14 @@
  */
 package servlet.Json;
 
+import com.google.gson.Gson;
 import dao.BookDAO;
 import entity.Book;
+import entity.Genre;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +62,18 @@ public class ListBookByGenreJson extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BookDAO myBookDAO = new BookDAO();
-        List<Book> listBookByGenre = myBookDAO.getListBookByGenre(0);
+        String jsonData = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        Gson gson = new Gson();
+        Genre genre = gson.fromJson(jsonData, Genre.class);
+        int id = genre.getGenre_id();
+        System.out.println(id);
+        List<Book> listBookByGenre = myBookDAO.getListBookByGenre(id);
+        String json = gson.toJson(listBookByGenre);
+      //  System.out.println(json);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+        System.out.println(json);
     }
 
     /**

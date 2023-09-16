@@ -115,7 +115,7 @@ public class CustomerJson extends HttpServlet {
         String jsonData = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         Gson gson = new Gson();
         Customer updatedCustomer = gson.fromJson(jsonData, Customer.class);
-         System.out.println(updatedCustomer.toString());
+       //  System.out.println(updatedCustomer.toString());
         int id = updatedCustomer.getCustomer_id();
         System.out.println(id);
         CustomerDAO myCusDAO = new CustomerDAO();

@@ -11,27 +11,39 @@ import java.io.Serializable;
  * @author BLC
  */
 public class Cart implements Serializable{
-    private int bookID;
+    private int book_id;
     private String title;
     private int price;
     private int quantity;
+    private String picture;
+    private int customer_id;
 
     public Cart() {
     }
 
     public Cart(int bookID, String title, int price, int quantity) {
-        this.bookID = bookID;
+        this.book_id = bookID;
         this.title = title;
         this.price = price;
         this.quantity = quantity;
     }
 
+    public Cart(int bookID,int customer_id, String title, int price, int quantity, String picture) {
+        this.book_id = bookID;
+        this.title = title;
+        this.price = price;
+        this.quantity = quantity;
+        this.picture = picture;
+        this.customer_id = customer_id;
+    }
+    
+
     public int getBookID() {
-        return bookID;
+        return book_id;
     }
 
     public void setBookID(int bookID) {
-        this.bookID = bookID;
+        this.book_id = bookID;
     }
 
     public String getTitle() {
@@ -57,7 +69,17 @@ public class Cart implements Serializable{
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
-    
-    
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+ 
 }

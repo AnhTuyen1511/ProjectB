@@ -5,22 +5,23 @@
 package servlet.Json;
 
 import com.google.gson.Gson;
-import dao.GenreDAO;
-import entity.Genre;
+import dao.CustomerDAO;
+import entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import manager.EncryptPassword;
 
 /**
  *
  * @author phuon
  */
-public class GenreJson extends HttpServlet {
+public class ResetPasswordJson extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +35,18 @@ public class GenreJson extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ResetPasswordJson</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ResetPasswordJson at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,20 +61,7 @@ public class GenreJson extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GenreDAO myGenre = new GenreDAO() ;
-        Gson gson = new Gson();
-        List<Genre> listGenre = myGenre.getListGenre();
-        List<Genre> listNewGenre = new ArrayList<>();
-        for (int i = 0; i < listGenre.size(); i++) {
-           if( listGenre.get(i).getGenre_status() == 1){
-               listNewGenre.add(listGenre.get(i));
-           }
-        }
-        String json = gson.toJson(listNewGenre);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
-      //  System.out.println(json);
+        processRequest(request, response);
     }
 
     /**
@@ -77,6 +76,30 @@ public class GenreJson extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String jsonData = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        Gson gson = new Gson();
+        Customer updatedCustomer = gson.fromJson(jsonData, Customer.class);
+        String email = updatedCustomer.getEmail();
+        System.out.println(email);
+        String password = updatedCustomer.getPassword();
+        CustomerDAO myCusDAO = new CustomerDAO();
+        List<Customer> listCustomer = myCusDAO.getListCustomer();
+        for (int i = 0; i < listCustomer.size(); i++) {
+            if (listCustomer.get(i).getEmail().equals(email) && listCustomer.get(i).getCustomer_status() == 1) {
+                myCusDAO.updatePassword(listCustomer.get(i), EncryptPassword.encriptPass(password));
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("Response message");
+                System.out.println("Update Successful");
+                break;
+            } else {
+                System.out.println("Email not found");
+            }
+        }
     }
 
     /**
