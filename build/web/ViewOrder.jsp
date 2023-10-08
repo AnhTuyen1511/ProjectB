@@ -59,7 +59,7 @@
     </head>
     <%
         ArrayList<String> listStatus = new ArrayList<>();
-        listStatus.add("pending");
+        listStatus.add("Pending");
         listStatus.add("In Transit");
         listStatus.add("Out For Delivery");
         listStatus.add("Completed");

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author phuon
  */
-public class SentOTPServlet extends HttpServlet {
+public class SentOTP extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

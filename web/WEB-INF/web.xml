@@ -120,6 +120,34 @@
         <servlet-name>ManageDiscountServlet</servlet-name>
         <servlet-class>servlet.ManageDiscountServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartJson</servlet-name>
+        <servlet-class>servlet.Json.CartJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SentOTP</servlet-name>
+        <servlet-class>servlet.Json.SentOTP</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgetPasswordJson</servlet-name>
+        <servlet-class>servlet.Json.ForgetPasswordJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordJson</servlet-name>
+        <servlet-class>servlet.Json.ResetPasswordJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCartItemJson</servlet-name>
+        <servlet-class>servlet.Json.DeleteCartItemJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderJson</servlet-name>
+        <servlet-class>servlet.Json.OrderJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailJson</servlet-name>
+        <servlet-class>servlet.Json.OrderDetailJson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -247,6 +275,34 @@
     <servlet-mapping>
         <servlet-name>ManageDiscountServlet</servlet-name>
         <url-pattern>/ManageDiscountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartJson</servlet-name>
+        <url-pattern>/CartJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SentOTP</servlet-name>
+        <url-pattern>/SentOTP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgetPasswordJson</servlet-name>
+        <url-pattern>/ForgetPasswordJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordJson</servlet-name>
+        <url-pattern>/ResetPasswordJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCartItemJson</servlet-name>
+        <url-pattern>/DeleteCartItemJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderJson</servlet-name>
+        <url-pattern>/OrderJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailJson</servlet-name>
+        <url-pattern>/OrderDetailJson</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

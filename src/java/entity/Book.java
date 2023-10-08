@@ -64,6 +64,11 @@ public class Book {
         this.picture = picture;
     }
 
+    public Book(int book_id, int quantity) {
+        this.book_id = book_id;
+        this.quantity = quantity;
+    }
+    
     
     
 
