@@ -15,6 +15,7 @@ public class Discount {
     private String startDate;
     private String endDate;
     private int status;
+    private int description;
 
     public Discount(String code, int percent, String startDate, String endDate, int status) {
         this.code = code;

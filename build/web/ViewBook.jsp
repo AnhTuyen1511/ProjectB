@@ -8,7 +8,19 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Book Management</title>
+        <ti
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="css/customstyle.css" />
+        <!-- https://fontawesome.com/ -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <!-- https://getbootstrap.com/ -->
+        <link rel="stylesheet" href="css/templatemo-style.css">
+        <!--
+            Product Admin CSS Template
+            https://templatemo.com/tm-524-product-admin
+        -->
+        <link rel="stylesheet" href="css/search_button.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>tle>Book Management</title>
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:400,700"
@@ -27,12 +39,7 @@
         -->
         <link rel="stylesheet" href="css/search_button.css" />
         <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
-        <style>
-
-
-
-
-        </style>
+       
     </head>
 
     <body id="reportsPage">
@@ -181,8 +188,9 @@
 
                                     </tr>  
                                     <% }%>                                                                      
-                                </tbody>
+                                </tbody>    
                             </table>
+                           
                         </div><!--
                         <!-- table container -->
                         

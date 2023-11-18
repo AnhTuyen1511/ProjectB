@@ -159,7 +159,7 @@ public class CartServlet extends HttpServlet {
 
                 String date = java.time.LocalDate.now().toString();
 
-                Order newOrder = new Order(customer.getCustomer_id(), date, total, "Pending", 1);
+                Order newOrder = new Order(customer.getCustomer_id(), date, total, "Pending", 1,"Reivew");
 
                 int orderID = myOrderDAO.saveOrders(newOrder);
                 if (orderID != 0) {

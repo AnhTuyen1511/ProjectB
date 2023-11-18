@@ -64,6 +64,7 @@
         listStatus.add("Out For Delivery");
         listStatus.add("Completed");
         listStatus.add("Rejected");
+        listStatus.add("Done");
     %>
 
     <body id="reportsPage">
@@ -115,9 +116,9 @@
                                 <i class="fas fa-user"></i> CUSTOMER
                             </a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="ManageStaffServlet?mode=viewStaff">
-                               <i class="fas fa-user-plus"></i> STAFF
+                                <i class="fas fa-user-plus"></i> STAFF
                             </a>
                         </li>
                     </ul>
@@ -141,7 +142,7 @@
                             <div class="search-wrapper">
 
                                 <div class="input-holder">
-                                   <form action="ManageOrderServlet" method="post">
+                                    <form action="ManageOrderServlet" method="post">
                                         <input type="text" class="search-input" placeholder="Type to search" name="searchInput" />
                                         <input type="hidden" name="mode" value="search">
                                     </form>
@@ -183,26 +184,46 @@
                                         <td><%=listOrder.get(i).getTotal()%></td>
 
                                         <td>
-                                            <select class="custom-select tm-select-accounts"
-                                                    id="category" name="shipping_status">
-                                                <%
+                                            <!--                                            <select class="custom-select tm-select-accounts"
+                                                                                                id="category" name="shipping_status">
+                                            <%
 
+                                                for (int j = 0; j < listStatus.size()-1; j++) {
+                                                    String selected = "";
+                                                    if (listOrder.get(i).getShipping_status().equals(listStatus.get(j))) {
+                                                        selected = "selected";
+                                                    }
+                                            %>
+
+                                            <option <%=selected%> value ="<%=listStatus.get(j)%>" > <%=listStatus.get(j)%> </option>
+                                            <%}%>
+                                        </select>-->
+                                            <select class="custom-select tm-select-accounts"
+                                                    id="category" name="shipping_status" <%= listOrder.get(i).getShipping_status().equals("Done") ? "disabled" : ""%>>
+                                                <%
+                                                  
                                                     for (int j = 0; j < listStatus.size(); j++) {
                                                         String selected = "";
                                                         if (listOrder.get(i).getShipping_status().equals(listStatus.get(j))) {
                                                             selected = "selected";
                                                         }
+                                                        String disable = "";
+                                                        if(listStatus.get(j).equals("Done")){
+                                                        disable = "disabled";
+                                                    }
+                                                        
                                                 %>
-
-                                                <option <%=selected%> value ="<%=listStatus.get(j)%>" > <%=listStatus.get(j)%> </option>
-                                                <%}%>
+                                                <option <%=selected%> <%=disable %> value="<%=listStatus.get(j) %>" > <%=listStatus.get(j)%> </option>
+                                                <%
+                                                    }
+                                                %>
                                             </select>
                                         </td>
                                         <td>
                                             <input type="hidden" name="orderID" value="<%=listOrder.get(i).getOrder_id()%>">
                                             <button type="submit" style="border: none; background: none;">
                                                 <a class="tm-product-delete-link">
-                                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>                                          
+                                                    <i class="fa fa-floppy-o" aria-hidden="true", style="color: white"></i>                                          
                                                 </a>
                                             </button>
                                         </td>

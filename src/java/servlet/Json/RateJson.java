@@ -6,13 +6,15 @@ package servlet.Json;
 
 import com.google.gson.Gson;
 import dao.OrderDAO;
-import entity.Order;
+
+import dao.RateDAO;
+import entity.Rate;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,7 @@ import org.json.JSONObject;
  *
  * @author phuon
  */
-public class OrderJson extends HttpServlet {
+public class RateJson extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,15 +41,7 @@ public class OrderJson extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet OrderJson</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet OrderJson at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+           
         }
     }
 
@@ -63,13 +57,15 @@ public class OrderJson extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        OrderDAO myOrderDAO = new OrderDAO();
+        
+        RateDAO myRateDAO = new RateDAO() ;
         Gson gson = new Gson();
-        List<Order> listOrder = myOrderDAO.getListOrder();
-        String json = gson.toJson(listOrder);
+        List<Rate> listRate = myRateDAO.getListRatedBooks();
+        String json = gson.toJson(listRate);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
+         
     }
 
     /**
@@ -86,50 +82,30 @@ public class OrderJson extends HttpServlet {
          response.setContentType("application/json");
         BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
         StringBuilder sb = new StringBuilder();
-        OrderDAO myorderDAO = new OrderDAO();
+        RateDAO rateDao = new RateDAO();
         String line;
         while ((line = reader.readLine()) != null) {
             sb.append(line);
         }
         reader.close();
         JSONObject requestDataJson = new JSONObject(sb.toString());
+        double rate = requestDataJson.getDouble("rate");
+        int book_id = requestDataJson.getInt("book_id");
         int customer_id = requestDataJson.getInt("customer_id");
-        String date = java.time.LocalDate.now().toString();
-        int total =  requestDataJson.getInt("total");
-        String shipping_status = "Pending";
-        int order_status = requestDataJson.getInt("order_status");
-        String review_status = "Review";
-        Order order = new Order(customer_id, date, total, shipping_status, order_status, review_status);
-        int order_id = myorderDAO.saveOrders(order);
+        String comment = requestDataJson.getString("comment");
+        int order_id = requestDataJson.getInt("order_id");
+        Rate myRate = new Rate(rate, comment, customer_id, book_id,order_id);
+        rateDao.insertIntoRate(myRate);
         JSONObject responseJson = new JSONObject();
-        responseJson.put("order_id", order_id);
-        responseJson.put("customer_id", order.getCustomer_id());
-        responseJson.put("order_date", order.getOrder_date());
-        responseJson.put("total", order.getTotal());
-        responseJson.put("shipping_status", order.getShipping_status());
-        responseJson.put("order_status", order.getShipping_status());
-        //responseJson.put("order_status", order.get));
+//        responseJson.put("order_id", myOrderDetail.getOrder_id());
+//        responseJson.put("book_id", myOrderDetail.getBook_id());
+//        responseJson.put("quantity", myOrderDetail.getQuantity());
+//        responseJson.put("price",myOrderDetail.getPrice() );
+//        responseJson.put("picture",myOrderDetail.getPicture() );
         System.out.println(responseJson.toString());
         response.getWriter().print(responseJson.toString());
         response.getWriter().flush();
     }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-          String jsonData = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        Gson gson = new Gson();
-        Order updateOrder = gson.fromJson(jsonData, Order.class);
-        updateOrder.setReview_status("Reviewed");
-        updateOrder.setShipping_status(updateOrder.getShipping_status());
-        OrderDAO myOrderDAO = new OrderDAO();
-        myOrderDAO.updateOrderReview(updateOrder);
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("Response message");
-    }
-    
-    
-    
 
     /**
      * Returns a short description of the servlet.
