@@ -240,6 +240,24 @@ public class BookDAO {
             System.out.println(ex.getMessage());
         }
     }
+    public void updateQuantity(Book book) {
+        try {
+            Connection con = DBContext.getConnection();
+
+            String query = "UPDATE books SET quantity = ? WHERE book_id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+
+            pst.setInt(1, book.getQuantity());
+            pst.setInt(2, book.getBook_id());
+            pst.executeUpdate();
+
+            pst.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     public Book getBookByID(int id) {
         Book book = null;

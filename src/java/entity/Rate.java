@@ -10,17 +10,21 @@ package entity;
  * @author phuon
  */
 public class Rate {
-    private int rate;
+    private double rate;
     private String comment;
     private int customer_id;
+    private int book_id;
+    private int order_id;
 
-    public Rate(int rate, String comment, int customer_id) {
+    public Rate(double rate, String comment, int customer_id, int book_id, int order_id) {
         this.rate = rate;
         this.comment = comment;
         this.customer_id = customer_id;
+        this.book_id = book_id;
+        this.order_id = order_id;
     }
 
-    public int getRate() {
+    public double getRate() {
         return rate;
     }
 
@@ -42,6 +46,14 @@ public class Rate {
 
     public void setCustomer_id(int customer_id) {
         this.customer_id = customer_id;
+    }
+
+    public int getBook_id() {
+        return book_id;
+    }
+
+    public int getOrder_id() {
+        return order_id;
     }
     
     

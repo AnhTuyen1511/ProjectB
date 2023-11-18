@@ -5,27 +5,26 @@
 package servlet.Json;
 
 import com.google.gson.Gson;
-import dao.CartDAO;
-import entity.Cart;
+import dao.OrderDAO;
+import entity.Order;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 /**
  *
  * @author phuon
  */
-public class CartJson extends HttpServlet {
-   
+public class OrderJson extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,10 +42,10 @@ public class CartJson extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CartJson</title>");            
+            out.println("<title>Servlet OrderJson</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CartJson at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OrderJson at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,10 +63,10 @@ public class CartJson extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-           CartDAO myCartDAO = new CartDAO() ;
+        OrderDAO myOrderDAO = new OrderDAO();
         Gson gson = new Gson();
-        List<Cart> listCart = myCartDAO.getListCart();
-        String json = gson.toJson(listCart);
+        List<Order> listOrder = myOrderDAO.getListOrder();
+        String json = gson.toJson(listOrder);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
@@ -84,82 +83,51 @@ public class CartJson extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
+         response.setContentType("application/json");
         BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
         StringBuilder sb = new StringBuilder();
-        CartDAO myCartDAO = new CartDAO();
+        OrderDAO myorderDAO = new OrderDAO();
         String line;
         while ((line = reader.readLine()) != null) {
             sb.append(line);
         }
         reader.close();
         JSONObject requestDataJson = new JSONObject(sb.toString());
-        int book_id = requestDataJson.getInt("book_id");
         int customer_id = requestDataJson.getInt("customer_id");
-        String title = requestDataJson.getString("title");
-        int price = requestDataJson.getInt("price");
-        int quantity = requestDataJson.getInt("quantity");
-        String picture = requestDataJson.getString("picture");
-        Cart myCart = new Cart(book_id, customer_id, title, price, quantity, picture);
-        myCartDAO.insertIntoCart(myCart);
+        String date = java.time.LocalDate.now().toString();
+        int total =  requestDataJson.getInt("total");
+        String shipping_status = "Pending";
+        int order_status = requestDataJson.getInt("order_status");
+        String review_status = "Review";
+        Order order = new Order(customer_id, date, total, shipping_status, order_status, review_status);
+        int order_id = myorderDAO.saveOrders(order);
         JSONObject responseJson = new JSONObject();
-        responseJson.put("book_id", myCart.getBookID());
-        responseJson.put("customer_id", myCart.getCustomer_id());
-        responseJson.put("title", myCart.getTitle());
-        responseJson.put("price", myCart.getPrice());
-        responseJson.put("quantity", myCart.getQuantity());
-        responseJson.put("picture", myCart.getPicture());
+        responseJson.put("order_id", order_id);
+        responseJson.put("customer_id", order.getCustomer_id());
+        responseJson.put("order_date", order.getOrder_date());
+        responseJson.put("total", order.getTotal());
+        responseJson.put("shipping_status", order.getShipping_status());
+        responseJson.put("order_status", order.getShipping_status());
+        //responseJson.put("order_status", order.get));
         System.out.println(responseJson.toString());
         response.getWriter().print(responseJson.toString());
         response.getWriter().flush();
     }
 
     @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String jsonData = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+    protected void doPut(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+          String jsonData = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         Gson gson = new Gson();
-        Cart updatedCart = gson.fromJson(jsonData, Cart.class);
-       //  System.out.println(updatedCustomer.toString());
-        int id = updatedCart.getBookID();
-        int customer_id = updatedCart.getCustomer_id();
-        String title = updatedCart.getTitle();
-        int price = updatedCart.getPrice();
-        int quantity = updatedCart.getQuantity();
-        String picture = updatedCart.getPicture();
-        System.out.println(id);
-         CartDAO myCartDAO = new CartDAO();
-        Cart cart = new Cart(id, customer_id, title, price, quantity, picture);
-        myCartDAO.updateQuantity(cart);
-        System.out.println(quantity);
+        Order updateOrder = gson.fromJson(jsonData, Order.class);
+        updateOrder.setReview_status("Reviewed");
+        updateOrder.setShipping_status(updateOrder.getShipping_status());
+        OrderDAO myOrderDAO = new OrderDAO();
+        myOrderDAO.updateOrderReview(updateOrder);
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write("Response message");
     }
-
-    @Override
-   protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        CartDAO myCartDAO = new CartDAO();
-    try {
-        // Parse JSON data from the request body
-         String jsonData = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        Gson gson = new Gson();
-        Cart cartItem = gson.fromJson(jsonData, Cart.class);
-
-        // Extract the cart item ID (adjust the property name as needed)
-        int book_id = cartItem.getBookID();
-        int customer_id = cartItem.getCustomer_id();
-        System.out.println(book_id);
-        
-            myCartDAO.DeleteCartItem(book_id, customer_id);
-            response.setStatus(HttpServletResponse.SC_OK);
-       
-    } catch (Exception e) {
-        // Handle any exceptions and send an appropriate error response
-        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        e.printStackTrace();
-    }
-}
+    
     
     
 

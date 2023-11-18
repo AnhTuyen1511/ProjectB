@@ -95,6 +95,7 @@ static HashMap<Integer, List<OTPCode>> map = new HashMap<>();
             }
         }else{
                 listValue = map.get(0);
+                
                 for (int i = 0; i <listValue.size(); i++) {
                  if (listValue.get(i) != null) {
                     Gson gson = new Gson();
