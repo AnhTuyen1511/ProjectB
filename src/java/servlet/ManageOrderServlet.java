@@ -11,8 +11,11 @@ import entity.Order;
 import entity.OrderDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +40,7 @@ public class ManageOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String mode = request.getParameter("mode");
             String target = "home.jsp";
@@ -45,11 +48,25 @@ public class ManageOrderServlet extends HttpServlet {
             OrderDAO myOrderDAO = new OrderDAO();
             if (mode.equals("viewOrder")) {
                 List<Order> listOrder = new ArrayList<>();
-
+                int year = Year.now().getValue();
                 listOrder = myOrderDAO.getListOrder();
-
+                List<Map<Object, Object>> listRevenueByMonth = new ArrayList<Map<Object, Object>>();
+                listRevenueByMonth = myOrderDAO.getRevenueByMonth(year);
+                target = "ViewOrder.jsp";
+                request.setAttribute("selectedYear", year);
+                request.setAttribute("listRevenueByMonth", listRevenueByMonth);
+                request.setAttribute("listOrder", listOrder);
+            }
+            if (mode.equals("generateChart")) {
+                int year = Integer.parseInt(request.getParameter("selectedYear"));
+                List<Order> listOrder = new ArrayList<>();
+                listOrder = myOrderDAO.getListOrder();
+                List<Map<Object, Object>> listRevenueByMonth = new ArrayList<Map<Object, Object>>();
+                listRevenueByMonth = myOrderDAO.getRevenueByMonth(year);
                 target = "ViewOrder.jsp";
                 request.setAttribute("listOrder", listOrder);
+                request.setAttribute("selectedYear", year);
+                request.setAttribute("listRevenueByMonth", listRevenueByMonth);
             }
 
             if (mode.equals("viewOrderDetail")) {
@@ -74,18 +91,28 @@ public class ManageOrderServlet extends HttpServlet {
                 order.setShipping_status(shipping_status);
 
                 myOrderDAO.updateOrder(order);
-                target = "ViewOrder.jsp";
                 listOrder = myOrderDAO.getListOrder();
+                int year = Year.now().getValue();
+                listOrder = myOrderDAO.getListOrder();
+                List<Map<Object, Object>> listRevenueByMonth = new ArrayList<Map<Object, Object>>();
+                listRevenueByMonth = myOrderDAO.getRevenueByMonth(year);
+                target = "ViewOrder.jsp";
+                request.setAttribute("listRevenueByMonth", listRevenueByMonth);
                 request.setAttribute("listOrder", listOrder);
+                request.setAttribute("selectedYear", year);
             }
-            if(mode.equals("search")){
+            if (mode.equals("search")) {
                 String input = request.getParameter("searchInput");
                 ArrayList<Order> listOrder = myOrderDAO.getListOrderSearching(input);
-                
+                    int year = Year.now().getValue();
+                listOrder = myOrderDAO.getListOrder();
+                List<Map<Object, Object>> listRevenueByMonth = new ArrayList<Map<Object, Object>>();
+                listRevenueByMonth = myOrderDAO.getRevenueByMonth(year);
+               
+                request.setAttribute("listRevenueByMonth", listRevenueByMonth);
                 request.setAttribute("listOrder", listOrder);
                 target = "ViewOrder.jsp";
 
-                
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(target);

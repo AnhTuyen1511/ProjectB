@@ -104,4 +104,29 @@ public class CartDAO {
         }
         return listCart;
     }
+    
+    public ArrayList<Cart> getListCartByCustomerID(int customerID) {
+        ArrayList<Cart> listCart = new ArrayList<>();
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM cart where customer_id = ?");
+            pst.setInt(1, customerID);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                Cart cart = new Cart(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getString(6));
+                listCart.add(cart);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listCart;
+    }
 }
