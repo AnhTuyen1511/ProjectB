@@ -12,17 +12,18 @@ package entity;
 public class Discount {
     private String code;
     private int percent;
-    private String startDate;
+    private int quantity;
     private String endDate;
     private int status;
-    private int description;
+    private String description;
 
-    public Discount(String code, int percent, String startDate, String endDate, int status) {
+    public Discount(String code, int percent, int quantity, String endDate, int status, String description) {
         this.code = code;
         this.percent = percent;
-        this.startDate = startDate;
+        this.quantity = quantity;
         this.endDate = endDate;
         this.status = status;
+         this.description = description;
     }
 
     public String getCode() {
@@ -41,12 +42,12 @@ public class Discount {
         this.percent = percent;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getEndDate() {
@@ -64,6 +65,15 @@ public class Discount {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
 
     
     

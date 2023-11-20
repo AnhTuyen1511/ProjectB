@@ -49,11 +49,13 @@ public class EditUserProfileServlet extends HttpServlet {
                 int status = thisCus.getCustomer_status();
                 String name = request.getParameter("name");
                 String username = thisCus.getUsername();
+                int total_spent = thisCus.getTotal_spent();
                 String email = request.getParameter("email");
                 String password = EncryptPassword.encriptPass(thisCus.getPassword());
                 String address = request.getParameter("address");
 
-                Customer edittedCustomer = new Customer(id, username, password, name, phone, address, email, status);
+
+                Customer edittedCustomer = new Customer(id, username, password, name, phone, address, email,total_spent, status);
                 myCustomerDAO.updateCustomer(edittedCustomer);
                 target = "ManageUserLoginServlet?mode=viewProfile&customerID=" + id;
 

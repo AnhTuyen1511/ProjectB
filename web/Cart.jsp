@@ -78,8 +78,8 @@
         }
         ArrayList<Discount> validDiscounts = new ArrayList<>();
         for (Discount discount : listDiscount) {
-            if (discount.getStartDate() != null && discount.getEndDate() != null) {
-                if (discount.getStartDate().compareTo(currentDate.toString()) <= 0 && discount.getEndDate().compareTo(currentDate.toString()) >= 0) {
+            if (discount.getQuantity() != 0 && discount.getEndDate() != null) {
+                if (discount.getQuantity()>= 1 && discount.getEndDate().compareTo(currentDate.toString()) >= 0) {
                     validDiscounts.add(discount);
                 }
             }

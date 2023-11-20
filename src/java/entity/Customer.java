@@ -18,9 +18,10 @@ public class Customer {
     private int phone_number;
     private String address;
     private String email;
+    private int total_spent ;
     private int customer_status;
 
-    public Customer(int customer_id, String username, String password, String name, int phone_number, String address, String email, int customer_status) {
+    public Customer(int customer_id, String username, String password, String name, int phone_number, String address, String email,int total_spent, int customer_status) {
         this.customer_id = customer_id;
         this.username = username;
         this.password = password;
@@ -29,6 +30,7 @@ public class Customer {
         this.address = address;
         this.email = email;
         this.customer_status = customer_status;
+        this.total_spent = total_spent;
     }
 
     public Customer(String username, String password, String name, int phone_number, String address, String email, int customer_status) {
@@ -108,4 +110,13 @@ public class Customer {
     public void setCustomer_status(int customer_status) {
         this.customer_status = customer_status;
     }
+
+    public int getTotal_spent() {
+        return total_spent;
+    }
+
+    public void setTotal_spent(int total_spent) {
+        this.total_spent = total_spent;
+    }
+    
 }

@@ -31,9 +31,10 @@ public class DiscountDAO {
             while (rs.next()) {
                 Discount discount = new Discount(rs.getString(1),
                         rs.getInt(2),
-                        rs.getString(3),
+                        rs.getInt(3),
                         rs.getString(4),
-                        rs.getInt(5)
+                        rs.getInt(5),
+                        rs.getString(6)
                 );
                 listDiscount.add(discount);
             }
@@ -50,9 +51,10 @@ public class DiscountDAO {
             
             pst.setString(1, discount.getCode().toString());
             pst.setInt(2, discount.getPercent());
-            pst.setString(3, discount.getStartDate().toString());
+            pst.setInt(3, discount.getQuantity());
             pst.setString(4, discount.getEndDate().toString());
             pst.setInt(5, discount.getStatus());
+            pst.setString(4, discount.getDescription());
 
             pst.executeUpdate();
 
@@ -69,14 +71,15 @@ public class DiscountDAO {
         try {
             Connection con = DBContext.getConnection();
 
-            String query = "UPDATE discount SET percent = ?, start_end = ?, end_start = ?, status = ? WHERE code = ?";
+            String query = "UPDATE discount SET percent = ?, quantity = ?, end_start = ?, status = ?, description = ? WHERE code = ?";
 
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(5, discount.getCode().toString());
+            pst.setString(6, discount.getCode().toString());
             pst.setInt(1, discount.getPercent());
-            pst.setString(2, discount.getStartDate().toString());
+            pst.setInt(2, discount.getQuantity());
             pst.setString(3, discount.getEndDate().toString());
             pst.setInt(4, discount.getStatus());
+            pst.setString(5, discount.getDescription());
 
             pst.executeUpdate();
 
@@ -100,9 +103,10 @@ public class DiscountDAO {
             while (rs.next()) {
                 discount = new Discount(rs.getString(1),
                         rs.getInt(2),
-                        rs.getString(3),
+                        rs.getInt(3),
                         rs.getString(4),
-                        rs.getInt(5)
+                        rs.getInt(5),
+                        rs.getString(6)
                 );
             }
             con.close();

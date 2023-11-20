@@ -36,7 +36,8 @@ public class CustomerDAO {
                         rs.getInt(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8)
+                        rs.getInt(8),
+                        rs.getInt(9)
                 );
                 listCus.add(customer);
             }
@@ -57,7 +58,8 @@ public class CustomerDAO {
             pst.setInt(4, customer.getPhone_number());
             pst.setString(5, customer.getAddress());
             pst.setString(6, customer.getEmail());
-            pst.setInt(7, customer.getCustomer_status());
+            pst.setInt(7, customer.getTotal_spent());
+            pst.setInt(8, customer.getCustomer_status());
             pst.executeUpdate();
 
             pst.close();
@@ -85,7 +87,8 @@ public class CustomerDAO {
                         rs.getInt(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8));
+                        rs.getInt(8),
+                        rs.getInt(9));
                 listCustomer.add(customer);
             }
         } catch (SQLException ex) {
@@ -110,7 +113,8 @@ public class CustomerDAO {
                         rs.getInt(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8)
+                        rs.getInt(8),
+                        rs.getInt(9)
                 );
             }
             con.close();
@@ -139,7 +143,8 @@ public class CustomerDAO {
                         rs.getInt(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8)
+                        rs.getInt(8),
+                        rs.getInt(9)
                 );
             }
             con.close();
@@ -183,7 +188,7 @@ public class CustomerDAO {
         try {
             Connection con = DBContext.getConnection();
 
-            String query = "UPDATE customer SET username = ?, password = ?, name = ?, phone_number= ?, address = ?, email = ?, customer_status=? WHERE customer_id = ?";
+            String query = "UPDATE customer SET username = ?, password = ?, name = ?, phone_number= ?, address = ?, email = ?,total_spent = ?, customer_status=? WHERE customer_id = ?";
             PreparedStatement pst = con.prepareStatement(query);
 
             pst.setInt(8, customer.getCustomer_id());
@@ -194,6 +199,7 @@ public class CustomerDAO {
             pst.setString(5, customer.getAddress());
             pst.setString(6, customer.getEmail());
             pst.setInt(7, customer.getCustomer_status());
+            pst.setInt(8, customer.getCustomer_status());
 
             pst.executeUpdate();
 
