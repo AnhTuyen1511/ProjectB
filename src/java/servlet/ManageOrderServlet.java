@@ -6,7 +6,9 @@
 package servlet;
 
 import dao.OrderDAO;
+import dao.OrderDetailDAO;
 import entity.Order;
+import entity.OrderDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -35,20 +37,58 @@ public class ManageOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             String mode = request.getParameter("mode");
+            String mode = request.getParameter("mode");
             String target = "home.jsp";
+            OrderDetailDAO myOrderDetailDAO = new OrderDetailDAO();
+            OrderDAO myOrderDAO = new OrderDAO();
             if (mode.equals("viewOrder")) {
                 List<Order> listOrder = new ArrayList<>();
-                OrderDAO dao = new OrderDAO();
-                listOrder = dao.getListOrder();
+
+                listOrder = myOrderDAO.getListOrder();
 
                 target = "ViewOrder.jsp";
                 request.setAttribute("listOrder", listOrder);
             }
-            
-              RequestDispatcher rd = request.getRequestDispatcher(target);
+
+            if (mode.equals("viewOrderDetail")) {
+                int orderID = Integer.parseInt(request.getParameter("orderID"));
+                ArrayList<OrderDetail> listOrderDetail = myOrderDetailDAO.getListOrderDetailByOrder(orderID);
+
+                target = "ViewOrderDetail.jsp";
+
+                request.setAttribute("listOrderDetail", listOrderDetail);
+
+            }
+
+            if (mode.equals("updateShippingStatus")) {
+                List<Order> listOrder = new ArrayList<>();
+
+                int orderID = Integer.parseInt(request.getParameter("orderID"));
+                Order order = myOrderDAO.getOrderByID(orderID);
+                String shipping_status = request.getParameter("shipping_status");
+                System.out.println(shipping_status);
+                System.out.println(order.getOrder_id());
+
+                order.setShipping_status(shipping_status);
+
+                myOrderDAO.updateOrder(order);
+                target = "ViewOrder.jsp";
+                listOrder = myOrderDAO.getListOrder();
+                request.setAttribute("listOrder", listOrder);
+            }
+            if(mode.equals("search")){
+                String input = request.getParameter("searchInput");
+                ArrayList<Order> listOrder = myOrderDAO.getListOrderSearching(input);
+                
+                request.setAttribute("listOrder", listOrder);
+                target = "ViewOrder.jsp";
+
+                
+            }
+
+            RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }
     }

@@ -56,6 +56,24 @@ public class ManageBookServlet extends HttpServlet {
                 request.setAttribute("listBook", listBook);
 
             }
+            if(mode.equals("viewBookByGenre")){
+                int genreID = Integer.parseInt(request.getParameter("genreID"));
+                ArrayList<Book> listGenreBook = new ArrayList<>();
+                listGenreBook = myBookDAO.getListBookByGenre(genreID);
+                
+                request.setAttribute("listGenreBook", listGenreBook);
+                target = "ViewBookByGenre.jsp";
+            }
+            
+            if(mode.equals("viewBookByAuthor")){
+                int authorID = Integer.parseInt(request.getParameter("authorID"));
+                ArrayList<Book> listAuthorBook = new ArrayList<>();
+                listAuthorBook = myBookDAO.getListBookByAuthor(authorID);
+                
+                request.setAttribute("listAuthorBook", listAuthorBook);
+                target = "ViewBookByAuthor.jsp";
+            }
+            
             if (mode.equals("addBook")) {
                 ArrayList<Author> listAuthor = new ArrayList<>();
                 AuthorDAO authorDao = new AuthorDAO();
@@ -76,10 +94,20 @@ public class ManageBookServlet extends HttpServlet {
                 myBookDAO.disableBook(id);
                 target = "ManageBookServlet?mode=viewBook";
             }
+            if(mode.equals("search")){
+                String input = request.getParameter("searchInput");
+                ArrayList<Book> listBook = myBookDAO.getListBookSearching(input);
+                
+                request.setAttribute("listBook", listBook);
+                target = "ViewBook.jsp";
+
+                
+            }
 
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -9,10 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Register</title>
         <link rel="stylesheet" href="css/loginstyle.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
+        <meta charset=UTF-8" />
     </head>
     <body class="align">
         <div class="overlay">
@@ -27,8 +28,11 @@
                     <!--<p>login here using your username and password</p>-->
                 </header>
                 <!--     End  header Content  -->
+                 <span style="color: red">${registerMess}</span>
                 <br>
+                 
                 <div class="field-set">
+                  
                     <form action = "ManageUserLoginServlet" method="post">
                         <input name="mode" type="hidden" value="userRegister" /> 
                         <!--   user name -->

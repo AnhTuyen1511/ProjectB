@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import manager.CustomerManager;
+import manager.EncryptPassword;
 
 /**
  *
@@ -36,33 +37,30 @@ public class ManageUserLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             CustomerDAO myCustomerDAO = new dao.CustomerDAO();
             manager.CustomerManager myCustomerManager = new CustomerManager();
             String mode = request.getParameter("mode");
             String target = "UserLogin.jsp";
-            String a = "hong co do";
-            request.setAttribute("aaa", a);
             HttpSession mySession = request.getSession();
 
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String mess = "";
-
-            System.out.println(username + password + "");
-
-            ArrayList<Customer> listCustomer = new ArrayList<>();
-            listCustomer = myCustomerDAO.getListCustomer();
-
-            System.out.println(listCustomer.get(1).getUsername() + listCustomer.get(1).getPassword());
             if (mode.equals("userLogin")) {
+                ArrayList<Customer> listCustomer = new ArrayList<>();
+                listCustomer = myCustomerDAO.getListCustomer();
+                
+                String username = request.getParameter("username");
+                String password = EncryptPassword.encriptPass(request.getParameter("password"));
+                String mess = "";
+
+                
                 for (int i = 0; i < listCustomer.size(); i++) {
-                    String user = listCustomer.get(i).getUsername().toString();
-                    String pass = listCustomer.get(i).getPassword().toString();
+                    String user = listCustomer.get(i).getUsername();
+                    String pass = listCustomer.get(i).getPassword();
                     if (user.equals(username) && pass.equals(password)) {
-                        target = "index.jsp";
+                        target = "UserActivityServlet?mode=userViewBook";
                         mySession.setAttribute("UserLogin", listCustomer.get(i).getName());
+                        mySession.setAttribute("tempCustomer", listCustomer.get(i));
                         break;
                     } else {
                         mess = "Invalid username or password";
@@ -72,20 +70,43 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 }
             }
+            if (mode.equals("viewProfile")) {
+                int customerID = Integer.parseInt(request.getParameter("customerID"));
+                Customer cus = myCustomerDAO.getCustomerByID(customerID);
+                request.setAttribute("cus", cus);
+
+                target = "UserProfile.jsp";
+            }
+            
+            
+            if (mode.equals("viewOrderDetailUser")) {
+
+                int orderID = Integer.parseInt(request.getParameter("orderID"));
+                request.setAttribute("orderID", orderID);
+
+                target = "ViewOrderDetailUser.jsp";
+            }
+
+            if (mode.equals("editProfile")) {
+                int customerID = Integer.parseInt(request.getParameter("customerID"));
+                Customer cus = myCustomerDAO.getCustomerByID(customerID);
+                request.setAttribute("cus", cus);
+
+                target = "EditUserProfile.jsp";
+            }
+
             if (mode.equals("userLogout")) {
-                target = "index.jsp";
+                target = "UserActivityServlet?mode=userViewBook";
                 mySession = request.getSession();
                 mySession.removeAttribute("UserLogin");
+                mySession.removeAttribute("listCart");
 
-            }
-            if(mode.equals("forgetPass")){
-                
             }
 
             if (mode.equals("userRegister")) {
                 String customerName = request.getParameter("name");
                 String R_username = request.getParameter("R_username");
-                password = request.getParameter("R_password");
+                String password = EncryptPassword.encriptPass(request.getParameter("R_password"));
                 String address = request.getParameter("address");
                 String email = request.getParameter("email");
                 int phoneNumber = Integer.parseInt(request.getParameter("phone_number"));
@@ -93,18 +114,59 @@ public class ManageUserLoginServlet extends HttpServlet {
 
                 Customer newCustomer = new Customer(R_username, password, customerName, phoneNumber, address, email, status);
 
-                listCustomer = myCustomerDAO.getListCustomer();
+                ArrayList<Customer> listCustomer = myCustomerDAO.getListCustomer();
+                boolean exist = false;
                 for (int i = 0; i < listCustomer.size(); i++) {
                     if (listCustomer.get(i).getUsername().equals(R_username)) {
-                        target = "UserRegister";
-                        mess = ("Username is already exist");
+                        exist = true;
+                        target = "UserRegister.jsp";
+                        String mess = ("Username is already exist");
                         request.setAttribute("registerMess", mess);
                         break;
-                    } else {
-                         myCustomerManager.addCustomer(newCustomer);
-                        target = "UserLogin.jsp";
-                        break;
                     }
+                }
+                if (exist == false) {
+                    myCustomerManager.addCustomer(newCustomer);
+                    target = "UserLogin.jsp";
+                }
+            }
+
+            if (mode.equals("enterOTP")) {
+                int valueOTP = Integer.parseInt(request.getParameter("otpCode"));
+                String email = (String) mySession.getAttribute("email");
+                Customer customer = myCustomerDAO.getCustomerByEmail(email);
+                request.setAttribute("cus", customer);
+                int value = (int) mySession.getAttribute("otp");
+
+                if (valueOTP == value) {
+                    target = "ChangePassword.jsp";
+                    request.setAttribute("email", email);
+                } else {
+                    target = "EnterValidateCode.jsp";
+                    String mess = "Enter the wrong code";
+                    request.setAttribute("mess", mess);
+                }
+
+            }
+            if (mode.equals("changePassword")) {
+                int cusID = Integer.parseInt(request.getParameter("cusID"));
+                Customer customer = myCustomerDAO.getCustomerByID(cusID);
+                String newPass = request.getParameter("newPass");
+                String cfPass = request.getParameter("cfPass");
+                if (newPass.equals(cfPass)) {
+                    String password = EncryptPassword.encriptPass(cfPass);
+                    System.out.println(password);
+                    myCustomerDAO.updatePassword(customer, password);
+                    String mess = "Password Updated";
+                    request.setAttribute("mess", mess);
+                    System.out.println(mess);
+                    target = "UserLogin.jsp";
+                } else {
+
+                    String mess = "Password does not match!";
+                    request.setAttribute("mess", mess);
+                    System.out.println(mess);
+                    target = "ResetPassword.jsp";
 
                 }
             }
@@ -114,7 +176,7 @@ public class ManageUserLoginServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

@@ -3,25 +3,37 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/InitServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/ManageAuthorServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/manager/BookManager.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/customstyle.css</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/dao/CustomerDAO.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/ViewAuthor.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/LoginServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/loginstyle.css</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/UserRegister.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/UserLogin.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/entity/Customer.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/AddAuthorServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/EditCustomer.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/dao/BookDAO.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/css/normalize.css</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/ManageCustomerServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/UserProfile.jsp</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/src/java/servlet/ManageUserLoginServlet.java</file>
-            <file>file:/C:/Users/phuon/OneDrive/Documents/GitHub/ProjectB/web/ViewCustomer.jsp</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/CartServlet.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/Json/CartJson.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/entity/Discount.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/manager/GenreManager.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/entity/Cart.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/dao/RateDAO.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/manager/CustomerManager.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/entity/Rate.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/web/ViewOrder.jsp</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/Json/OrderJson.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/entity/Order.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/ManageOrderServlet.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/dao/OrderDAO.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/web/DashboardAdmin.jsp</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/manager/EncryptPassword.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/Json/OrderDetailJson.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/Json/ForgetPasswordJson.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/dao/PictureDAO.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/Json/RateJson.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/Json/BookJson.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/entity/OrderDetail.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/dao/StaffDAO.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/Json/CustomerJson.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/dao/BookDAO.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/dao/CartDAO.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/dao/DiscountDAO.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/Json/GenreJson.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/web/ViewBook.jsp</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/web/WEB-INF/web.xml</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/dao/OrderDetailDAO.java</file>
+            <file>file:/D:/CSE%20492/Project_B/Project_B/ProjectB_BookSaw/src/java/servlet/Json/GetJson.java</file>
         </group>
     </open-files>
 </project-private>

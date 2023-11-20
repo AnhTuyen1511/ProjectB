@@ -4,6 +4,7 @@
     Author     : BLC
 --%>
 
+<%@page import="entity.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,8 +14,11 @@
         <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
         <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" >
         <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" >
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"/>
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
         <style type="text/css">
-            
+
             @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
             *{
                 margin: 0;
@@ -36,6 +40,19 @@
                 margin: 10px auto;
                 max-width: 600px;
             }
+
+
+            .image:hover img {
+                transition: all 0.5s;
+                transform: scale(1.5);
+            }
+
+            .name {
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+
             h4{
                 letter-spacing: -1px;
                 font-weight: 400;
@@ -119,73 +136,86 @@
         </style>
     </head>
     <body>
+        <% Customer tempCustomer = (Customer) request.getAttribute("cus");%>
         <div class="wrapper bg-white mt-sm-5">
             <h4 class="pb-4 border-bottom">Account settings</h4>
-            <div class="d-flex align-items-start py-3 border-bottom">
-                <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                     class="img" alt="">
-                <div class="pl-sm-4 pl-2" id="img-section">
-                    <b>Profile Photo</b>
-                    <p>Accepted file type .png. Less than 1MB</p>
-                    <button class="btn button border"><b>Upload</b></button>
-                </div>
+
+            <div class=" image d-flex flex-column justify-content-center align-items-center">      
+                <button class="btn btn-secondary"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" height="100" width="100" />
+                    <!--https://i.imgur.com/wvxPV9S.png-->
+                </button> 
+                <span class="name mt-3">@<%=tempCustomer.getUsername()%></span> 
             </div>
+            <!--            <div class="d-flex align-items-start py-3 border-bottom">
+                            <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                 class="img" alt="">
+                            <div class="pl-sm-4 pl-2" id="img-section">
+                                <b>Profile Photo</b>
+                                <p>Accepted file type .png. Less than 1MB</p>
+                                <button class="btn button border"><b>Upload</b></button>
+                            </div>
+                        </div>-->
             <div class="py-2">
-                <div class="row py-2">
-                    <div class="col-md-6">
-                        <label for="firstname">First Name</label>
-                        <input type="text" class="bg-light form-control" placeholder="Steve">
-                    </div>
-                    <div class="col-md-6 pt-md-0 pt-3">
-                        <label for="lastname">Last Name</label>
-                        <input type="text" class="bg-light form-control" placeholder="Smith">
-                    </div>
-                </div>
-                <div class="row py-2">
-                    <div class="col-md-6">
-                        <label for="email">Email Address</label>
-                        <input type="text" class="bg-light form-control" placeholder="steve_@email.com">
-                    </div>
-                    <div class="col-md-6 pt-md-0 pt-3">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" class="bg-light form-control" placeholder="+1 213-548-6015">
-                    </div>
-                </div>
-                <div class="row py-2">
-                    <div class="col-md-6">
-                        <label for="country">Country</label>
-                        <select name="country" id="country" class="bg-light">
-                            <option value="india" selected>India</option>
-                            <option value="usa">USA</option>
-                            <option value="uk">UK</option>
-                            <option value="uae">UAE</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 pt-md-0 pt-3" id="lang">
-                        <label for="language">Language</label>
-                        <div class="arrow">
-                            <select name="language" id="language" class="bg-light">
-                                <option value="english" selected>English</option>
-                                <option value="english_us">English (United States)</option>
-                                <option value="enguk">English UK</option>
-                                <option value="arab">Arabic</option>
-                            </select>
+                <form action="EditUserProfileServlet?mode=editProfile&cusID=<%=tempCustomer.getCustomer_id()%>" method="POST">
+
+                    <div class="row py-2">
+                        <div class="col-md-6">
+                            <label for="name">Name</label>
+                            <input name="name" type="text" class="bg-light form-control" value="<%=tempCustomer.getName()%>" required="" >
+                        </div>
+                        <div class="col-md-6 pt-md-0 pt-3">
+                            <label for="address">Address</label>
+                            <input name="address" type="text" class="bg-light form-control" value="<%=tempCustomer.getAddress()%>" required="">
                         </div>
                     </div>
-                </div>
-                <div class="py-3 pb-4 border-bottom">
-                    <button class="btn btn-primary mr-3">Save Changes</button>
-                    <button class="btn border button">Cancel</button>
-                </div>
+                    <div class="row py-2">
+                        <div class="col-md-6">
+                            <label for="email">Email Address</label>
+                            <input name="email" type="text" class="bg-light form-control" value="<%=tempCustomer.getEmail()%>" required="">
+                        </div>
+                        <div class="col-md-6 pt-md-0 pt-3">
+                            <label for="phone">Phone Number</label>
+                            <input name="phone" type="tel" class="bg-light form-control" value="0<%=tempCustomer.getPhone_number()%>" required="">
+                        </div>
+                    </div>
+
+                    <!--                <div class="row py-2">
+                                        <div class="col-md-6">
+                                            <label for="country">Country</label>
+                                            <select name="country" id="country" class="bg-light">
+                                                <option value="india" selected>India</option>
+                                                <option value="usa">USA</option>
+                                                <option value="uk">UK</option>
+                                                <option value="uae">UAE</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 pt-md-0 pt-3" id="lang">
+                                            <label for="language">Language</label>
+                                            <div class="arrow">
+                                                <select name="language" id="language" class="bg-light">
+                                                    <option value="english" selected>English</option>
+                                                    <option value="english_us">English (United States)</option>
+                                                    <option value="enguk">English UK</option>
+                                                    <option value="arab">Arabic</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                    <div class="py-3 pb-4 border-bottom">
+                        <button class="btn btn-primary mr-3">Save Changes</button>
+                        <a href="ManageUserLoginServlet?mode=viewProfile&customerID=<%=tempCustomer.getCustomer_id()%>"><button class="btn border button">Cancel</button></a>
+                    </div>
+                </form>
                 <div class="d-sm-flex align-items-center pt-3" id="deactivate">
                     <div>
-                        <b>Deactivate your account</b>
+                        <b>Reset your password</b>
                         <p>Details about your company account and password</p>
                     </div>
                     <div class="ml-auto">
-                        <button class="btn danger">Deactivate</button>
+                        <a href="ResetPassword.jsp"><button class="btn danger">Reset Password</button></a>
                     </div>
                 </div>
+
             </div>
         </div>
     </body>

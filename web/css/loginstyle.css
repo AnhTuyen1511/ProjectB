@@ -12,14 +12,11 @@
 /* Start body rules */
 body {
     background-image: linear-gradient(-225deg, #FFE6FA 0%, #F3F2EC 100%);
-background-image: linear-gradient(to top, #F3F2EC 0%, #F3F2EC 100%);
-background-attachment: fixed;
-  background-repeat: no-repeat;
-    font-family: 'Vibur', cursive;
-/*   the main font */
-    font-family: 'Abel', sans-serif;
-opacity: .95;
-/* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
+    background-image: linear-gradient(to top, #F3F2EC 0%, #F3F2EC 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    opacity: .95;
+    /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
 }
 
 
@@ -47,14 +44,14 @@ opacity: .95;
  .con {
     display: -webkit-flex;
     display: flex;
-  
+
     -webkit-justify-content: space-around;
     justify-content: space-around;
-  
+
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
-  
-      margin: 0 auto;
+
+    margin: 0 auto;
 }
 
 /* the header form form */
@@ -69,7 +66,9 @@ header h2 {
     color: #3e403f;
 }
 /*  A welcome message or an explanation of the login form */
-header p {letter-spacing: 0.05em;}
+header p {
+    letter-spacing: 0.05em;
+}
 
 
 
@@ -106,24 +105,26 @@ header p {letter-spacing: 0.05em;}
 }*/
 /* inputs form  */
 input[class="form-input"]{
+    
     width: 250px;
     height: 50px;
-  
+
     margin-top: 2%;
     padding: 15px;
-    
+
     font-size: 16px;
-    font-family: 'Abel', sans-serif;
     color: #5E6472;
-  
+
     outline: none;
     border: none;
-  
+
     border-radius: 0px 5px 5px 0px;
     transition: 0.2s linear;
-    
+
 }
-input[id="txt-input"] {width: 250px;}
+input[id="txt-input"] {
+    width: 250px;
+}
 /* focus  */
 input:focus {
     transform: translateX(-2px);
@@ -138,21 +139,21 @@ input:focus {
 button {
     display: inline-block;
     color: #252537;
-  
+
     width: 280px;
     height: 50px;
-  
+
     padding: 0 20px;
     background: #fff;
     border-radius: 5px;
-    
+
     outline: none;
     border: none;
-  
+
     cursor: pointer;
     text-align: center;
     transition: all 0.2s linear;
-    
+
     margin: 7% auto;
     letter-spacing: 0.05em;
 }
@@ -165,10 +166,14 @@ button {
 }
 
 /*       Forgot Password button FAF3DD  */
-.frgt-pass {background: transparent;}
+.frgt-pass {
+    background: transparent;
+}
 
 /*     Sign Up button  */
-.sign-up {background: #B8F2E6;}
+.sign-up {
+    background: #B8F2E6;
+}
 
 
 /* buttons hover */

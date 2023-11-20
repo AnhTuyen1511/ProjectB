@@ -42,6 +42,10 @@ public class Customer {
     
     
 
+    public Customer() {
+    }
+    
+
     public int getCustomer_id() {
         return customer_id;
     }

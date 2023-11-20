@@ -14,13 +14,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Product Page - Admin HTML Template</title>
+        <title>Add Book</title>
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:400,700"
             />
         <!-- https://fonts.google.com/specimen/Roboto -->
-        
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- https://fontawesome.com/ -->
@@ -32,8 +32,9 @@
             https://templatemo.com/tm-524-product-admin
         -->
         <link rel="stylesheet" href="css/search_button.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
         <style>
-           
+
 
 
 
@@ -74,7 +75,7 @@
                                 <i class="fas fa-book"></i> BOOKS
                             </a>
                         </li>
-                        
+
 
                         <li class="nav-item">
                             <a class="nav-link" href="ManageGenreServlet?mode=viewGenre">
@@ -83,7 +84,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="ManageOrderServlet?mode=viewOrder">
-                                 <i class="far fa-file-alt"></i> ORDER
+                                <i class="far fa-file-alt"></i> ORDER
                             </a>
                         </li>
                         <li class="nav-item">
@@ -91,12 +92,16 @@
                                 <i class="fas fa-user"></i> CUSTOMER
                             </a>
                         </li>
-                        
-<!--                        <li class="nav-item">
-                            <a class="nav-link" href="Billing.jsp">
-                                <i class="fas fa-money-bill-wave"></i> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="ManageStaffServlet?mode=viewStaff">
+                                <i class="fas fa-user-plus"></i> STAFF
                             </a>
-                        </li>-->
+                        </li>
+                        <!--                        <li class="nav-item">
+                                                    <a class="nav-link" href="Billing.jsp">
+                                                        <i class="fas fa-money-bill-wave"></i> 
+                                                    </a>
+                                                </li>-->
 
                     </ul>
                     <ul class="navbar-nav">
@@ -121,73 +126,78 @@
                         <div class="row tm-edit-product-row">
                             <div class="col-xl-6 col-lg-6 col-md-10" id="add">
                                 <form action="AddBookServlet" method="post" class="tm-edit-product-form" enctype="multipart/form-data" >
-                                
-                                    
+
+
                                     <div class="form-group mb-3">
                                         <label  for="name" >Book Title </label>
-                                            <input id="name" name="title" type="text"class="form-control validate" required=""/>
+                                        <input id="name" name="title" type="text"class="form-control validate" required=""/>
                                     </div> 
                                     <div class="form-group mb-3">
-                                        <label  for="name" >Author ID </label>
+                                        <label  for="name" >Author </label>
                                         <select class="custom-select tm-select-accounts"
                                                 id="category" name = "authorID">
-                                            <% for(int i = 0; i < listAuthor.size();i++){ %>
-                                            <option value ="<%=listAuthor.get(i).getAuthor_id() %>" > <%=listAuthor.get(i).getAuthor_id() %> </option>
+                                            <%
+
+                                                for (int i = 0; i < listAuthor.size(); i++) {
+
+                                            %>
+
+                                            <option value ="<%=listAuthor.get(i).getAuthor_id()%>" > <%=listAuthor.get(i).getAuthor_name()%> </option>
                                             <% } %>
                                         </select>
                                     </div>
-                                        
+
                                     <div class="form-group mb-3">
-                                        <label  for="name" >Genre ID </label>
+                                        <label  for="name" >Genre </label>
                                         <select class="custom-select tm-select-accounts"
                                                 id="category" name = "genreID">
-                                            <% for(int i = 0; i < listGenre.size();i++){ %>
-                                            <option value ="<%=listGenre.get(i).getGenre_id()%>" > <%=listGenre.get(i).getGenre_id()%> </option>
-                                            <% } %>
+                                            <% for (int i = 0; i < listGenre.size(); i++) {%>
+                                            <option value ="<%=listGenre.get(i).getGenre_id()%>" > <%=listGenre.get(i).getGenre()%> </option>
+                                            <% }%>
                                         </select>
                                     </div>                                    
 
-                                    
-                                    
-                                    
+
+
+
                                     <div class="form-group mb-3">
                                         <label  for="name" >Year of Release </label>
                                         <input
                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                             id="name" name="YOR" type="number" min = "1200" max="2022" maxlength="4"  pattern="\d*" class="form-control validate" required=""/>
                                     </div>
-                                                                                                                                                                                                                                   
-                                   
-<!--                                    <div class="custom-file mt-3 mb-3">
-                                        <input  name = "image" id="fileInput" type="file"  />
-                                    </div>-->
+
+
+                                    <!--                                    <div class="custom-file mt-3 mb-3">
+                                                                            <input  name = "image" id="fileInput" type="file"  />
+                                                                        </div>-->
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                              <div class="row">
-                                <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label for="expire_date"> Price </label>
-                                    <input id="expire_date" name="price" type="number" value="" class="form-control validate" data-large-mode="true"/>
-                                </div>
-                                <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label for="stock">Quantity</label> 
-                                     <input id="name" name="quantity" type="number" class="form-control validate" required=""/>
+                                <div class="row">
+                                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                        <label for="expire_date"> Price </label>
+                                        <input id="expire_date" name="price" type="number" value="" class="form-control validate" data-large-mode="true"/>
+                                    </div>
+                                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                        <label for="stock">Quantity</label> 
+                                        <input id="name" name="quantity" type="number" class="form-control validate" required=""/>
 
+                                    </div>
                                 </div>
-                             </div>
-                              <div class="form-group mb-3">
-                                <label  for="name" >Description </label>
+                                <div class="form-group mb-3">
+                                    <label  for="name" >Description </label>
                                     <textarea class="form-control validate tm-small" rows="5" name="description" required="" ></textarea>
-                               </div>   
+                                </div>   
                                 <div class="custom-file mt-3 mb-3">
                                     <input id="fileInput" type="file" name="image" style="display: none" accept=".png, .jpg, .jpeg, .gif"  />
-                                  <input
-                                    type="button"
-                                    class="btn btn-primary btn-block mx-auto"
-                                    value="UPLOAD PRODUCT IMAGE"
-                                    onclick="document.getElementById('fileInput').click();"
-                                  />
+                                    <input
+                                        type="button"
+                                        class="btn btn-primary btn-block mx-auto"
+                                        value="UPLOAD PRODUCT IMAGE"
+                                        onclick="document.getElementById('fileInput').click();"
+                                        />
                                 </div>
-                        </div>
+                            </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary btn-block text-uppercase">ADD NEW BOOK</button>
                             </div>
@@ -213,9 +223,9 @@
         <script src="js/bootstrap.min.js"></script>
         <!-- https://getbootstrap.com/ -->
         <script>
-            $(function () {
-                $("#expire_date").datepicker();
-            });
+                                            $(function () {
+                                                $("#expire_date").datepicker();
+                                            });
         </script>
     </body>
 </html>

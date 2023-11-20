@@ -5,6 +5,7 @@
  */
 package servlet;
 
+
 import dao.CustomerDAO;
 import entity.Customer;
 import java.io.IOException;
@@ -42,12 +43,12 @@ public class ManageCustomerServlet extends HttpServlet {
             String target = "home.jsp";
             if (mode.equals("viewCustomer")) {
                 List<Customer> listCustomer = new ArrayList<>();
-
                 listCustomer = myCustomerDAO.getListCustomer();
-
+                
                 target = "ViewCustomer.jsp";
                 request.setAttribute("listCustomer", listCustomer);
             }
+                
             if (mode.equals("disableCustomer")) {
 
                 int id = Integer.parseInt(request.getParameter("customerID"));
@@ -56,7 +57,14 @@ public class ManageCustomerServlet extends HttpServlet {
 
                 target = "ManageCustomerServlet?mode=viewCustomer";
             }
-
+            if(mode.equals("search")){
+                String input = request.getParameter("searchInput");
+                ArrayList<Customer> listCustomer = myCustomerDAO.getListCustomerSearching(input);
+                
+                request.setAttribute("listCustomer", listCustomer);
+                target = "ViewCustomer.jsp";         
+            }
+            
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
         }

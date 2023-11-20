@@ -58,11 +58,22 @@ public class ManageAuthorServlet extends HttpServlet {
 
                 target = "ManageAuthorServlet?mode=viewAuthor";
             }
+             if(mode.equals("search")){
+                String input = request.getParameter("searchInput");
+                ArrayList<Author> listAuthor = myAuthorDAO.getListAuthorSearching(input);
+                
+                request.setAttribute("listAuthor", listAuthor);
+                target = "ViewAuthor.jsp";
+
+                
+            }
+
 
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
 
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

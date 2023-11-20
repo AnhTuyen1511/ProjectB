@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login</title>
         <link rel="stylesheet" href="css/loginstyle.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
     </head>
     <body class="align">
         <div class="overlay">
@@ -29,6 +29,7 @@
                     <!--     End  header Content  -->
                     <br>
                     <div class="field-set">
+                        <span style="color: red">${mess}</span>
                          <form action = "ManageUserLoginServlet" method="post">
                         <!--   user name -->
                         <span class="input-item">
@@ -68,7 +69,7 @@
 
                     <div class="other">
                         <!--      Forgot Password button-->
-                        <a href="#"><button class="btn submits frgt-pass">Forgot Password</button></a>
+                        <a href="ForgetPassword.jsp" ><button class="btn submits frgt-pass">Forgot Password</button></a>
                         <!--     Sign Up button -->
                         <a href="UserRegister.jsp"><button class="btn submits sign-up">Sign Up 
                             <!--         Sign Up font icon -->

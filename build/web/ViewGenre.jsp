@@ -15,14 +15,14 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Product Page - Admin HTML Template</title>
+        <title>Genre Management</title>
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:400,700"
             />
         <!-- https://fonts.google.com/specimen/Roboto -->
         <link rel="stylesheet" href="css/fontawesome.min.css" />
-         <link rel="stylesheet" href="css/customstyle.css" />
+        <link rel="stylesheet" href="css/customstyle.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- https://fontawesome.com/ -->
@@ -35,8 +35,9 @@
         
         -->
         <link rel="stylesheet" href="css/search_button.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
     </head>
-    
+
     <body id="reportsPage">
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
@@ -69,7 +70,7 @@
                                 <i class="fas fa-book"></i> BOOKS
                             </a>
                         </li>
-                        
+
 
                         <li class="nav-item">
                             <a class="nav-link active" href="ManageGenreServlet?mode=viewGenre">
@@ -78,7 +79,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="ManageOrderServlet?mode=viewOrder">
-                                 <i class="far fa-file-alt"></i> ORDER
+                                <i class="far fa-file-alt"></i> ORDER
                             </a>
                         </li>
                         <li class="nav-item">
@@ -86,15 +87,20 @@
                                 <i class="fas fa-user"></i> CUSTOMER
                             </a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="ManageStaffServlet?mode=viewStaff">
+                               <i class="fas fa-user-plus"></i> STAFF
+                            </a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link d-block" href='LoginServlet?mode=logout'>
+                            <a class="nav-link d-block" href='adminLogin.jsp'>
                                 Admin, <b>Logout</b>
                             </a>
-                          
+
                         </li>
-                         
+
                     </ul>
                 </div>
             </div>
@@ -104,15 +110,19 @@
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-products">
                         <form>
-                        <div class="search-wrapper">
-                           
-                            <div class="input-holder">
-                                <input type="text" class="search-input" placeholder="Type to search" name="search" />
-                                <button type="submit" class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
-                             
-                        </div>
-                        <span class="close" onclick="searchToggle(this, event);"></span>
-                        </div>
+                            <div class="search-wrapper">
+
+                                <div class="input-holder">
+                                     <form action="ManageGenreServlet" method="post">
+                                        <input type="text" class="search-input" placeholder="Type to search" name="searchInput" />
+                                        <input type="hidden" name="mode" value="search">
+                                    </form>
+                                    <button type="submit" class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+
+                                </div>
+                                <span class="close" onclick="searchToggle(this, event);"></span>
+                            </div>
+                            <a href="AddGenre.jsp" style="margin-top: 30px" class="btn btn-primary btn-block text-uppercase mb-3">Add new genre </a>
                         </form>
                         <div class="tm-product-table-container" style="margin-top: 25px">
                             <%
@@ -122,7 +132,7 @@
                                 <thead>
 
                                     <tr>
-                                        
+
                                         <th scope="col">ID </th>
                                         <th scope="col">Genre</th>
                                         <th scope="col">Genre Description</th>
@@ -136,7 +146,7 @@
 
                                     <% for (int i = 0; i < listGenre.size(); i++) {%>
                                     <tr class="rowGenre<%=listGenre.get(i).getGenre_status()%>">
-                                        
+
                                         <td><%=listGenre.get(i).getGenre_id()  %></td>
                                         <td class="tm-product-name"><%=listGenre.get(i).getGenre() %></td>
                                         <td><%=listGenre.get(i).getDescription() %> </td>
@@ -161,37 +171,36 @@
                             </table>
                         </div><!--
                         <!-- table container -->
-                        <a href="AddGenre.jsp" class="btn btn-primary btn-block text-uppercase mb-3">Add new genre </a>
-<!--                        <button class="btn btn-primary btn-block text-uppercase">
-                            Delete selected products
-                        </button>-->
+                        
+                        <!--                        <button class="btn btn-primary btn-block text-uppercase">
+                                                    Delete selected products
+                                                </button>-->
                     </div>
                 </div>
             </div>
         </div>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script>
-                $(function () {
-                    $(".tm-product-name").on("click", function () {
-                        window.location.href = "edit-product.html";
-                    });
-                });
-                
-                
-                
-                function searchToggle(obj, evt){
-                    var container = $(obj).closest('.search-wrapper');
-                        if(!container.hasClass('active')){
-                            container.addClass('active');
-                            evt.preventDefault();
-                        }
-                        else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
-                            container.removeClass('active');
-                            // clear input
-                            container.find('.search-input').val('');
-        }
-}
-            </script>
-                       
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+                                    $(function () {
+                                        $(".tm-product-name").on("click", function () {
+                                            window.location.href = "edit-product.html";
+                                        });
+                                    });
+
+
+
+                                    function searchToggle(obj, evt) {
+                                        var container = $(obj).closest('.search-wrapper');
+                                        if (!container.hasClass('active')) {
+                                            container.addClass('active');
+                                            evt.preventDefault();
+                                        } else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
+                                            container.removeClass('active');
+                                            // clear input
+                                            container.find('.search-input').val('');
+                                        }
+                                    }
+        </script>
+
     </body>
 </html>

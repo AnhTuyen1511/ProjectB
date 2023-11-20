@@ -5,7 +5,10 @@
 package servlet;
 
 import configPkg.ConfigInfo;
+import dao.BookDAO;
+import dao.PictureDAO;
 import entity.Book;
+import entity.Picture;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -22,7 +25,6 @@ import manager.BookManager;
  *
  * @author BLC
  */
-
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
         maxFileSize = 1024 * 1024 * 10, // 10 MB
@@ -42,9 +44,10 @@ public class AddBookServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
+        try ( PrintWriter out = response.getWriter()) {
+
             BookManager myBookManager = new BookManager();
+            PictureDAO myPictureDAO = new PictureDAO();
             String target = "ViewBook.jsp";
             String title = request.getParameter("title");
             int authorID = Integer.parseInt(request.getParameter("authorID"));
@@ -53,25 +56,25 @@ public class AddBookServlet extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             int price = Integer.parseInt(request.getParameter("price"));
             String description = request.getParameter("description");
-            String pictureName = title+".jpg";
             Part filePart = request.getPart("image");
             int status = 1;
-            
-
-            Book newBook = new Book(title, authorID, genreID, price, quantity, yor, description, status,pictureName);
-           
-            myBookManager.addBook(newBook);
-
+             
+            Book newBook = new Book(title, authorID, genreID, price, quantity, yor, description, status);
+            int newId=myBookManager.addBook(newBook);
+            String pictureName = newId+".jpg";
             ArrayList<Book> listBook = new ArrayList<>();
-
             listBook = myBookManager.getListBook();
+            
             filePart.write(ConfigInfo.getCtxRealPath() + "\\bookImages\\" + pictureName);
+            String baseUrl = "http://localhost:8080/ProjectB_BookSaw";
+            String pictureUrl = baseUrl + "/bookImages/" + pictureName;
+            Picture picture = new Picture(newId, pictureUrl);
+            myPictureDAO.insertImage(picture);
             request.setAttribute("listBook", listBook);
             target = "ManageBookServlet?mode=viewBook";
-
             RequestDispatcher rd = request.getRequestDispatcher(target);
             rd.forward(request, response);
-        }     
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -101,11 +104,7 @@ public class AddBookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        
 
-        
     }
 
-    
 }

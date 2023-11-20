@@ -251,7 +251,7 @@
 /** Slick Slider Css
 --------------------------------------------------------------*/
 
-@charset 'UTF-8';
+/*@charset 'UTF-8';*/
 /* Slider */
 .slick-loading .slick-list
 {
@@ -602,7 +602,7 @@
 
 /* Chocolat Lightbox */
 
-.chocolat-zoomable.chocolat-zoomed {
+/*.chocolat-zoomable.chocolat-zoomed {
     cursor: zoom-out;
 }
 .chocolat-open {
@@ -768,7 +768,7 @@
     padding-left: 15px;
     padding-right: 15px;
     margin-right: 15px;
-    /*border-right: 1px solid rgba(255, 255, 255, 0.2);*/
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 .chocolat-wrapper .chocolat-fullscreen {
     width: 16px;
@@ -784,7 +784,7 @@
     text-align: left;
 }
 
-/* no container mode*/
+ no container mode
 body.chocolat-open > .chocolat-overlay {
     z-index: 15;
 }
@@ -795,7 +795,7 @@ body.chocolat-open > .chocolat-image-wrapper {
     z-index: 17;
 }
 
-/* container mode*/
+ container mode
 .chocolat-in-container .chocolat-wrapper,
 .chocolat-in-container .chocolat-image-wrapper,
 .chocolat-in-container .chocolat-overlay {
@@ -812,7 +812,7 @@ body.chocolat-open > .chocolat-image-wrapper {
 .chocolat-zoomable.chocolat-zooming-in .chocolat-img,
 .chocolat-zoomable.chocolat-zooming-out .chocolat-img {
     transition: margin .2s ease;
-}
+}*/
 
 /* uncomment to hide controls when zoomed-in*/
 /*

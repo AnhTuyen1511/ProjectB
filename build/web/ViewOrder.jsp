@@ -14,7 +14,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Product Page - Admin HTML Template</title>
+        <title>Order Management</title>
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:400,700"
@@ -33,7 +33,39 @@
         
         -->
         <link rel="stylesheet" href="css/search_button.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/book.ico"/>
+        <style type="text/css">
+            a.button4{
+                display:inline-block;
+                padding:0.3em 1.2em;
+                margin:0 0.1em 0.1em 0;
+                border:0.16em solid rgba(255,255,255,0);
+                border-radius:2em;
+                box-sizing: border-box;
+                text-decoration:none;
+                font-family:'Roboto',sans-serif;
+                font-weight:300;
+                color:#FFFFFF;
+                text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+                text-align:center;
+                transition: all 0.2s;
+            }
+
+            a.button4:hover{
+                border-color: rgba(255,255,255,1);
+            }
+        </style>
     </head>
+    <%
+        ArrayList<String> listStatus = new ArrayList<>();
+        listStatus.add("Pending");
+        listStatus.add("In Transit");
+        listStatus.add("Out For Delivery");
+        listStatus.add("Completed");
+        listStatus.add("Rejected");
+        listStatus.add("Done");
+    %>
 
     <body id="reportsPage">
         <nav class="navbar navbar-expand-xl">
@@ -67,7 +99,7 @@
                                 <i class="fas fa-book"></i> BOOKS
                             </a>
                         </li>
-                        
+
 
                         <li class="nav-item">
                             <a class="nav-link" href="ManageGenreServlet?mode=viewGenre">
@@ -76,7 +108,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="ManageOrderServlet?mode=viewOrder">
-                                 <i class="far fa-file-alt"></i> ORDER
+                                <i class="far fa-file-alt"></i> ORDER
                             </a>
                         </li>
                         <li class="nav-item">
@@ -84,15 +116,20 @@
                                 <i class="fas fa-user"></i> CUSTOMER
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ManageStaffServlet?mode=viewStaff">
+                                <i class="fas fa-user-plus"></i> STAFF
+                            </a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link d-block" href='LoginServlet?mode=logout'>
+                            <a class="nav-link d-block" href='adminLogin.jsp'>
                                 Admin, <b>Logout</b>
                             </a>
-                          
+
                         </li>
-                         
+
                     </ul>
                 </div>
             </div>
@@ -102,17 +139,20 @@
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-products">
                         <form>
-                        <div class="search-wrapper">
-                           
-                            <div class="input-holder">
-                                <input type="text" class="search-input" placeholder="Type to search" name="search" />
-                                <button type="submit" class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
-                             
-                        </div>
-                        <span class="close" onclick="searchToggle(this, event);"></span>
-                        </div>
+                            <div class="search-wrapper">
+
+                                <div class="input-holder">
+                                    <form action="ManageOrderServlet" method="post">
+                                        <input type="text" class="search-input" placeholder="Type to search" name="searchInput" />
+                                        <input type="hidden" name="mode" value="search">
+                                    </form>
+                                    <button type="submit" class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+
+                                </div>
+                                <span class="close" onclick="searchToggle(this, event);"></span>
+                            </div>
                         </form>
-                        <div class="tm-product-table-container" style="margin-top: 25px">
+                        <div class="tm-product-table-container" style="margin-top: 25px">    
                             <%
                                 ArrayList<Order> listOrder = (ArrayList<Order>) request.getAttribute("listOrder");
                             %>
@@ -120,72 +160,123 @@
                                 <thead>
 
                                     <tr>
-                                        
+
                                         <th scope="col"> Order ID </th>
                                         <th scope="col">Customer ID</th>
                                         <th scope="col">Order date</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">Shipping status</th>
                                         <th scope="col">&nbsp;</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
+
                                     <% for (int i = 0; i < listOrder.size(); i++) {%>
+                                <form action="ManageOrderServlet?mode=updateShippingStatus" method="post">
                                     <tr>
-                                        
+
                                         <td><%=listOrder.get(i).getOrder_id()%></td>
-                                        <td><%=listOrder.get(i).getCustomer_id() %></td>
-                                        <td><%=listOrder.get(i).getOrder_date() %> </td>
+                                        <td><%=listOrder.get(i).getCustomer_id()%></td>
+                                        <td><%=listOrder.get(i).getOrder_date()%> </td>
 
-                                        <td><%=listOrder.get(i).getTotal() %></td>
-                                        <td><%=listOrder.get(i).getShipping_status() %></td>
-                                        
-<!--                                        <td><img src="dishImages/<% %>" style="max-width: 100%;width: 115px;height: 115px;" alt="loading" loading="lazy"> </td>-->
-                                        
+                                        <td><%=listOrder.get(i).getTotal()%></td>
+
                                         <td>
-                                            <a href="EditGenre.jsp" class="tm-product-delete-link">
-                                                <i class="fas fa-pen"></i>                                           
-                                            </a>
+                                            <!--                                            <select class="custom-select tm-select-accounts"
+                                                                                                id="category" name="shipping_status">
+                                            <%
 
+                                                for (int j = 0; j < listStatus.size()-1; j++) {
+                                                    String selected = "";
+                                                    if (listOrder.get(i).getShipping_status().equals(listStatus.get(j))) {
+                                                        selected = "selected";
+                                                    }
+                                            %>
+
+                                            <option <%=selected%> value ="<%=listStatus.get(j)%>" > <%=listStatus.get(j)%> </option>
+                                            <%}%>
+                                        </select>-->
+                                            <select class="custom-select tm-select-accounts"
+                                                    id="category" name="shipping_status" <%= listOrder.get(i).getShipping_status().equals("Done") ? "disabled" : ""%>>
+                                                <%
+                                                  
+                                                    for (int j = 0; j < listStatus.size(); j++) {
+                                                        String selected = "";
+                                                        if (listOrder.get(i).getShipping_status().equals(listStatus.get(j))) {
+                                                            selected = "selected";
+                                                        }
+                                                        String disable = "";
+                                                        if(listStatus.get(j).equals("Done")){
+                                                        disable = "disabled";
+                                                    }
+                                                        
+                                                %>
+                                                <option <%=selected%> <%=disable %> value="<%=listStatus.get(j) %>" > <%=listStatus.get(j)%> </option>
+                                                <%
+                                                    }
+                                                %>
+                                            </select>
                                         </td>
-                                    </tr>  
-                                    <% }%>                                                                      
+                                        <td>
+                                            <input type="hidden" name="orderID" value="<%=listOrder.get(i).getOrder_id()%>">
+                                            <button type="submit" style="border: none; background: none;">
+                                                <a class="tm-product-delete-link">
+                                                    <i class="fa fa-floppy-o" aria-hidden="true", style="color: white"></i>                                          
+                                                </a>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <a class="button4" href="ManageOrderServlet?mode=viewOrderDetail&orderID=<%=listOrder.get(i).getOrder_id()%>">
+                                                View                                        
+                                            </a>
+                                        </td>
+
+                                    </tr> 
+                                </form>
+                                <% }%>  
+
+
                                 </tbody>
                             </table>
                         </div><!--
                         <!-- table container -->
-<!--                        <a href="AddAuthor.jsp" class="btn btn-primary btn-block text-uppercase mb-3">Add new author </a>
-                        <button class="btn btn-primary btn-block text-uppercase">
-                            Delete selected products
-                        </button>-->
+                        <!--                        <a href="AddAuthor.jsp" class="btn btn-primary btn-block text-uppercase mb-3">Add new author </a>
+                                                <button class="btn btn-primary btn-block text-uppercase">
+                                                    Delete selected products
+                                                </button>-->
                     </div>
                 </div>
             </div>
         </div>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script>
-                $(function () {
-                    $(".tm-product-name").on("click", function () {
-                        window.location.href = "edit-product.html";
-                    });
-                });
-                
-                
-                
-                function searchToggle(obj, evt){
-                    var container = $(obj).closest('.search-wrapper');
-                        if(!container.hasClass('active')){
-                            container.addClass('active');
-                            evt.preventDefault();
-                        }
-                        else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
-                            container.removeClass('active');
-                            // clear input
-                            container.find('.search-input').val('');
-        }
-}
-            </script>
-                       
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+
+
+//                                    
+//                                    function winOpen(int orderID)
+//                                    {
+////                                    String str = "ManageOrderServlet?mode=viewOrderDetail&orderID=" + orderID;
+//                                    String str = "ViewOrderDetail.jsp";
+//                                    window.open(str);
+//                                    }
+
+
+
+
+                                    function searchToggle(obj, evt) {
+                                        var container = $(obj).closest('.search-wrapper');
+                                        if (!container.hasClass('active')) {
+                                            container.addClass('active');
+                                            evt.preventDefault();
+                                        } else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
+                                            container.removeClass('active');
+                                            // clear input
+                                            container.find('.search-input').val('');
+                                        }
+                                    }
+        </script>
+
     </body>
 </html>
