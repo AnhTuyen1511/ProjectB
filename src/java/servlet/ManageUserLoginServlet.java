@@ -109,10 +109,10 @@ public class ManageUserLoginServlet extends HttpServlet {
                 String password = EncryptPassword.encriptPass(request.getParameter("R_password"));
                 String address = request.getParameter("address");
                 String email = request.getParameter("email");
-                int phoneNumber = Integer.parseInt(request.getParameter("phone_number"));
+                String phoneNumber = request.getParameter("phone_number");
                 int status = 1;
 
-                Customer newCustomer = new Customer(R_username, password, customerName, phoneNumber, address, email, status);
+                Customer newCustomer = new Customer(R_username, password, customerName, phoneNumber, address, email,0, status);
 
                 ArrayList<Customer> listCustomer = myCustomerDAO.getListCustomer();
                 boolean exist = false;

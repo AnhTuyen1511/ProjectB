@@ -62,7 +62,6 @@ public class CartServlet extends HttpServlet {
                 } else {
                     session.setAttribute("listCart", listCart);
                 }
-
                 target = "Cart.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(target);
                 rd.forward(request, response);
@@ -158,7 +157,6 @@ public class CartServlet extends HttpServlet {
                 Customer customer = (Customer) session.getAttribute("tempCustomer");
 
                 String date = java.time.LocalDate.now().toString();
-
                 Order newOrder = new Order(customer.getCustomer_id(), date, total, "Pending", 1,"Reivew");
 
                 int orderID = myOrderDAO.saveOrders(newOrder);

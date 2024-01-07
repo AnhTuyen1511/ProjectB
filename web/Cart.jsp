@@ -67,7 +67,6 @@
                 listGenre.add(list_genre.get(i));
             }
         }
-
         DiscountDAO myDiscountDAO = new DiscountDAO();
         ArrayList<Discount> list_discount = myDiscountDAO.getListDiscount();
         ArrayList<Discount> listDiscount = new ArrayList<>();

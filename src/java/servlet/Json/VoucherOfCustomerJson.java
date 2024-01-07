@@ -1,22 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package servlet;
+package servlet.Json;
 
-
-import configPkg.ConfigInfo;
-import dao.CustomerDAO;
+import com.google.gson.Gson;
 import dao.DiscountDAO;
-import entity.Customer;
-import entity.Discount;
+import entity.CustomerVoucher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuon
  */
-public class InitServlet extends HttpServlet {
+public class VoucherOfCustomerJson extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,22 +47,15 @@ public class InitServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-         try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            
-            ServletContext servletctx = request.getServletContext();
-            
-            String ctxFullPath = servletctx.getRealPath("\\");
-
-            //Set path to ConfigInfo, DAO can get the real path from ConfigInfo
-            ConfigInfo.setCtxRealPath(ctxFullPath);
-           // request.setAttribute("listCustomer", listCustomer);
-            String target = "UserActivityServlet?mode=userViewBook";
-            RequestDispatcher reqDispatch = request.getRequestDispatcher(target);
-            reqDispatch.forward(request, response);
-        }
+         throws ServletException, IOException {
+         DiscountDAO myDiscount = new DiscountDAO();
+        Gson gson = new Gson();
+        ArrayList<CustomerVoucher> list = myDiscount.getListCustomerVoucher();
+        String json = gson.toJson(list);
+        System.out.println(json);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     /**

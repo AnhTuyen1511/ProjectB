@@ -152,6 +152,18 @@
         <servlet-name>RateJson</servlet-name>
         <servlet-class>servlet.Json.RateJson</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DiscountJson</servlet-name>
+        <servlet-class>servlet.Json.DiscountJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerVoucher</servlet-name>
+        <servlet-class>servlet.Json.CustomerVoucherJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VoucherOfCustomerJson</servlet-name>
+        <servlet-class>servlet.Json.VoucherOfCustomerJson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -312,6 +324,18 @@
         <servlet-name>RateJson</servlet-name>
         <url-pattern>/RateJson</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DiscountJson</servlet-name>
+        <url-pattern>/DiscountJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerVoucher</servlet-name>
+        <url-pattern>/CustomerVoucher</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VoucherOfCustomerJson</servlet-name>
+        <url-pattern>/VoucherOfCustomerJson</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -338,6 +362,6 @@
         <url-pattern>/adminPage</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>DashboardAdmin.jsp</welcome-file>
+        <welcome-file>InitServlet</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -33,7 +33,7 @@ public class CustomerDAO {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getInt(5),
+                        rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
                         rs.getInt(8),
@@ -50,16 +50,16 @@ public class CustomerDAO {
     public void insertCustomer(Customer customer) {
         try {
             Connection con = DBContext.getConnection();
-            PreparedStatement pst = con.prepareStatement("INSERT INTO customer( username, password,name,phone_number,address,email, customer_status) VALUE(?,?,?,?,?,?,?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO customer(username, password,name,phone_number,address,email,total_spent,customer_status) VALUE(?,?,?,?,?,?,?,?)");
 
             pst.setString(1, customer.getUsername());
             pst.setString(2, customer.getPassword());
             pst.setString(3, customer.getName());
-            pst.setInt(4, customer.getPhone_number());
+            pst.setString(4, customer.getPhone_number());
             pst.setString(5, customer.getAddress());
             pst.setString(6, customer.getEmail());
             pst.setInt(7, customer.getTotal_spent());
-            pst.setInt(8, customer.getCustomer_status());
+            pst.setInt(8,customer.getCustomer_status() );
             pst.executeUpdate();
 
             pst.close();
@@ -84,7 +84,7 @@ public class CustomerDAO {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getInt(5),
+                        rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
                         rs.getInt(8),
@@ -110,7 +110,7 @@ public class CustomerDAO {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getInt(5),
+                        rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
                         rs.getInt(8),
@@ -140,7 +140,7 @@ public class CustomerDAO {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getInt(5),
+                        rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
                         rs.getInt(8),
@@ -195,7 +195,7 @@ public class CustomerDAO {
             pst.setString(1, customer.getUsername());
             pst.setString(2, customer.getPassword());
             pst.setString(3, customer.getName());
-            pst.setInt(4, customer.getPhone_number());
+            pst.setString(4, customer.getPhone_number());
             pst.setString(5, customer.getAddress());
             pst.setString(6, customer.getEmail());
             pst.setInt(7, customer.getCustomer_status());
@@ -205,7 +205,6 @@ public class CustomerDAO {
 
             pst.close();
             con.close();
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

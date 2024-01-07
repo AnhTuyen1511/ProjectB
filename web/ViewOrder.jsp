@@ -133,6 +133,8 @@
 //        map.put("y", 0);
 //        list.add(map);
         String dataPoints = gsonObj.toJson(list);
+        System.out.println(dataPoints);
+
     %>
 
     <body id="reportsPage">
@@ -250,7 +252,7 @@
                                         <td><%=listOrder.get(i).getTotal()%></td>
 
                                         <td>
-                                            <!--                                            <select class="custom-select tm-select-accounts"
+                                            <!--                                           <select class="custom-select tm-select-accounts"
                                                                                                 id="category" name="shipping_status">
                                             <%
 

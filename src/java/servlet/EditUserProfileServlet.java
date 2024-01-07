@@ -45,7 +45,7 @@ public class EditUserProfileServlet extends HttpServlet {
             if (mode.equals("editProfile")) {
                 int id = Integer.parseInt(request.getParameter("cusID"));
                 Customer thisCus = myCustomerDAO.getCustomerByID(id);
-                int phone = Integer.parseInt(request.getParameter("phone"));
+                String phone = request.getParameter("phone");
                 int status = thisCus.getCustomer_status();
                 String name = request.getParameter("name");
                 String username = thisCus.getUsername();

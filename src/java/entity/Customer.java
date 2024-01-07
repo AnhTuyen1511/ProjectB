@@ -15,13 +15,13 @@ public class Customer {
     private String username;
     private String password;
     private String name;
-    private int phone_number;
+    private String phone_number;
     private String address;
     private String email;
     private int total_spent ;
     private int customer_status;
 
-    public Customer(int customer_id, String username, String password, String name, int phone_number, String address, String email,int total_spent, int customer_status) {
+    public Customer(int customer_id, String username, String password, String name, String phone_number, String address, String email,int total_spent, int customer_status) {
         this.customer_id = customer_id;
         this.username = username;
         this.password = password;
@@ -33,7 +33,7 @@ public class Customer {
         this.total_spent = total_spent;
     }
 
-    public Customer(String username, String password, String name, int phone_number, String address, String email, int customer_status) {
+    public Customer(String username, String password, String name, String phone_number, String address, String email,int total_spent, int customer_status) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -41,6 +41,7 @@ public class Customer {
         this.address = address;
         this.email = email;
         this.customer_status = customer_status;
+        this.total_spent = total_spent;
     }
 
     public Customer() {
@@ -79,11 +80,11 @@ public class Customer {
         this.name = name;
     }
 
-    public int getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 

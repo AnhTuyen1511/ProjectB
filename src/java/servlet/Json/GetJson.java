@@ -93,11 +93,12 @@ public class GetJson extends HttpServlet {
         String username = requestDataJson.getString("username");
         String password = EncryptPassword.encriptPass(requestDataJson.getString("password"));
         String name = requestDataJson.getString("name");
-        int phone_number = requestDataJson.getInt("phone_number");
+        String phone_number = requestDataJson.getString("phone_number");
         String address = requestDataJson.getString("address");
         String email = requestDataJson.getString("email");
         int status = requestDataJson.getInt("customer_status");
-        Customer customer = new Customer(username, password, name, phone_number, address, email, status);
+        int total_spent = 0;
+        Customer customer = new Customer(username, password, name, phone_number, address, email, total_spent, status);
         CustomerDAO myCusDAO = new CustomerDAO();
         myCusDAO.insertCustomer(customer);
         JSONObject responseJson = new JSONObject();

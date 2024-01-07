@@ -5,6 +5,7 @@
  */
 package dao;
 
+import entity.CustomerVoucher;
 import entity.Discount;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,12 +30,13 @@ public class DiscountDAO {
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
-                Discount discount = new Discount(rs.getString(1),
-                        rs.getInt(2),
+                Discount discount = new Discount(rs.getInt(1),
+                        rs.getString(2),
                         rs.getInt(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getString(6)
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7)
                 );
                 listDiscount.add(discount);
             }
@@ -47,15 +49,14 @@ public class DiscountDAO {
     public void insertDiscount(Discount discount) {
         try {
             Connection con = DBContext.getConnection();
-            PreparedStatement pst = con.prepareStatement("INSERT INTO discount(code, percent,start_date, end_date, status) VALUE(?,?,?,?,?)");
-            
-            pst.setString(1, discount.getCode().toString());
-            pst.setInt(2, discount.getPercent());
-            pst.setInt(3, discount.getQuantity());
-            pst.setString(4, discount.getEndDate().toString());
-            pst.setInt(5, discount.getStatus());
-            pst.setString(4, discount.getDescription());
-
+            PreparedStatement pst = con.prepareStatement("INSERT INTO discount(voucher_id,code, percent,start_date, end_date, status) VALUE(?,?,?,?,?,?)");
+            pst.setInt(1, discount.getVoucher_id());
+            pst.setString(2, discount.getCode().toString());
+            pst.setInt(3, discount.getPercent());
+            pst.setInt(4, discount.getQuantity());
+            pst.setString(5, discount.getEndDate().toString());
+            pst.setInt(6, discount.getStatus());
+            pst.setString(7, discount.getDescription());
             pst.executeUpdate();
 
             pst.close();
@@ -65,6 +66,7 @@ public class DiscountDAO {
             System.out.println(ex.getMessage());
         }
     }
+    
 
     public void updateDiscount(Discount discount) {
 
@@ -101,12 +103,13 @@ public class DiscountDAO {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                discount = new Discount(rs.getString(1),
-                        rs.getInt(2),
+                discount = new Discount(rs.getInt(1),
+                        rs.getString(2),
                         rs.getInt(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getString(6)
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7)
                 );
             }
             con.close();
@@ -117,6 +120,52 @@ public class DiscountDAO {
             System.out.println(ex.getMessage());
         }
         return discount;
+    }
+    public void insertCustomerVoucher(int voucher_id , int customer_id ) {
+        try {
+            Connection con = DBContext.getConnection();
+            PreparedStatement pst = con.prepareStatement("INSERT INTO customer_voucher(voucher_id,customer_id,status) VALUE(?,?,?)");
+            
+            pst.setInt(1, voucher_id);
+            pst.setInt(2,customer_id );
+            pst.setInt(3, 1);
+            
+            pst.executeUpdate();
+
+            pst.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+     
+      public ArrayList<CustomerVoucher> getListCustomerVoucher() {
+
+        ArrayList<CustomerVoucher> listVoucher = new ArrayList<>();
+
+        try {
+            Connection con = DBContext.getConnection();
+            String query = "SELECT * FROM customer_voucher inner join discount on customer_voucher.voucher_id = discount.voucher_id";
+            Statement st = con.prepareStatement(query);
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                CustomerVoucher cv = new CustomerVoucher(rs.getInt(2),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(8),
+                        rs.getInt(3),
+                        rs.getString(10)
+                );
+                
+                listVoucher.add(cv);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listVoucher;
     }
 
     
