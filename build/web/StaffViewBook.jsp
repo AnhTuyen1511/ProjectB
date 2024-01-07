@@ -66,7 +66,7 @@
 
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="StaffManageServlet?mode=StaffViewOrder">
+                            <a class="nav-link" href="StaffManageOrderServlet?mode=viewOrder">
                                 <i class="far fa-file-alt"></i> ORDER
                             </a>
                         </li>

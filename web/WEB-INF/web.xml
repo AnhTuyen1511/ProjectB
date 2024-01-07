@@ -153,16 +153,8 @@
         <servlet-class>servlet.Json.RateJson</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DiscountJson</servlet-name>
-        <servlet-class>servlet.Json.DiscountJson</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CustomerVoucher</servlet-name>
-        <servlet-class>servlet.Json.CustomerVoucherJson</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>VoucherOfCustomerJson</servlet-name>
-        <servlet-class>servlet.Json.VoucherOfCustomerJson</servlet-class>
+        <servlet-name>StaffManageOrderServlet</servlet-name>
+        <servlet-class>servlet.StaffManageOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -325,16 +317,8 @@
         <url-pattern>/RateJson</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DiscountJson</servlet-name>
-        <url-pattern>/DiscountJson</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CustomerVoucher</servlet-name>
-        <url-pattern>/CustomerVoucher</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>VoucherOfCustomerJson</servlet-name>
-        <url-pattern>/VoucherOfCustomerJson</url-pattern>
+        <servlet-name>StaffManageOrderServlet</servlet-name>
+        <url-pattern>/StaffManageOrderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
